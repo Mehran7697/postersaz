@@ -67,7 +67,7 @@ body[data-role="student"] .topbar{background:#fdfefa}
 body[data-role="student"] .nav-btn.active{background:#e7f5d1;color:#263b15}
 body[data-role="student"] .brand-symbol{background:#202d20!important;color:#dfff70}
 body[data-role="student"] #view-studio{overflow:hidden}
-.student-studio{--ss-bg:#0d1511;--ss-ink:#f5f7ed;--ss-muted:#b9c4b9;--ss-lime:#dfff69;--ss-line:rgba(255,255,255,.16);background:var(--ss-bg);color:var(--ss-ink);font-family:IRANSansXFaNum,Tahoma,sans-serif;min-height:100vh;line-height:1.9}
+.student-studio{--ss-bg:#0d1511;--ss-ink:#f5f7ed;--ss-muted:#b9c4b9;--ss-lime:var(--uiAccent,#dfff69);--ss-line:rgba(255,255,255,.16);background:var(--ss-bg);color:var(--ss-ink);font-family:IRANSansXFaNum,Tahoma,sans-serif;min-height:100vh;line-height:1.9}
 .student-studio *{box-sizing:border-box}
 .student-studio button,.student-studio input,.student-studio textarea,.student-studio select{font-family:inherit}
 .student-studio .ss-container{width:min(1120px,calc(100% - 68px));margin:auto}
@@ -82,9 +82,9 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .ss-hero p{font-size:clamp(13px,1.4vw,17px);line-height:2.2;color:#d5ddd2;max-width:540px;margin:0 0 30px}
 .student-studio .ss-hero-number{position:absolute;left:2%;bottom:-45px;font-weight:900;font-size:clamp(210px,32vw,490px);line-height:1;opacity:.085;color:#fff;direction:ltr;pointer-events:none;z-index:-1}
 .student-studio .ss-hero-foot{position:absolute;bottom:28px;left:45px;direction:ltr;color:#dae2d6;font-size:10px;letter-spacing:1.8px;z-index:1}
-.student-studio .ss-pill{display:inline-flex;border:1px solid #f1ffab55;color:#dfff69;border-radius:40px;padding:5px 12px;font-size:10px;font-weight:700;margin-bottom:10px;background:#172b1966}
+.student-studio .ss-pill{display:inline-flex;border:1px solid #f1ffab55;color:var(--uiAccent,#dfff69);border-radius:40px;padding:5px 12px;font-size:10px;font-weight:700;margin-bottom:10px;background:#172b1966}
 .student-studio .ss-action{display:inline-flex;gap:12px;align-items:center;justify-content:center;background:var(--ss-lime);color:#101810;border:0;border-radius:3px;padding:13px 24px;font-weight:900;font-size:13px;min-height:49px;transition:transform .2s,box-shadow .2s}
-.student-studio .ss-action:hover{transform:translateY(-2px);box-shadow:0 12px 40px #dfff6933}
+.student-studio .ss-action:hover{transform:translateY(-2px);box-shadow:0 12px 40px color-mix(in srgb,var(--uiAccent,#dfff69) 20%,transparent)}
 .student-studio .ss-action--outline{background:transparent;color:#eff8e8;border:1px solid #ffffff70}
 .student-studio .ss-belt{overflow:hidden;white-space:nowrap;background:#142019;border-top:1px solid var(--ss-line);border-bottom:1px solid var(--ss-line);padding:12px 0;display:flex;gap:24px;justify-content:center;font-size:11px;letter-spacing:1px;color:#d0ddca}
 .student-studio .ss-belt strong{color:var(--ss-lime)}
@@ -106,7 +106,7 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .ss-theme-arrow{font-size:21px;color:var(--ss-lime)}
 .student-studio .ss-theme-check{position:absolute;left:16px;top:15px;width:26px;height:26px;border-radius:50%;background:var(--ss-lime);color:#132013;display:none;place-items:center;font-weight:900}
 .student-studio .ss-theme-card[aria-pressed="true"] .ss-theme-check{display:grid}
-.student-studio .ss-create{background:#dfff69;color:#142016;padding:70px 0 86px;position:relative;overflow:hidden}
+.student-studio .ss-create{background:var(--uiAccent,#dfff69);color:#142016;padding:70px 0 86px;position:relative;overflow:hidden}
 .student-studio .ss-create:before{content:"7";position:absolute;left:-5%;top:-170px;font-size:550px;line-height:1;color:#12200f09;font-weight:900;direction:ltr;pointer-events:none}
 .student-studio .ss-create .ss-section-label{color:#40551d}
 .student-studio .ss-create .ss-headrow p{color:#486032}
@@ -150,40 +150,40 @@ body[data-role="student"] #view-studio{overflow:hidden}
 
 
 /* Guided questions for students — designed to match cinematic studio. */
-.student-studio .gq-shell{--gq-lime:#dfff69;min-height:calc(100svh - 160px);position:relative;overflow:hidden;background:#0c1510;color:#f3f8ee;isolation:isolate;display:flex;align-items:center;justify-content:center;padding:55px 22px}
+.student-studio .gq-shell{--gq-lime:var(--uiAccent,#dfff69);min-height:calc(100svh - 160px);position:relative;overflow:hidden;background:#0c1510;color:#f3f8ee;isolation:isolate;display:flex;align-items:center;justify-content:center;padding:55px 22px}
 .student-studio .gq-shell:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0d1510 5%,#0b1510c9 55%,#0a120caf 100%),linear-gradient(0deg,#0c1510bb,#0c151000 55%),var(--gq-bg,radial-gradient(circle,#2a4830,#0b1510));background-position:center;background-size:cover;opacity:.99;z-index:-2}
 .student-studio .gq-shell:after{content:"07";position:absolute;inset:auto 12px -145px auto;font-size:clamp(220px,28vw,430px);font-weight:900;color:#ffffff0d;line-height:1;pointer-events:none;z-index:-1;direction:ltr}
 .student-studio .gq-inner{width:min(870px,100%);position:relative;margin:auto}
 .student-studio .gq-topline{display:flex;align-items:center;justify-content:space-between;gap:14px;color:#c3d1c1;font-size:11px;margin-bottom:26px}
-.student-studio .gq-tag{border:1px solid #dfff6977;color:#dfff69;padding:5px 12px;border-radius:40px;font-size:10px;font-weight:800;background:#16302075}
+.student-studio .gq-tag{border:1px solid color-mix(in srgb,var(--uiAccent,#dfff69) 47%,transparent);color:var(--uiAccent,#dfff69);padding:5px 12px;border-radius:40px;font-size:10px;font-weight:800;background:#16302075}
 .student-studio .gq-progress{display:flex;gap:7px;align-items:center;direction:ltr;margin-bottom:38px}
 .student-studio .gq-progress span{flex:1;height:5px;border-radius:10px;background:#ffffff32;transition:background .2s}
-.student-studio .gq-progress span.done{background:#dfff69}
-.student-studio .gq-overline{font-size:12px;color:#dfff69;letter-spacing:1px;font-weight:900;margin:0 0 12px}
+.student-studio .gq-progress span.done{background:var(--uiAccent,#dfff69)}
+.student-studio .gq-overline{font-size:12px;color:var(--uiAccent,#dfff69);letter-spacing:1px;font-weight:900;margin:0 0 12px}
 .student-studio .gq-title{font-size:clamp(26px,5vw,47px);line-height:1.5;font-weight:900;margin:0 0 10px;max-width:780px;letter-spacing:-1px}
 .student-studio .gq-desc{font-size:13px;line-height:2;color:#c5d4c2;max-width:650px;margin:0 0 29px}
 .student-studio .gq-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .student-studio .gq-choice{background:#19281ecd;color:#ecf5ea;border:1px solid #ffffff3d;border-radius:10px;min-height:85px;padding:17px;text-align:right;display:flex;gap:14px;align-items:center;transition:transform .2s,border-color .2s,background .2s}
-.student-studio .gq-choice:hover,.student-studio .gq-choice[aria-pressed="true"]{background:#253f2c;border-color:#dfff69;transform:translateY(-2px)}
-.student-studio .gq-choice[aria-pressed="true"]{box-shadow:inset 0 0 0 1px #dfff6944}
+.student-studio .gq-choice:hover,.student-studio .gq-choice[aria-pressed="true"]{background:#253f2c;border-color:var(--uiAccent,#dfff69);transform:translateY(-2px)}
+.student-studio .gq-choice[aria-pressed="true"]{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--uiAccent,#dfff69) 27%,transparent)}
 .student-studio .gq-emoji{width:47px;height:47px;border-radius:11px;background:#ffffff15;display:grid;place-items:center;font-size:22px;flex:none}
 .student-studio .gq-choice strong{font-size:13px;font-weight:800;line-height:1.7}
 .student-studio .gq-choice small{display:block;color:#b4c4b4;font-size:10px;margin-top:3px}
 .student-studio .gq-controls{display:flex;justify-content:space-between;gap:12px;margin-top:28px;align-items:center}
 .student-studio .gq-back{background:#ffffff14;border:1px solid #ffffff48;border-radius:5px;color:#f5f9f1;min-height:48px;padding:12px 19px;font-size:12px;font-weight:700}
-.student-studio .gq-next{border:0;background:#dfff69;color:#112016;border-radius:5px;padding:12px 27px;min-height:48px;font-weight:900;font-size:13px}
+.student-studio .gq-next{border:0;background:var(--uiAccent,#dfff69);color:#112016;border-radius:5px;padding:12px 27px;min-height:48px;font-weight:900;font-size:13px}
 .student-studio .gq-next:disabled{opacity:.4;cursor:not-allowed}
 .student-studio .gq-note{margin-top:25px;font-size:11px;line-height:1.9;color:#aabca9}
 .student-studio .gq-result-header{margin-bottom:27px}
 .student-studio .gq-result-header h2{font-size:clamp(26px,4vw,42px);line-height:1.5;margin:9px 0;color:#fff}
 .student-studio .gq-suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .student-studio .gq-suggestion{display:flex;flex-direction:column;align-items:stretch;text-align:right;justify-content:space-between;gap:18px;background:linear-gradient(140deg,#21382aeb,#121e18ec);border:1px solid #ffffff42;padding:23px;border-radius:9px;color:#f5fcef;min-height:96px;transition:transform .2s,border-color .2s}
-.student-studio .gq-suggestion:hover,.student-studio .gq-suggestion:focus-visible{border-color:#dfff69;transform:translateY(-3px)}
-.student-studio .gq-suggestion .gq-n{font-size:10px;letter-spacing:1px;color:#dfff69;font-weight:900}
+.student-studio .gq-suggestion:hover,.student-studio .gq-suggestion:focus-visible{border-color:var(--uiAccent,#dfff69);transform:translateY(-3px)}
+.student-studio .gq-suggestion .gq-n{font-size:10px;letter-spacing:1px;color:var(--uiAccent,#dfff69);font-weight:900}
 .student-studio .gq-suggestion strong{font-size:clamp(13px,1.6vw,18px);line-height:1.85;flex:1;white-space:normal;overflow-wrap:anywhere;min-width:0}
-.student-studio .gq-suggestion .gq-use{font-size:11px;color:#dfff69;align-self:flex-start;font-weight:800}
+.student-studio .gq-suggestion .gq-use{font-size:11px;color:var(--uiAccent,#dfff69);align-self:flex-start;font-weight:800}
 .student-studio .gq-again{border:1px solid #ffffff55;background:transparent;border-radius:5px;padding:10px 16px;color:#f4f9ef;font-size:12px;font-weight:800}
-.student-studio .gq-free{background:transparent;color:#dfff69;border:0;font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:5px}
+.student-studio .gq-free{background:transparent;color:var(--uiAccent,#dfff69);border:0;font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:5px}
 .student-studio .ss-quiz-reminder{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:10px 13px;background:#e7f9c0;border:1px solid #bad792;border-radius:5px;color:#314a26;font-size:11px;margin:-5px 0 20px;line-height:1.8}
 .student-studio .ss-quiz-reminder button{background:none;border:0;color:#244918;font-size:11px;font-weight:900;text-decoration:underline;white-space:nowrap}
 @media(max-width:760px){.student-studio .gq-shell{min-height:calc(100svh - 150px);padding:36px 16px}.student-studio .gq-progress{margin-bottom:24px}.student-studio .gq-choices,.student-studio .gq-suggestions{grid-template-columns:1fr}.student-studio .gq-choice{min-height:72px;padding:12px}.student-studio .gq-suggestion{padding:12px 14px}.student-studio .gq-title{font-size:27px}.student-studio .gq-controls{margin-top:22px}.student-studio .gq-shell:after{font-size:210px;inset:auto 0 -70px auto}.student-studio .ss-quiz-reminder{flex-wrap:wrap}}
@@ -194,18 +194,18 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .gq-intro-shell:before{content:"";position:absolute;inset:0;z-index:-2;background-image:linear-gradient(90deg,#0b1510 0%,#0b1510ef 31%,#0b1510a8 58%,#0b15104d 100%),linear-gradient(0deg,#0b1510 0%,transparent 35%),var(--gq-bg,radial-gradient(circle,#27402c,#0b1510));background-size:cover;background-position:center 40%}
 .student-studio .gq-intro-shell:after{content:"7";position:absolute;inset:auto 3% -110px auto;color:#e6ff7110;font-weight:900;font-size:clamp(240px,34vw,540px);line-height:1;direction:ltr;z-index:-1;pointer-events:none}
 .student-studio .gq-intro-inner{width:min(950px,100%);margin:auto;position:relative}
-.student-studio .gq-intro-tag{display:inline-flex;align-items:center;gap:9px;color:#dfff69;border:1px solid #dfff6965;border-radius:30px;background:#15291b90;padding:8px 14px;font-weight:900;font-size:11px}
-.student-studio .gq-intro-kicker{color:#dfff69;font-weight:900;letter-spacing:1px;font-size:12px;margin:32px 0 13px;direction:ltr;text-align:right}
+.student-studio .gq-intro-tag{display:inline-flex;align-items:center;gap:9px;color:var(--uiAccent,#dfff69);border:1px solid color-mix(in srgb,var(--uiAccent,#dfff69) 40%,transparent);border-radius:30px;background:#15291b90;padding:8px 14px;font-weight:900;font-size:11px}
+.student-studio .gq-intro-kicker{color:var(--uiAccent,#dfff69);font-weight:900;letter-spacing:1px;font-size:12px;margin:32px 0 13px;direction:ltr;text-align:right}
 .student-studio .gq-intro-heading{font-size:clamp(42px,6.7vw,83px);line-height:1.25;letter-spacing:-2px;font-weight:900;color:#fff;max-width:760px;margin:0 0 20px}
-.student-studio .gq-intro-heading em{font-style:normal;color:#dfff69;display:block}
-.student-studio .campaign-participants{width:100%;text-align:center;color:#e9f4e6;background:radial-gradient(ellipse at center,#23432ee6,#0b1510db 75%);border-block:1px solid #dfff695e;padding:clamp(10px,2.5svh,22px) 16px;margin:0;flex:none;line-height:1.4}
-.student-studio .campaign-participants strong{display:block;color:#dfff69;font-size:clamp(36px,7vw,68px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
+.student-studio .gq-intro-heading em{font-style:normal;color:var(--uiAccent,#dfff69);display:block}
+.student-studio .campaign-participants{width:100%;text-align:center;color:#e9f4e6;background:radial-gradient(ellipse at center,#23432ee6,#0b1510db 75%);border-block:1px solid color-mix(in srgb,var(--uiAccent,#dfff69) 37%,transparent);padding:clamp(10px,2.5svh,22px) 16px;margin:0;flex:none;line-height:1.4}
+.student-studio .campaign-participants strong{display:block;color:var(--uiAccent,#dfff69);font-size:clamp(36px,7vw,68px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
 .student-studio .campaign-participants span{display:block;margin-top:4px;font-size:clamp(13px,2.5vw,17px);font-weight:800}
 .student-studio .campaign-participants small{display:block;margin-top:3px;color:#d3dfcf;font-size:10px}
 .student-studio .gq-intro-desc{font-size:clamp(13px,1.5vw,17px);line-height:2.2;max-width:580px;color:#dce8dc;margin:0 0 25px}
 .student-studio .gq-intro-facts{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
 .student-studio .gq-intro-facts span{border:1px solid #ffffff3f;background:#16251bc9;color:#f3f8ed;padding:9px 13px;font-size:11px;border-radius:6px;font-weight:700}
-.student-studio .gq-intro-start{background:#dfff69;border:0;border-radius:7px;color:#0e2015;padding:15px 35px;min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:24px;font-weight:900;font-size:15px;box-shadow:0 14px 45px #cfff2933;transition:transform .2s,box-shadow .2s}
+.student-studio .gq-intro-start{background:var(--uiAccent,#dfff69);border:0;border-radius:7px;color:#0e2015;padding:15px 35px;min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:24px;font-weight:900;font-size:15px;box-shadow:0 14px 45px #cfff2933;transition:transform .2s,box-shadow .2s}
 .student-studio .gq-intro-start:hover{transform:translateY(-3px);box-shadow:0 17px 48px #cfff2955}
 .student-studio .gq-intro-foot{font-size:11px;color:#a8baa7;margin:15px 0 0;line-height:2}
 .student-studio .gq-skeleton{width:min(790px,100%);margin:auto}
@@ -246,25 +246,25 @@ body[data-role="student"].studio-paginated .student-studio{height:100dvh;min-hei
 body[data-role="student"].studio-paginated .content{padding:0!important;max-width:none}
 body[data-role="student"].studio-paginated .content>.copyright{display:none}
 body[data-role="student"].studio-paginated #studentBottomNav{display:none!important}
-body[data-role="student"].studio-paginated .ss-wizard{height:100%;position:relative;overflow:hidden;background:#0c1611;color:#f5fbee}
+body[data-role="student"].studio-paginated .ss-wizard{height:100%;position:relative;overflow:hidden;background:var(--uiBackground,#0c1611);color:var(--uiText,#f5fbee)}
 body[data-role="student"].studio-paginated .ss-wizard-screen{display:none;height:100%;width:100%;overflow:hidden;position:relative}
 body[data-role="student"].studio-paginated .ss-wizard-screen.is-current{display:flex;flex-direction:column;animation:ssPageIn .23s ease both}
 @keyframes ssPageIn{from{opacity:.4;transform:translateX(-12px)}to{opacity:1;transform:none}}
-body[data-role="student"].studio-paginated .ss-wizard-cover{isolation:isolate;padding:clamp(16px,5vw,70px);background:radial-gradient(circle at 80% 35%,#344b37,#0c1611 67%)}
+body[data-role="student"].studio-paginated .ss-wizard-cover{isolation:isolate;padding:clamp(16px,5vw,70px);background:radial-gradient(circle at 80% 35%,#344b37,var(--uiBackground,#0c1611) 67%)}
 body[data-role="student"].studio-paginated .ss-wizard-cover::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--ss-cover,linear-gradient(130deg,#24472c,#10180f));background-position:center 34%;background-size:cover;opacity:.84}
 body[data-role="student"].studio-paginated .ss-wizard-cover::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(270deg,#0a1711f8 0%,#0a1711df 32%,#0a171177 71%,#0a171165),linear-gradient(0deg,#0b1711,transparent 34%)}
 body[data-role="student"].studio-paginated .ss-wizard-cover-inner{width:min(1120px,100%);margin:auto;position:relative}
 body[data-role="student"].studio-paginated .ss-wizard-cover h1{font-size:clamp(42px,8vw,94px);line-height:1.2;margin:21px 0 12px;font-weight:900;max-width:750px}
-body[data-role="student"].studio-paginated .ss-wizard-cover h1 em{display:block;color:#dfff69;font-style:normal}
+body[data-role="student"].studio-paginated .ss-wizard-cover h1 em{display:block;color:var(--uiAccent,#dfff69);font-style:normal}
 body[data-role="student"].studio-paginated .ss-wizard-cover p{font-size:clamp(14px,2vw,20px);color:#dce9d9;margin:0 0 28px}
 body[data-role="student"].studio-paginated .ss-wizard-page{display:flex;flex-direction:column;width:min(920px,100%);height:100%;min-height:0;margin:auto;padding:clamp(14px,2.5vh,27px) clamp(18px,5vw,43px);gap:clamp(9px,1.6vh,18px)}
-body[data-role="student"].studio-paginated .ss-wizard-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#dfff69;font-size:clamp(10px,1.6vw,12px);font-weight:800;flex:none}
+body[data-role="student"].studio-paginated .ss-wizard-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--uiAccent,#dfff69);font-size:clamp(10px,1.6vw,12px);font-weight:800;flex:none}
 body[data-role="student"].studio-paginated .ss-wizard-count{display:flex;align-items:center;gap:13px;direction:ltr}
 body[data-role="student"].studio-paginated .ss-wizard-count small{color:#c1d0bc;font-size:11px;white-space:nowrap}
 body[data-role="student"].studio-paginated .ss-wizard-dots{display:flex;gap:5px}
 body[data-role="student"].studio-paginated .ss-wizard-dots span{width:24px;height:4px;border-radius:5px;background:#738475}
 body[data-role="student"].studio-paginated .ss-wizard-dots span.now,
-body[data-role="student"].studio-paginated .ss-wizard-dots span.done{background:#dfff69}
+body[data-role="student"].studio-paginated .ss-wizard-dots span.done{background:var(--uiAccent,#dfff69)}
 body[data-role="student"].studio-paginated .ss-wizard-page h2{font-size:clamp(23px,3.5vw,37px);line-height:1.45;margin:0;font-weight:900;flex:none;letter-spacing:-.5px}
 body[data-role="student"].studio-paginated .ss-wizard-fields{display:flex;flex-direction:column;justify-content:center;gap:clamp(6px,1.4vh,18px);flex:1;min-height:0}
 body[data-role="student"].studio-paginated .ss-wizard-fields .ss-field{margin:0;min-height:0}
@@ -274,11 +274,11 @@ body[data-role="student"].studio-paginated .ss-wizard-fields .ss-input::placehol
 body[data-role="student"].studio-paginated .ss-wizard-fields textarea.ss-input{height:clamp(95px,22vh,176px);min-height:0;resize:none;line-height:1.85}
 body[data-role="student"].studio-paginated .ss-wizard-fields .ss-counter{color:#acc1a5}
 body[data-role="student"].studio-paginated .ss-wizard-fields .ss-color{border:3px solid #17261a;outline:1px solid #bde4a7}
-body[data-role="student"].studio-paginated .ss-wizard-fields .ss-color[aria-pressed="true"]{outline:3px solid #dfff69}
-body[data-role="student"].studio-paginated .ss-return-quiz{align-self:flex-start;background:transparent;border:0;color:#dfff69;text-decoration:underline;font-size:11px}
+body[data-role="student"].studio-paginated .ss-wizard-fields .ss-color[aria-pressed="true"]{outline:3px solid var(--uiAccent,#dfff69)}
+body[data-role="student"].studio-paginated .ss-return-quiz{align-self:flex-start;background:transparent;border:0;color:var(--uiAccent,#dfff69);text-decoration:underline;font-size:11px}
 body[data-role="student"].studio-paginated .ss-wizard-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;flex:none}
 body[data-role="student"].studio-paginated .ss-wizard-footer button{min-height:45px;border-radius:9px;padding:10px clamp(13px,3vw,24px);font-weight:900;font-size:clamp(11px,1.4vw,13px)}
-body[data-role="student"].studio-paginated .ss-wizard-next{background:#dfff69;border:1px solid #dfff69;color:#0e1c11}
+body[data-role="student"].studio-paginated .ss-wizard-next{background:var(--uiAccent,#dfff69);border:1px solid var(--uiAccent,#dfff69);color:#0e1c11}
 body[data-role="student"].studio-paginated .ss-wizard-back{background:#17261a;border:1px solid #657b5d;color:#f2f8eb}
 body[data-role="student"].studio-paginated .ss-wizard-design{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);align-items:center;gap:clamp(12px,3vw,32px);min-height:0;flex:1}
 body[data-role="student"].studio-paginated .ss-design-fields{justify-content:center;gap:22px}
@@ -289,7 +289,7 @@ body[data-role="student"].studio-paginated [data-ss-screen="3"]{overflow-y:auto}
 body[data-role="student"].studio-paginated .ss-wizard-result{
  display:grid;width:100%;grid-template-rows:auto minmax(180px,1fr) auto;
  padding:clamp(6px,1.3vw,14px);gap:6px;
- background:radial-gradient(ellipse at center,#304938 0%,#0c1611 78%);
+ background:radial-gradient(ellipse at center,#304938 0%,var(--uiBackground,#0c1611) 78%);
 }
 .ss-result-edge{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:5px}
 .ss-result-edge--top{justify-content:flex-end;direction:rtl}
@@ -300,9 +300,9 @@ body[data-role="student"].studio-paginated .ss-wizard-result{
  background:#eafbe81a;color:#f4ffef;backdrop-filter:blur(12px);cursor:pointer;
 }
 .ss-result-edge .ss-result-close{min-width:36px;padding-inline:6px}
-.ss-result-edge .ss-result-primary{background:#dfff6933;border-color:#dfff6980;color:#f1ffb1}
+.ss-result-edge .ss-result-primary{background:color-mix(in srgb,var(--uiAccent,#dfff69) 20%,transparent);border-color:color-mix(in srgb,var(--uiAccent,#dfff69) 50%,transparent);color:#f1ffb1}
 .ss-result-edge button:hover{background:#eafbe833}
-.ss-result-edge button:focus-visible{outline:2px solid #dfff69;outline-offset:2px}
+.ss-result-edge button:focus-visible{outline:2px solid var(--uiAccent,#dfff69);outline-offset:2px}
 body[data-role="student"].studio-paginated .ss-wizard-result-body,
 body[data-role="student"].studio-paginated .ss-wizard-final-host{height:100%;width:100%;min-height:0}
 body[data-role="student"].studio-paginated .ss-wizard-final-host .ss-canvas-frame{container-type:size}
@@ -373,7 +373,7 @@ body[data-role="student"].studio-paginated .gq-skeleton{width:min(790px,calc(100
 .ss-card-options button{position:relative;padding:0;background:#17251d;color:white;border:2px solid #657565;border-radius:8px;overflow:hidden;font:inherit;cursor:pointer}
 .ss-card-options img{display:block;width:100%;height:clamp(48px,9vh,92px);object-fit:cover;object-position:center 30%}
 .ss-card-options span{display:block;padding:3px;font-size:11px;font-weight:700}
-.ss-card-options button[aria-pressed=true]{border-color:#dfff69;color:#dfff69}
+.ss-card-options button[aria-pressed=true]{border-color:var(--uiAccent,#dfff69);color:var(--uiAccent,#dfff69)}
 .ss-card-options button:focus-visible{outline:2px solid white;outline-offset:2px}
 body[data-role="student"].studio-paginated .ss-design-fields{max-height:100%;overflow-y:auto;justify-content:safe center}
 @media(max-width:820px){body[data-role="student"].studio-paginated .ss-wizard-design:has(.ss-card-picker){grid-template-rows:minmax(0,auto) minmax(110px,1fr)}
@@ -473,7 +473,7 @@ const SAMPLE_LEADERS=[{name:'ستاره آبی',invites:5,score:120},{name:'آو
 function defaultState(){return{campaigns:structuredClone(SAMPLE_CAMPAIGNS),posts:structuredClone(SAMPLE_POSTS),leaders:structuredClone(SAMPLE_LEADERS),selectedCampaign:'number7',userDisplay:'',refsCreated:7,sentDemo:14,likesByMe:[],unitPrice:1200,selectedTeam:'آبی'}}
 let state;try{const old=JSON.parse(localStorage.getItem(STORE));state=old?.campaigns?.length&&Array.isArray(old.posts)?{...defaultState(),...old}:defaultState()}catch{state=defaultState()}
 const publishedSettings=window.posterSettings;
-if(publishedSettings?.revision&&publishedSettings.revision!==state.settingsRevision){
+if(publishedSettings?.revision&&Array.isArray(publishedSettings.campaigns)&&publishedSettings.revision!==state.settingsRevision){
  for(const cfg of publishedSettings.campaigns){
   const c=state.campaigns.find(item=>item.id===cfg.id);
   if(!c&&cfg.id.startsWith('camp')){state.campaigns.push(structuredClone(cfg));continue}
@@ -483,6 +483,12 @@ if(publishedSettings?.revision&&publishedSettings.revision!==state.settingsRevis
 }
 let role=(new URLSearchParams(location.search).get('role')||'student'),view='studio',photoImage=null,posterVariant='purple',toastTimer,recording=false,searchTerm='',feedExpandedComment=null;
 if(!['student','central','org'].includes(role))role='student';
+const routeParams=new URLSearchParams(location.search);
+const requestedCampaign=routeParams.get('campaign');
+const studentPreview=routeParams.get('preview')==='1';
+if((role==='student'||studentPreview)&&state.campaigns.some(c=>c.id===requestedCampaign&&c.enabled!==false)){
+ role='student';state.selectedCampaign=requestedCampaign;
+}
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Math.round(Number(n)||0).toLocaleString('fa-IR');
@@ -510,11 +516,66 @@ function posterStats(posts){
  const authors=[...byAuthor.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'fa'));
  return {total:posts.length,authors};
 }
+function readCampaignAnalytics(c){
+ try{return JSON.parse(localStorage.getItem(STORE+'-analytics-'+c.id))||{started:false,clicks:{}}}
+ catch{return {started:false,clicks:{}}}
+}
+function trackStudentClick(event){
+ if(role!=='student'||studentPreview)return;
+ const button=event.target.closest('button');
+ if(!button||button.disabled||!button.closest('#view-studio,#view-invites,#view-leaderboard,#studentBottomNav,#modalOverlay'))return;
+ const c=getCamp(state.selectedCampaign),d=button.dataset;
+ const key=button.id==='gq-next'?'quiz-next:'+guidedQuizFor(c.id).step:button.id==='gq-back'?'quiz-back:'+guidedQuizFor(c.id).step:button.id||(d.gqAnswer?'answer:'+guidedQuizFor(c.id).step+':'+d.gqAnswer:
+  d.gqSuggestion!==undefined?'suggestion:'+d.gqSuggestion:
+  d.ssCard?'card:'+d.ssCard:
+  d.ssColor?'color:'+paletteFor(c).findIndex(([color])=>color===d.ssColor):
+  d.ssPage!==undefined?'page:'+studentStudioPage+':'+d.ssPage:
+  d.nav?'nav:'+d.nav:
+  d.action?'action:'+d.action+':'+(d.id||''):'');
+ if(!key)return;
+ const data=readCampaignAnalytics(c),entry=data.clicks[key];
+ const buttonLabel=button.getAttribute('aria-label')||button.textContent.trim().replace(/\s+/g,' ')||key;
+ const label=(key.startsWith('quiz-')||key.startsWith('answer:'))?'سؤال '+fmt(guidedQuizFor(c.id).step+1)+' · '+buttonLabel:buttonLabel;
+ data.clicks[key]={count:(entry?.count||0)+1,label};
+ if(button.id==='gq-start'||(studentStudioPage===0&&d.ssPage==='1'))data.started=true;
+ try{localStorage.setItem(STORE+'-analytics-'+c.id,JSON.stringify(data))}catch{}
+}
+function campaignAnalyticsHTML(c){
+ const data=readCampaignAnalytics(c);
+ const {total,authors}=posterStats(state.posts.filter(post=>post.campaignId===c.id));
+ const defaults={
+  'gq-start':contentValue(c,'start','شروع کنیم'),
+  'page:0:1':contentValue(c,'start','ساخت پوستر رو شروع کنیم'),
+  'page:2:3':contentValue(c,'viewPoster',STUDENT_COPY.viewPoster[2]),
+  'action:save-image:':contentValue(c,'download',STUDENT_COPY.download[2]),
+  'action:share-demo:':contentValue(c,'share',STUDENT_COPY.share[2]),
+  'page:3:2':contentValue(c,'edit',STUDENT_COPY.edit[2]),
+  'ss-result-close':contentValue(c,'close',STUDENT_COPY.close[2])
+ };
+ GUIDED_QUESTIONS.forEach((_,i)=>{
+  const step='سؤال '+fmt(i+1);
+  defaults['quiz-next:'+i]=step+' · '+(i===4?contentValue(c,'quizFinish',STUDENT_COPY.quizFinish[2]):contentValue(c,'quizNext',STUDENT_COPY.quizNext[2]));
+  if(i>0)defaults['quiz-back:'+i]=step+' · '+contentValue(c,'quizPrevious',STUDENT_COPY.quizPrevious[2]);
+  questionFor(c,i).options.forEach(option=>{defaults['answer:'+i+':'+option.id]=step+' · '+option.label});
+ });
+ if(campaignHasCards(c))for(const [key,card] of Object.entries(cardsFor(c)))defaults['card:'+key]=card.label;
+ paletteFor(c).forEach(([,label],i)=>{defaults['color:'+i]=label});
+ const rows=Object.entries({...Object.fromEntries(Object.entries(defaults).map(([key,label])=>[key,{count:0,label}])),...data.clicks})
+  .sort(([,a],[,b])=>b.count-a.count)
+  .map(([,entry])=>`<tr><td>${esc(entry.label)}</td><td>${fmt(entry.count)}</td></tr>`).join('');
+ return `<h3>آمار ${esc(c.title)}</h3><p>این آمار فقط فعالیت همین مرورگر را نشان می‌دهد و با دستگاه‌های دیگر همگام نمی‌شود.</p>
+ <div class="config-inline">
+  <p>شروع پویش در این مرورگر <strong>${fmt(Number(data.started))}</strong></p>
+  <p>عدد نمایشی روی صفحهٔ شروع <strong>${fmt((c.base||0)+authors.length+Number(data.started))}</strong></p>
+  <p>پوسترهای ثبت‌شده <strong>${fmt(total)}</strong></p>
+ </div>
+ <div class="table-wrap"><table class="table"><thead><tr><th scope="col">دکمه یا گزینه</th><th scope="col">تعداد کلیک</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
 function campaignParticipantsHTML(c){
  if(c.studentContent?.counter===false)return '';
  const {authors}=posterStats(state.posts.filter(post=>post.campaignId===c.id));
- const total=(c.base||0)+authors.length;
- return `<div class="campaign-participants"><strong>${fmt(total)}</strong><span>${esc(contentValue(c,'counterLabel','شرکت‌کننده در این پویش'))}</span><small>آمار نمایشی پویش</small></div>`;
+ const total=(c.base||0)+authors.length+Number(readCampaignAnalytics(c).started);
+ return `<div class="campaign-participants"><strong>${fmt(total)}</strong><span>${esc(contentValue(c,'counterLabel','شرکت‌کننده در این پویش'))}</span><small>${studentCopy(c,'counterNote')}</small></div>`;
 }
 function posterAuthorsTable(authors){
  return `<section class="card module-box poster-authors"><h4>تعداد پوسترهای هر سازنده</h4>${authors.length?`<div class="table-wrap"><table class="table"><thead><tr><th scope="col">نام نمایشی</th><th scope="col">تعداد پوسترهای ثبت‌شده</th></tr></thead><tbody>${authors.map(({name,count})=>`<tr><td class="name">${esc(name)}</td><td>${fmt(count)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">هنوز پوستری ثبت نشده است.</p>'}</section>`;
@@ -523,7 +584,7 @@ function save(){try{localStorage.setItem(STORE,JSON.stringify(state));return tru
 function toast(s){const el=$('toast');el.textContent=s;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3500)}
 function sectionHead(title,desc,action=''){return`<div class="section-head"><div><h3>${title}</h3><p>${desc}</p></div>${action}</div>`}
 function renderOverview(){const count=state.campaigns.reduce((a,c)=>a+campTotal(c),0);const {total,authors}=posterStats(state.posts);const approved=state.posts.filter(p=>p.status==='approved').length;const top=state.campaigns.slice(0,3);$('view-overview').innerHTML=`<div class="hero"><div class="hero-copy"><span class="hero-kicker">✦ خلاقیت، مشارکت، انتشار</span><h2>هر پوستر، شروع یک جریان تازه!</h2><p>پویش بساز، با یک هویت بصری مشترک محتوا تولید کن و دوستانت را در دنیای شاد به چالش دعوت کن.</p><div class="row-flex"><button class="btn btn-white" data-nav="studio">✦ شروع ساخت پوستر</button><button class="btn btn-ghost" style="background:transparent;color:white;border-color:#ffffff78" data-nav="campaigns">مشاهده پویش‌ها</button></div></div><div class="hero-art"><div class="fly"></div><div class="fly"></div><span class="poster-icon">🖼️</span></div></div><div class="stats-grid poster-stats">${statHTML('مشارکت در پویش‌های نمونه',fmt(count),'♙','bg-violet','آمار اولیه، نمایشی')}${statHTML('پویش فعال',fmt(state.campaigns.length),'▤','bg-blue','قابل تنظیم')}${statHTML('کل پوسترهای ثبت‌شده',fmt(total),'✦','bg-orange','شامل داده‌های آزمایشی')}${statHTML('سازندگان یکتا',fmt(authors.length),'♙','bg-violet','بر اساس ثبت‌های این مرورگر')}${statHTML('محتوای تأییدشده',fmt(approved),'♥','bg-mint','با نظارت مرکزی')}</div>${posterAuthorsTable(authors)}${sectionHead('پویش‌های فعال','یک پویش را انتخاب کن و پوستر اختصاصی‌ات را بساز.',`<button class="btn btn-ghost btn-sm" data-nav="campaigns">مشاهده همه پویش‌ها ←</button>`)}<div class="grid-campaigns">${top.map(campaignHTML).join('')}</div><div style="height:24px"></div><div class="two-col"><div class="card module-box"><div class="section-head"><div><h3 style="font-size:15px">آخرین فعالیت‌ها</h3><p>نمونه‌ای از محتوای منتشرشده</p></div><button class="btn btn-soft btn-sm" data-nav="feed">مشاهده فید</button></div><div class="table-wrap"><table class="table"><thead><tr><th>شرکت‌کننده</th><th>پویش</th><th>محبوبیت</th><th>وضعیت</th></tr></thead><tbody>${state.posts.slice().filter(p=>p.status==='approved').sort((a,b)=>b.date-a.date).slice(0,5).map(p=>`<tr><td class="name">${esc(p.author)}</td><td>${esc(getCamp(p.campaignId).title)}</td><td>♥ ${fmt(p.likes)}</td><td><span class="pill pill-green">منتشر شده</span></td></tr>`).join('')}</tbody></table></div></div><div class="card module-box"><h4>مسیرهای اصلی پوسترساز</h4><div class="mini-list">${[['🎨','ساخت محتوای شخصی','عکس، متن و خروجی پوستر'],['🔗','دعوت و مشارکت','پیوند اختصاصی و دعوت موفق'],['🏆','رقابت و امتیاز','لیدربرد و قرعه‌کشی'],['🛡️','نظارت مرکزی','تأیید محتوا و دسترسی‌ها']].map(x=>`<div class="mini-item"><span class="bubble">${x[0]}</span><div class="txt"><strong>${x[1]}</strong><small>${x[2]}</small></div></div>`).join('')}</div></div></div>`}
-function renderCampaigns(){const camps=state.campaigns.filter(c=>(c.title+' '+c.description).includes(searchTerm));$('view-campaigns').innerHTML=`${sectionHead('پویش‌ها','رویدادهای رسانه‌ای، رقابتی و دعوت‌محور را در یک جا ببین.',`<button class="btn btn-primary" data-action="new-campaign">+ پویش جدید</button>`)}<div class="notice-demo">ساخت و انتشار پویش در محصول نهایی تنها در اختیار مدیریت مرکزی خواهد بود؛ این نمونه داده‌های محلی دارد.</div><div class="grid-campaigns">${camps.map(campaignHTML).join('')||'<div class="empty">پویشی با این عبارت پیدا نشد.</div>'}</div>`}
+function renderCampaigns(){const camps=state.campaigns.filter(c=>(c.title+' '+c.description).includes(searchTerm));$('view-campaigns').innerHTML=`${sectionHead('پویش‌ها','رویدادهای رسانه‌ای، رقابتی و دعوت‌محور را در یک جا ببین.',`<button class="btn btn-primary" data-action="new-campaign">+ افزودن پویش</button>`)}<div class="notice-demo">ساخت و انتشار پویش در محصول نهایی تنها در اختیار مدیریت مرکزی خواهد بود؛ این نمونه داده‌های محلی دارد.</div><div class="grid-campaigns">${camps.map(campaignHTML).join('')||'<div class="empty">پویشی با این عبارت پیدا نشد.</div>'}</div>`}
 const optionsHTML=arr=>arr.map(x=>`<option value="${esc(x.id)}" ${state.selectedCampaign===x.id?'selected':''}>${esc(x.title)}</option>`).join('');
 function studioFields(){const c=getCamp(state.selectedCampaign);return`<div class="studio-layout"><div class="card studio-form"><span class="eyebrow">استودیوی خلاقیت</span><h3>پوستر اختصاصی خودت را بساز</h3><p>اطلاعات را وارد کن و خروجی را به‌صورت زنده ببین. متن و تصویر فقط روی مرورگر تو پردازش می‌شوند.</p><div class="field"><label for="studioCampaign">انتخاب پویش</label><select class="form-control" id="studioCampaign">${optionsHTML(state.campaigns)}</select></div><div style="height:16px"></div><div class="form-grid"><div class="field"><label for="studioName">نام نمایشی یا لقب</label><input class="form-control" maxlength="30" id="studioName" placeholder="مثلاً: ستاره آبی" value="${esc(state.userDisplay)}"/></div><div class="field"><label for="studioTeam">گروه رقابتی</label><select class="form-control" id="studioTeam" ${c.teams?.length?'':'disabled'}>${(c.teams||[]).length?c.teams.map(t=>`<option value="${esc(t)}" ${state.selectedTeam===t?'selected':''}>${esc(t)}</option>`).join(''):'<option>بدون گروه</option>'}</select></div></div><div style="height:16px"></div><div class="field"><label for="studioText">متن پوستر</label><textarea id="studioText" maxlength="110" class="form-control" placeholder="متن دلخواهت را بنویس...">${esc(c.defaultText)}</textarea><small>تعداد نویسه مجاز: ۱۱۰</small></div><div style="height:16px"></div><div class="field"><label>رنگ‌بندی پوستر</label><div class="opt-row">${[['purple','#6755d9'],['blue','#1d85b6'],['orange','#ef853d'],['mint','#149d90'],['lilac','#a17bdd']].map(x=>`<button type="button" title="${x[0]}" class="color-option ${posterVariant===x[0]?'selected':''}" style="background:${x[1]}" data-action="color" data-value="${x[0]}"></button>`).join('')}</div></div><div style="height:16px"></div><div class="field"><label>تصویر اختیاری</label><label class="file-upload" for="photoInput">📷 برای افزودن تصویر شخصی اینجا کلیک کن <input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp"/></label><small>در این نمونه تصویر بارگذاری‌شده فقط در همین صفحه استفاده می‌شود.</small></div><div class="divider"></div><div class="row-flex"><button class="btn btn-primary" id="submitPoster" data-action="submit-poster">✓ ثبت برای بررسی و انتشار</button><button class="btn btn-ghost" data-action="reset-form">بازنشانی فرم</button></div><div class="alert">انتشار محتوای جدید نیازمند تأیید مدیر مرکزی است. از صفحه «بک‌آفیس» می‌توان محتوای آزمایشی را تأیید کرد.</div></div><div class="studio-preview"><div class="preview-title">پیش‌نمایش زنده خروجی</div><canvas id="posterCanvas" class="poster-canvas" width="750" height="1000" aria-label="پیش‌نمایش پوستر"></canvas><div class="canvas-actions"><button class="btn btn-ghost btn-sm" data-action="save-image">▧ ذخیره PNG برای آزمایش</button><button class="btn btn-soft btn-sm" id="videoBtn" data-action="make-video">▶ ساخت ویدئوی ۵ ثانیه‌ای</button><button class="btn btn-ghost btn-sm" data-action="share-demo">↗ انتشار در شاد (نیازمند API)</button></div><div class="preview-note">خروجی ویدئو در مرورگرهای پشتیبانی‌شده با فرمت WebM ساخته می‌شود. انتشار واقعی در شاد و خروجی تولیدی نهایی نیازمند سرویس سمت سرور هستند.</div><div id="videoResult"></div></div></div>`}
 function renderStudio(){if(role==='student'){renderStudentStudio();return} $('view-studio').innerHTML=studioFields();attachStudio();applyStudioRules();drawPoster()}
@@ -536,8 +597,8 @@ function drawPoster(animation=0){if(role==='student'&&$('studentCinematicStudio'
 function renderFeed(){const approved=state.posts.filter(p=>p.status==='approved');const opts=state.campaigns.map(c=>`<option value="${esc(c.id)}">${esc(c.title)}</option>`).join('');$('view-feed').innerHTML=`${sectionHead('فید و تعاملات اجتماعی','محتوای کاربران را ببین، لایک کن و درباره پوسترها نظر بده.',`<button class="btn btn-primary" data-nav="studio">✦ ساخت پوستر</button>`)}<div class="feed-controls"><select id="feedCampaign" class="form-control"><option value="all">همه پویش‌ها</option>${opts}</select><select id="feedSort" class="form-control"><option value="smart">پیشنهاد هوشمند (قواعد و امتیاز)</option><option value="latest">جدیدترین</option><option value="popular">محبوب‌ترین</option></select></div><div class="feed-grid" id="feedGrid"></div>`;['feedCampaign','feedSort'].forEach(id=>$(id)?.addEventListener('change',renderFeedCards));renderFeedCards()}
 function scorePost(p){return p.likes*3+p.comments.length*12+Math.max(0,48-(Date.now()-p.date)/36e5)}
 function renderFeedCards(){const grid=$('feedGrid');if(!grid)return;const filter=$('feedCampaign').value,sort=$('feedSort').value;let posts=state.posts.filter(p=>p.status==='approved'&&(filter==='all'||p.campaignId===filter));posts.sort((a,b)=>sort==='latest'?b.date-a.date:sort==='popular'?b.likes-a.likes:scorePost(b)-scorePost(a));grid.innerHTML=posts.map(p=>{const c=getCamp(p.campaignId),liked=state.likesByMe.includes(p.id),open=feedExpandedComment===p.id;return`<article class="post card"><div class="poster-mini" style="background:linear-gradient(145deg,${esc(c.color1)},${esc(c.color2)})"><div class="campaign-name">✦ ${esc(c.title)}</div><div class="symbol">${esc(p.emoji||c.emoji)}</div><div class="text">${esc(p.text)}</div></div><div class="post-body"><div class="post-meta"><span class="post-author">${esc(p.author)}</span><span class="tag-name">${esc(p.team||c.type)}</span></div><p class="post-caption">پوستر اختصاصی برای پویش «${esc(c.title)}»</p><div class="post-actions"><button class="${liked?'liked':''}" data-action="like" data-id="${esc(p.id)}">${liked?'♥':'♡'} ${fmt(p.likes)} پسند</button><button data-action="toggle-comments" data-id="${esc(p.id)}">☷ ${fmt(p.comments.length)} دیدگاه</button><button data-action="share-demo">↗ اشتراک</button></div>${open?`<div class="comment-zone">${p.comments.slice(-4).map(co=>`<div class="comment-row"><strong>${esc(co.by)}:</strong> ${esc(co.text)}</div>`).join('')||'<div class="comment-row">هنوز نظری ثبت نشده است.</div>'}<div class="comment-form"><input id="comment-${esc(p.id)}" maxlength="140" placeholder="دیدگاه محترمانه..." aria-label="متن دیدگاه"/><button data-action="comment" data-id="${esc(p.id)}">ثبت</button></div></div>`:''}</div></article>`}).join('')||'<div class="empty"><span>🖼️</span>فعلاً محتوایی برای این فیلتر وجود ندارد.</div>'}
-function renderLeaderboard(){let leaders=state.leaders.slice().sort((a,b)=>b.score-a.score);const podium=[leaders[1],leaders[0],leaders[2]];const red=state.posts.filter(p=>p.team==='سرخ').length+18570,blue=state.posts.filter(p=>p.team==='آبی').length+19740;const max=red+blue;$('view-leaderboard').innerHTML=`${sectionHead('رقابت و لیدربرد','آمار و رتبه‌های نمایشی؛ بدون افشای هویت واقعی کاربران.') }<div class="leader-grid"><div class="card module-box"><h4>🏆 نفرات برتر پویش‌های نمونه</h4><div class="podium">${podium.map((p,i)=>p?`<div class="podium-member ${i===1?'first':''}"><div class="head">${i===1?'👑':esc(p.name.charAt(0))}</div><strong>${esc(p.name)}</strong><small>${fmt(p.score)} امتیاز</small><div class="podium-step">${i===0?'۲':i===1?'۱':'۳'}</div></div>`:'').join('')}</div><div class="table-wrap"><table class="table"><thead><tr><th>رتبه</th><th>نام نمایشی</th><th>دعوت موفق</th><th>امتیاز</th></tr></thead><tbody>${leaders.map((p,i)=>`<tr><td>${fmt(i+1)}</td><td class="name">${esc(p.name)}</td><td>${fmt(p.invites)}</td><td>${fmt(p.score)}</td></tr>`).join('')}</tbody></table></div></div><div class="card module-box"><h4>⚽ رقابت گروهی شهرآورد</h4><p class="muted" style="font-size:11px">آمار تیمی ساختگی برای نمایش قابلیت رقابت.</p><div class="group-row"><strong>🔴 تیم سرخ</strong><span>${fmt(red)} مشارکت</span></div><div class="group-track"><span style="width:${red/max*100}%;background:linear-gradient(90deg,#fa7479,#d94571)"></span></div><div class="group-row"><strong>🔵 تیم آبی</strong><span>${fmt(blue)} مشارکت</span></div><div class="group-track"><span style="width:${blue/max*100}%;background:linear-gradient(90deg,#55b5e8,#416bcf)"></span></div><div class="divider"></div><h4>نحوه امتیازدهی در این نمونه</h4><div class="mini-list"><div class="mini-item"><span class="bubble">🖼️</span><div class="txt"><strong>ثبت پوستر</strong><small>۱۰ امتیاز آزمایشی</small></div></div><div class="mini-item"><span class="bubble">🔗</span><div class="txt"><strong>دعوت موفق</strong><small>۲۰ امتیاز آزمایشی</small></div></div><div class="mini-item"><span class="bubble">⭐</span><div class="txt"><strong>دعوت ویژه موفق</strong><small>۳۰ امتیاز آزمایشی</small></div></div></div><div class="alert">امتیازها صرفاً برای نشان دادن تجربه محصول‌اند؛ وزن‌های نهایی باید برای هر الگوی پویش تعیین شوند.</div></div></div>`;applyLeaderboardRules()}
-function renderInvites(){const me=state.leaders.find(x=>x.name==='کاربر نمونه')||state.leaders[0];const ref='PS-'+encodeURIComponent(me.name).replaceAll('%','').slice(0,12).toUpperCase();const localLink=location.protocol==='file:'?'[لینک واقعی فقط پس از استقرار در شاد فعال می‌شود]':location.origin+location.pathname+'#invite='+ref;$('view-invites').innerHTML=`${sectionHead('دعوت دوستان','با لینک اختصاصی، دوستانت را به ساخت پوستر دعوت کن.') }<div class="invite-layout"><div class="card info-block"><span class="eyebrow">لینک اختصاصی پویش</span><h3 style="margin:2px 0 8px">دوستانت را به چالش دعوت کن!</h3><p class="muted" style="font-size:11px">ساخت پوستر توسط شخص دعوت‌شده، رویداد «دعوت موفق» محسوب می‌شود.</p><div class="field"><label>انتخاب پویش</label><select id="inviteCampaign" class="form-control">${optionsHTML(state.campaigns)}</select></div><div style="height:14px"></div><div class="field"><label>شناسه دعوت نمونه</label><div class="copy-line"><input id="inviteCode" class="form-control" readonly value="${esc(ref)}"/><button class="btn btn-soft btn-sm" data-action="copy-invite">کپی شناسه</button></div></div><p style="font-size:10px;color:var(--muted)">${esc(localLink)}</p><div class="divider"></div><div class="stats-grid" style="grid-template-columns:repeat(2,1fr);margin-bottom:5px">${statHTML('دعوت موفق نمونه',fmt(me.invites),'✓','bg-mint','رویدادهای شبیه‌سازی‌شده')}${statHTML('امتیاز',fmt(me.score),'★','bg-violet','بر اساس قواعد نمایشی')}</div><div class="sim-card"><strong>شبیه‌ساز دعوت موفق</strong><p>برای آزمایش تعاملات، کلیک کن تا یک دعوت موفق جدید ثبت و امتیاز نمونه به‌روزرسانی شود. این کار پیام واقعی ارسال نمی‌کند.</p><div class="row-flex"><button class="btn btn-primary btn-sm" data-action="simulate-invite">+ ثبت دعوت موفق آزمایشی</button><button class="btn btn-ghost btn-sm" data-action="simulate-special">+ دعوت ویژه موفق</button></div></div></div><div class="card info-block"><h3 style="margin:0 0 18px;font-size:16px">مسیر یک دعوت موفق</h3><div class="steps">${[['ایجاد لینک','شناسه اختصاصی برای دعوت‌کننده یا پوستر'],['ارسال در شاد','نیازمند ارتباط با APIهای مجاز شاد'],['ورود دعوت‌شونده','نمایش صفحه معرفی پویش'],['ساخت پوستر','ثبت مشارکت کاربر دعوت‌شده'],['دریافت امتیاز','اعمال قوانین دعوت عادی یا ویژه']].map((x,i)=>`<div class="step"><span class="no">${fmt(i+1)}</span><div><strong>${x[0]}</strong><small>${x[1]}</small></div></div>`).join('')}</div><div class="alert">این فایل HTML به دفترچه مخاطبان، ارسال پیام، وضعیت و APIهای شاد دسترسی ندارد. امکان دعوت فعلاً شبیه‌سازی شده است.</div></div></div>`;const sel=$('inviteCampaign');sel?.addEventListener('change',e=>{state.selectedCampaign=e.target.value;save();navigate('invites')});applyInviteRules()}
+function renderLeaderboard(){const c=getCamp(state.selectedCampaign);let leaders=state.leaders.slice().sort((a,b)=>b.score-a.score);const podium=[leaders[1],leaders[0],leaders[2]];const red=state.posts.filter(p=>p.team==='سرخ').length+18570,blue=state.posts.filter(p=>p.team==='آبی').length+19740;const max=red+blue;$('view-leaderboard').innerHTML=`${sectionHead(studentCopy(c,'rankingTitle'),studentCopy(c,'rankingIntro')) }<div class="leader-grid"><div class="card module-box"><h4>🏆 نفرات برتر پویش‌های نمونه</h4><div class="podium">${podium.map((p,i)=>p?`<div class="podium-member ${i===1?'first':''}"><div class="head">${i===1?'👑':esc(p.name.charAt(0))}</div><strong>${esc(p.name)}</strong><small>${fmt(p.score)} امتیاز</small><div class="podium-step">${i===0?'۲':i===1?'۱':'۳'}</div></div>`:'').join('')}</div><div class="table-wrap"><table class="table"><thead><tr><th>رتبه</th><th>نام نمایشی</th><th>دعوت موفق</th><th>امتیاز</th></tr></thead><tbody>${leaders.map((p,i)=>`<tr><td>${fmt(i+1)}</td><td class="name">${esc(p.name)}</td><td>${fmt(p.invites)}</td><td>${fmt(p.score)}</td></tr>`).join('')}</tbody></table></div></div><div class="card module-box"><h4>⚽ رقابت گروهی شهرآورد</h4><p class="muted" style="font-size:11px">آمار تیمی ساختگی برای نمایش قابلیت رقابت.</p><div class="group-row"><strong>🔴 تیم سرخ</strong><span>${fmt(red)} مشارکت</span></div><div class="group-track"><span style="width:${red/max*100}%;background:linear-gradient(90deg,#fa7479,#d94571)"></span></div><div class="group-row"><strong>🔵 تیم آبی</strong><span>${fmt(blue)} مشارکت</span></div><div class="group-track"><span style="width:${blue/max*100}%;background:linear-gradient(90deg,#55b5e8,#416bcf)"></span></div><div class="divider"></div><h4>نحوه امتیازدهی در این نمونه</h4><div class="mini-list"><div class="mini-item"><span class="bubble">🖼️</span><div class="txt"><strong>ثبت پوستر</strong><small>۱۰ امتیاز آزمایشی</small></div></div><div class="mini-item"><span class="bubble">🔗</span><div class="txt"><strong>دعوت موفق</strong><small>۲۰ امتیاز آزمایشی</small></div></div><div class="mini-item"><span class="bubble">⭐</span><div class="txt"><strong>دعوت ویژه موفق</strong><small>۳۰ امتیاز آزمایشی</small></div></div></div><div class="alert">امتیازها صرفاً برای نشان دادن تجربه محصول‌اند؛ وزن‌های نهایی باید برای هر الگوی پویش تعیین شوند.</div></div></div>`;applyLeaderboardRules()}
+function renderInvites(){const c=getCamp(state.selectedCampaign);const me=state.leaders.find(x=>x.name==='کاربر نمونه')||state.leaders[0];const ref='PS-'+encodeURIComponent(me.name).replaceAll('%','').slice(0,12).toUpperCase();const localLink=location.protocol==='file:'?'[لینک واقعی فقط پس از استقرار در شاد فعال می‌شود]':location.origin+location.pathname+'#invite='+ref;$('view-invites').innerHTML=`${sectionHead(studentCopy(c,'inviteTitle'),studentCopy(c,'inviteIntro')) }<div class="invite-layout"><div class="card info-block"><span class="eyebrow">لینک اختصاصی پویش</span><h3 style="margin:2px 0 8px">${studentCopy(c,'inviteCard')}</h3><p class="muted" style="font-size:11px">ساخت پوستر توسط شخص دعوت‌شده، رویداد «دعوت موفق» محسوب می‌شود.</p><div class="field"><label>انتخاب پویش</label><select id="inviteCampaign" class="form-control">${optionsHTML(state.campaigns)}</select></div><div style="height:14px"></div><div class="field"><label>شناسه دعوت نمونه</label><div class="copy-line"><input id="inviteCode" class="form-control" readonly value="${esc(ref)}"/><button class="btn btn-soft btn-sm" data-action="copy-invite">${studentCopy(c,"inviteCopy")}</button></div></div><p style="font-size:10px;color:var(--muted)">${esc(localLink)}</p><div class="divider"></div><div class="stats-grid" style="grid-template-columns:repeat(2,1fr);margin-bottom:5px">${statHTML('دعوت موفق نمونه',fmt(me.invites),'✓','bg-mint','رویدادهای شبیه‌سازی‌شده')}${statHTML('امتیاز',fmt(me.score),'★','bg-violet','بر اساس قواعد نمایشی')}</div><div class="sim-card"><strong>شبیه‌ساز دعوت موفق</strong><p>برای آزمایش تعاملات، کلیک کن تا یک دعوت موفق جدید ثبت و امتیاز نمونه به‌روزرسانی شود. این کار پیام واقعی ارسال نمی‌کند.</p><div class="row-flex"><button class="btn btn-primary btn-sm" data-action="simulate-invite">+ ثبت دعوت موفق آزمایشی</button><button class="btn btn-ghost btn-sm" data-action="simulate-special">+ دعوت ویژه موفق</button></div></div></div><div class="card info-block"><h3 style="margin:0 0 18px;font-size:16px">مسیر یک دعوت موفق</h3><div class="steps">${[['ایجاد لینک','شناسه اختصاصی برای دعوت‌کننده یا پوستر'],['ارسال در شاد','نیازمند ارتباط با APIهای مجاز شاد'],['ورود دعوت‌شونده','نمایش صفحه معرفی پویش'],['ساخت پوستر','ثبت مشارکت کاربر دعوت‌شده'],['دریافت امتیاز','اعمال قوانین دعوت عادی یا ویژه']].map((x,i)=>`<div class="step"><span class="no">${fmt(i+1)}</span><div><strong>${x[0]}</strong><small>${x[1]}</small></div></div>`).join('')}</div><div class="alert">این فایل HTML به دفترچه مخاطبان، ارسال پیام، وضعیت و APIهای شاد دسترسی ندارد. امکان دعوت فعلاً شبیه‌سازی شده است.</div></div></div>`;const sel=$('inviteCampaign');sel?.addEventListener('change',e=>{state.selectedCampaign=e.target.value;save();navigate('invites')});applyInviteRules()}
 function renderLottery(){const eligible=state.leaders.filter(p=>p.invites>=3);$('view-lottery').innerHTML=`${sectionHead('قرعه‌کشی و مأموریت‌ها','افرادی که حداقل سه دعوت موفق دارند در این سناریوی نمونه واجد شرایط می‌شوند.') }<div class="leader-grid"><div class="card module-box"><span class="eyebrow">قرعه‌کشی نمونه</span><h3 style="font-size:21px;margin:6px 0">سه دعوت موفق، یک فرصت برنده‌شدن!</h3><p class="muted" style="font-size:12px">در محصول نهایی، شرایط برای هر پویش قابل تنظیم است. انتخاب برنده در این صفحه فقط نمایش آزمایشی است.</p><div class="stats-grid" style="grid-template-columns:1fr 1fr;margin:20px 0">${statHTML('افراد واجد شرایط',fmt(eligible.length),'♙','bg-mint','نام نمایشی')}${statHTML('حداقل دعوت موفق','۳','☆','bg-orange','شرط این پویش نمونه')}</div><button class="btn btn-primary" data-action="draw-lottery" ${role!=='central'?'disabled':''}>🎁 اجرای قرعه‌کشی آزمایشی</button><div id="lotteryResult"></div>${role!=='central'?'<div class="alert">اجرای قرعه‌کشی فقط برای مدیر مرکزی مجاز است.</div>':''}</div><div class="card module-box"><h4>افراد واجد شرایط</h4><div class="table-wrap"><table class="table"><thead><tr><th>نام نمایشی</th><th>دعوت موفق</th><th>وضعیت</th></tr></thead><tbody>${eligible.map(p=>`<tr><td class="name">${esc(p.name)}</td><td>${fmt(p.invites)}</td><td><span class="pill pill-green">واجد شرایط</span></td></tr>`).join('')||'<tr><td colspan="3">هنوز فرد واجد شرایط وجود ندارد.</td></tr>'}</tbody></table></div><p class="muted" style="font-size:11px">قرعه‌کشی واقعی نیازمند ثبت رویدادها، جلوگیری از تقلب و گزارش قابل حسابرسی است.</p></div></div>`}
 function renderAdmin(){if(role!=='central'){$('view-admin').innerHTML=`${sectionHead('بک‌آفیس و دسترسی‌ها','نمای پیش‌نمایش بر اساس نقش انتخاب‌شده') }<div class="card info-block"><h3>${role==='org'?'پنل نهاد برگزارکننده':'پنل مدرسه'}</h3><p class="muted">${role==='org'?'نهاد می‌تواند آمار و اطلاعات قراردادی مجاز خود را مشاهده کند. ایجاد یا تأیید پویش و نظارت محتوا در اختیار تیم مرکزی است.':'مدرسه فقط می‌تواند آمار مربوط به محدوده مدرسه خود را مشاهده کند؛ اطلاعات هویتی دیگران نمایش داده نمی‌شود.'}</p><div class="role-note">این یک پیش‌نمایش نقش در مرورگر است، نه سامانه واقعی کنترل مجوز. امنیت نقش‌ها در محصول واقعی باید در سرور اعمال شود.</div><div style="margin-top:15px"><button class="btn btn-ghost" data-nav="overview">بازگشت به داشبورد</button></div></div>`;return}
 const pending=state.posts.filter(p=>p.status==='pending');$('view-admin').innerHTML=`${sectionHead('بک‌آفیس مدیریت مرکزی','پویش‌ها، محتوا و دسترسی‌های اصلی را مدیریت کن.',`<div class="row-flex"><button class="btn btn-soft" data-nav="permissions">⚙ تنظیم دسترسی نقش‌ها</button><button class="btn btn-primary" data-action="new-campaign">+ تعریف پویش آزمایشی</button></div>`)}<div class="admin-layout"><div class="card admin-block"><h4>محتواهای در انتظار تأیید <span class="pill pill-orange">${fmt(pending.length)}</span></h4>${pending.length?pending.map(p=>`<div class="pending-card"><div><strong>${esc(p.author)} · ${esc(getCamp(p.campaignId).title)}</strong><small>${esc(p.text)}</small></div><div class="row-flex"><button class="btn btn-soft btn-sm" data-action="approve" data-id="${esc(p.id)}">تأیید</button><button class="btn btn-red btn-sm" data-action="reject" data-id="${esc(p.id)}">رد</button></div></div>`).join(''):'<div class="empty" style="padding:26px"><span>✓</span>هیچ محتوایی در انتظار تأیید نیست.</div>'}<div class="divider"></div><h4>پویش‌های ثبت‌شده</h4>${state.campaigns.map(c=>`<div class="pending-card"><div><strong>${esc(c.title)}</strong><small>${esc(c.type)} · هدف ${fmt(c.goal)} مشارکت</small></div><span class="pill pill-green">تأییدشده</span></div>`).join('')}</div><div class="card admin-block"><h4>سطوح دسترسی نمونه</h4><div class="table-wrap"><table class="table"><thead><tr><th>عملیات</th><th>مرکزی</th><th>نهاد</th><th>مدرسه</th></tr></thead><tbody>${[['ایجاد پویش','✓','—','—'],['تأیید محتوا','✓','—','—'],['بارگذاری قالب','✓','✓','—'],['دیدن آمار','✓','محدود','مدرسه'],['صورتحساب','✓','مشاهده','—']].map(r=>`<tr>${r.map(s=>`<td>${esc(s)}</td>`).join('')}</tr>`).join('')}</tbody></table></div><div class="divider"></div><div class="role-note">در MVP نقش‌های آماده استفاده می‌شوند. نقش‌های سفارشی و سطح دسترسی ریزدانه در فاز توسعه در نظر گرفته شده‌اند.</div><button class="btn btn-ghost btn-sm" style="margin-top:16px" data-action="reset-data">بازنشانی نمونه</button></div></div>`}
@@ -572,7 +633,11 @@ function prepareRole(){
   const candidates=eligibleCampaigns();
   if(candidates.length&&!candidates.some(c=>c.id===state.selectedCampaign))state.selectedCampaign=candidates[0].id;
   const allowed=roleAllowedViews();
-  document.querySelectorAll('#studentBottomNav [data-nav]').forEach(el=>el.classList.toggle('hidden',!allowed.includes(el.dataset.nav)));
+  const navKeys={studio:'navStudio',invites:'navInvites',leaderboard:'navRanking'};
+  document.querySelectorAll('#studentBottomNav [data-nav]').forEach(el=>{
+   el.classList.toggle('hidden',!allowed.includes(el.dataset.nav));
+   const key=navKeys[el.dataset.nav];el.textContent=contentValue(getCamp(state.selectedCampaign),key,STUDENT_COPY[key][2]);
+  });
   document.querySelectorAll('[data-nav]').forEach(el=>{
     const enabled=allowed.includes(el.dataset.nav);
     // پنهان‌سازی فقط برای ناوبری؛ دکمه‌های عملیاتی داخل صفحات توسط دسترسی جداگانه کنترل می‌شوند.
@@ -608,36 +673,111 @@ function cardsFor(c){
 function questionFor(c,i){
  const q=GUIDED_QUESTIONS[i],key='q'+i;
  const title=i===0&&studentCampaignArt(c)?'از داستان شماره ۷ رونالدو، کدوم پیام به دلت نزدیک‌تره؟':q.title;
- return {...q,title:contentValue(c,key,title),hint:contentValue(c,key+'Hint',q.hint),options:q.options.map((o,j)=>({...o,label:contentValue(c,key+'Label'+j,o.label),sub:contentValue(c,key+'Sub'+j,o.sub)}))};
+ return {...q,title:contentValue(c,key,title),hint:contentValue(c,key+'Hint',q.hint),options:q.options.map((o,j)=>({...o,label:contentValue(c,key+'Label'+j,o.label),sub:contentValue(c,key+'Sub'+j,o.sub),emoji:contentValue(c,key+'Emoji'+j,o.emoji)}))};
 }
+const STUDENT_COPY={
+"inviteTitle":['competition',"عنوان دعوت دوستان","دعوت دوستان"],
+"inviteIntro":['competition',"متن معرفی دعوت","با لینک اختصاصی، دوستانت را به ساخت پوستر دعوت کن."],
+"inviteCard":['competition',"عنوان کارت دعوت","دوستانت را به چالش دعوت کن!"],
+"inviteCopy":['competition',"دکمهٔ کپی شناسه","کپی شناسه"],
+"rankingTitle":['competition',"عنوان جدول رقابت","رقابت و لیدربرد"],
+"rankingIntro":['competition',"توضیح جدول رقابت","آمار و رتبه‌های نمایشی؛ بدون افشای هویت واقعی کاربران."],
+"navStudio":['competition',"دکمهٔ پوسترساز در منو","✦ پوسترساز"],
+"navInvites":['competition',"دکمهٔ دعوت در منو","↗ دعوت"],
+"navRanking":['competition',"دکمهٔ رقابت در منو","▥ جدول رقابت"],
+ "kicker": ["intro", "متن کوچک بالای عنوان", "YOUR STORY · YOUR SEVEN"],
+ "counterNote": ["intro", "متن زیر شمارنده", "آمار نمایشی پویش"],
+ "quizPrevious": ["questions", "دکمهٔ سؤال قبلی", "سؤال قبلی"],
+ "quizNext": ["questions", "دکمهٔ سؤال بعدی", "سؤال بعدی"],
+ "quizFinish": ["questions", "دکمهٔ دیدن پیشنهادها", "دیدن جمله‌های پیشنهادی"],
+ "suggestTitle": ["questions", "عنوان پیشنهادها", "جملهٔ پوسترت رو انتخاب کن"],
+ "suggestUse": ["questions", "دکمهٔ انتخاب جمله", "انتخاب جمله"],
+ "suggestBack": ["questions", "دکمهٔ تغییر جواب‌ها", "تغییر جواب‌ها"],
+ "suggestOwn": ["questions", "دکمهٔ نوشتن جملهٔ شخصی", "جمله خودم رو می‌نویسم"],
+ "writeTitle": ["design", "عنوان مرحلهٔ نوشتن", "حالا تو بگو؛ داستانت چیه؟"],
+ "textLabel": ["design", "برچسب جمله", "جمله تو"],
+ "textHelp": ["design", "راهنمای جمله", "هر طور دوست داری بنویس"],
+ "nameLabel": ["design", "برچسب نام", "نام یا لقب (اختیاری)"],
+ "namePlaceholder": ["design", "نمونهٔ نام", "مثلاً یک رؤیاباف"],
+ "teamLabel": ["design", "برچسب تیم", "تیم"],
+ "retake": ["design", "دکمهٔ تغییر پاسخ‌ها", "تغییر پاسخ‌ها"],
+ "back": ["design", "دکمهٔ برگشت", "قبلی"],
+ "continue": ["design", "دکمهٔ ادامه", "ادامه"],
+ "designTitle": ["design", "عنوان مرحلهٔ طراحی", "پوسترت رو شخصی کن"],
+ "cardsLabel": ["design", "عنوان کارت‌ها", "کارت پوستر"],
+ "colorsLabel": ["design", "عنوان رنگ‌ها", "رنگ پوستر"],
+ "viewPoster": ["design", "دکمهٔ دیدن پوستر", "دیدن پوستر"],
+ "download": ["output", "دکمهٔ دانلود", "دانلود"],
+ "share": ["output", "دکمهٔ اشتراک‌گذاری", "اشتراک‌گذاری"],
+ "edit": ["output", "دکمهٔ ویرایش", "ویرایش"],
+ "close": ["output", "برچسب دکمهٔ ضربدر", "بستن نتیجه و بازگشت به شروع"],
+ "resultLabel": ["output", "عنوان دسترس‌پذیر نتیجه", "نتیجهٔ پوستر"],
+ "posterMark": ["output", "نشان روی تصویر", ""],
+ "posterHeading": ["output", "عنوان متن روی تصویر", ""],
+ "posterFooter": ["output", "نوشتهٔ پایین تصویر", ""],
+ "posterName": ["output", "نام پیش‌فرض روی تصویر", "یک رؤیاباف"],
+ "posterAnon": ["output", "نام ناشناس", "یک شرکت‌کننده"],
+ "posterPlaceholder": ["output", "متن قبل از نوشتن جمله", "یک جمله از خودت بنویس؛ داستان از همین‌جا شروع می‌شه."],
+ "shareTitle": ["output", "عنوان پنجرهٔ اشتراک‌گذاری", "انتشار مستقیم در شاد"],
+ "shareBody": ["output", "توضیح پنجرهٔ اشتراک‌گذاری", "در محصول نهایی، این دکمه باید به API مجاز اشتراک‌گذاری، مخاطبان و استوری شاد متصل شود."],
+ "shareNotice": ["output", "پیام پنجرهٔ اشتراک‌گذاری", "در این نمونه HTML هیچ پیام یا پوستری در شاد ارسال نشده است."],
+ "shareOk": ["output", "دکمهٔ بستن پنجره", "متوجه شدم"],
+ "downloadNotice": ["output", "پیام پس از دانلود", "پوستر ذخیره شد."]
+};
+function studentCopy(c,key,fallback=STUDENT_COPY[key][2]){return esc(contentValue(c,key,fallback))}
+const STUDENT_COLORS={
+ uiAccent:['رنگ تأکیدی رابط','#dfff69'],uiBackground:['پس‌زمینهٔ استودیو','#0c1611'],
+ uiText:['رنگ متن رابط','#f5fbee'],posterTextColor:['رنگ متن پوستر','#f4f9f0'],
+ posterBackground:['پس‌زمینهٔ پوستر بدون عکس','#203323'],
+ resultButton:['رنگ شیشه‌ای دکمه‌های نتیجه','#eafbe8']
+};
+function designColor(c,key){const value=contentValue(c,key);return /^#[0-9a-f]{6}$/i.test(value)?value:STUDENT_COLORS[key][1]}
+function studentStyle(c){
+ return ['uiAccent','uiBackground','uiText','resultButton'].map(key=>'--'+key+':'+designColor(c,key)).join(';');
+}
+function studentCover(c,key,defaultArt){
+ const photo=contentValue(c,key+'Photo');
+ return /^data:image\/(?:jpeg|png|webp);base64,[\w+/=]+$/i.test(photo)?photo:(STUDENT_ASSETS[defaultArt]||'');
+}
+function campaignHasCards(c){return c.studentContent?.showCards??studentCampaignArt(c)}
 let configSection='intro';
 function designSettings(c){
  const field=(key,label,value,type='text',max=180)=>`<label class="field">${esc(label)}<input class="form-control" data-content="${key}" type="${type}" maxlength="${max}" ${type==='number'?'min="0" step="1" max="999999999"':''} value="${esc(value)}"></label>`;
  const group=(title,body)=>`<details class="card setting-panel"><summary>${esc(title)}</summary><div class="config-fields">${body}</div></details>`;
  const custom=(key,label,fallback='')=>field(key,label,contentValue(c,key,fallback));
  const guided=rulesFor(c).studio.showText&&rulesFor(c).studio.guidedQuestions;
+ const copies=section=>Object.entries(STUDENT_COPY).filter(([,entry])=>entry[0]===section).map(([key,[,label,fallback]])=>custom(key,label,fallback)).join('');
+ const themeFields=(...keys)=>keys.map(key=>field(key,STUDENT_COLORS[key][0],designColor(c,key),'color')).join('');
+ const photoField=(key,label,fallback)=>`<fieldset><legend>${label}</legend><img class="config-thumb" data-art-preview="${key}" src="${esc(fallback||'')}" ${fallback?'':'hidden'} alt="پیش‌نمایش تصویر"><label class="field">انتخاب عکس<input type="file" data-art-file="${key}" accept="image/jpeg,image/png,image/webp"></label><button type="button" class="btn btn-ghost" data-art-clear="${key}">بازگشت به تصویر پیش‌فرض</button><input type="hidden" data-content="${key}Photo" value="${esc(contentValue(c,key+'Photo'))}"></fieldset>`;
  const intro=field('title','نام پویش',c.title)+field('description','توضیح پویش',c.description)+custom('headline','عنوان صفحه شروع (اختیاری)')+custom('intro','متن خوشامد',guided?'داستان از تو شروع می‌شه.':'قصه تو، تصویر تو.')+custom('start','دکمه شروع',guided?'شروع کنیم':'ساخت پوستر رو شروع کنیم')+field('base','تعداد اولیه شرکت‌کنندگان',c.base||0,'number')+custom('counterLabel','عنوان شمارنده','شرکت‌کننده در این پویش')+settingCheck('display','counter','نمایش شمارنده شرکت‌کنندگان',c.studentContent?.counter!==false);
  const cards=Object.entries(cardsFor(c)).map(([key,card],i)=>`<fieldset><legend>کارت ${fmt(i+1)}</legend>${field(key+'Label','نام کارت',card.label)}${field(key+'Starter','راهنمای نوشتن جمله',card.starter)}<label class="field">تصویر کارت<select class="form-control" data-content="${key}Image" data-art-select="${key}">${Object.values(STUDENT_THEMES).map(t=>`<option value="${t.image}" ${card.image===t.image?'selected':''}>${esc(t.label)}</option>`).join('')}</select></label><img class="config-thumb" data-art-preview="${key}" src="${esc(contentValue(c,key+'Photo',STUDENT_ASSETS[card.image]))}" alt="پیش‌نمایش کارت"><label class="field">تصویر دلخواه کارت<input type="file" data-art-file="${key}" accept="image/jpeg,image/png,image/webp"></label><input type="hidden" data-content="${key}Photo" value="${esc(contentValue(c,key+'Photo'))}"></fieldset>`).join('');
  const colors=paletteFor(c).map(([color,label],i)=>`<fieldset><legend>رنگ ${fmt(i+1)}</legend>${field('color'+i,'رنگ',color,'color')}${field('colorLabel'+i,'نام رنگ',label)}</fieldset>`).join('');
- const questions=GUIDED_QUESTIONS.map((_,i)=>{const q=questionFor(c,i),key='q'+i;return group('سؤال '+fmt(i+1),field(key,'صورت سؤال',q.title)+field(key+'Hint','راهنما',q.hint)+q.options.map((o,j)=>field(key+'Label'+j,'گزینه '+fmt(j+1),o.label)+field(key+'Sub'+j,'توضیح گزینه '+fmt(j+1),o.sub)).join(''))}).join('');
- return {intro,design:field('defaultText','متن پیش‌فرض پوستر',c.defaultText,'text',140)+`<div class="config-palette">${colors}</div>`+(studentCampaignArt(c)?`<h4>کارت‌های رونالدو</h4><div class="config-cards">${cards}</div>`:''),teams:field('teams','نام تیم‌ها (جداشده با ویرگول)',(c.teams||[]).join('، ')),questions:questions+[0,1,2,3].map(i=>field('suggest'+i,'جمله پیشنهادی '+fmt(i+1)+' (خالی برای پیشنهاد خودکار)',contentValue(c,'suggest'+i),'text',140)).join('')};
+ const questions=GUIDED_QUESTIONS.map((_,i)=>{const q=questionFor(c,i),key='q'+i;return group('سؤال '+fmt(i+1),field(key,'صورت سؤال',q.title)+field(key+'Hint','راهنما',q.hint)+q.options.map((o,j)=>field(key+'Label'+j,'گزینه '+fmt(j+1),o.label)+field(key+'Sub'+j,'توضیح گزینه '+fmt(j+1),o.sub)+field(key+'Emoji'+j,'نماد گزینه '+fmt(j+1),o.emoji,'text',16)).join(''))}).join('');
+ return {intro:intro+copies('intro')+photoField('cover','عکس صفحهٔ شروع',studentCover(c,'cover',studentCampaignArt(c)?'legacy':''))+themeFields('uiAccent','uiBackground','uiText'),output:copies('output')+themeFields('posterTextColor','posterBackground','resultButton')+photoField('poster','پس‌زمینهٔ پوستر بدون کارت',studentCover(c,'poster','')),design:field('defaultText','متن پیش‌فرض پوستر',c.defaultText,'text',140)+`<div class="config-palette">${colors}</div>`+copies('design')+settingCheck('display','showCards','نمایش کارت‌های پوستر',campaignHasCards(c))+`<h4>کارت‌های پوستر</h4><div class="config-cards">${cards}</div>`,teams:field('teams','نام تیم‌ها (جداشده با ویرگول)',(c.teams||[]).join('، '))+copies('competition'),questions:photoField('quiz','عکس پس‌زمینهٔ سؤال‌ها',studentCover(c,'quiz',studentCampaignArt(c)?'focus':''))+copies('questions')+questions+[0,1,2,3].map(i=>field('suggest'+i,'جمله پیشنهادی '+fmt(i+1)+' (خالی برای پیشنهاد خودکار)',contentValue(c,'suggest'+i),'text',140)).join('')};
 }
-function bindCardImages(panel){
+function bindCampaignImages(panel){
  panel.querySelectorAll('[data-art-file]').forEach(input=>{
   const key=input.dataset.artFile,select=panel.querySelector('[data-art-select="'+key+'"]'),preview=panel.querySelector('[data-art-preview="'+key+'"]'),photo=panel.querySelector('[data-content="'+key+'Photo"]');
-  panel.querySelector('[data-action="new-campaign"]').onclick=e=>{
-  if(dirty&&!window.confirm('تغییرات این پویش ذخیره نشده‌اند. پویش جدید بسازیم؟'))e.stopPropagation();
- };
- select.onchange=()=>{input.value='';delete input.dataset.loading;photo.value='';preview.src=STUDENT_ASSETS[select.value]};
+  const clear=panel.querySelector('[data-art-clear="'+key+'"]');
+  const reset=()=>{
+   input.value='';delete input.dataset.loading;photo.value='';
+   const fallback={cover:'legacy',quiz:'focus'}[key];
+   const art=select?.value||(studentCampaignArt(getCamp(configCampaignId))?fallback:'');
+   if(art)preview.src=STUDENT_ASSETS[art];else preview.removeAttribute('src');
+   preview.hidden=!art;
+  };
+  if(select)select.onchange=reset;
+  if(clear)clear.onclick=()=>{reset();input.dispatchEvent(new Event('input',{bubbles:true}))};
   input.onchange=async()=>{
    const file=input.files[0];if(!file)return;
    const url=URL.createObjectURL(file),img=new Image();
    input.dataset.loading='true';
    try{
     img.src=url;await img.decode();if(file!==input.files[0])return;
-    const scale=Math.min(1,800/Math.max(img.width,img.height)),canvas=document.createElement('canvas');
+    const maxSide=key==='cover'||key==='quiz'?1280:1000;
+    const scale=Math.min(1,maxSide/Math.max(img.width,img.height)),canvas=document.createElement('canvas');
     canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));
-    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);photo.value=canvas.toDataURL('image/jpeg',0.75);preview.src=photo.value;
+    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);photo.value=canvas.toDataURL('image/jpeg',0.75);preview.src=photo.value;preview.hidden=false;
    }catch{toast('تصویر خوانده نشد. فایل دیگری انتخاب کنید.')}
    finally{URL.revokeObjectURL(url);if(file===input.files[0])delete input.dataset.loading}
   };
@@ -657,14 +797,16 @@ function renderPermissions(){
  const c=state.campaigns.find(x=>x.id===configCampaignId)||state.campaigns[0];
  configCampaignId=c.id;
  const p=rulesFor(c),fields=designSettings(c);
- const sections={intro:'صفحهٔ شروع',design:'طراحی پوستر',questions:'سؤال‌ها',features:'امکانات دانش‌آموز',competition:'دعوت و رقابت'};
+ const sections={intro:'صفحهٔ شروع',design:'طراحی پوستر',questions:'سؤال‌ها',output:'خروجی پوستر',stats:'آمار',features:'امکانات دانش‌آموز',competition:'دعوت و رقابت'};
  $('view-permissions').innerHTML=`
  ${sectionHead('تنظیمات پنل دانش‌آموز','پویش را انتخاب کنید و بخش‌های آن را ویرایش کنید.',`<button class="btn btn-primary" data-action="new-campaign">+ پویش جدید</button>`)}
  <div class="config-top"><label>پویش در حال ویرایش<select class="form-control" id="configCampaign">${state.campaigns.map(campaign=>`<option value="${esc(campaign.id)}">${esc(campaign.title)}</option>`).join('')}</select></label></div>
  <nav class="config-nav" aria-label="بخش‌های ویرایش پویش">${Object.entries(sections).map(([key,label])=>`<button type="button" class="btn btn-ghost" data-config-step="${key}">${label}</button>`).join('')}</nav>
- <section class="card setting-panel config-page" data-config-page="intro"><h3>صفحهٔ شروع</h3><div class="config-intro"><div class="config-fields">${fields.intro}</div><aside class="config-preview"><small>پیش‌نمایش صفحهٔ شروع</small><p id="cfg-preview-campaign"></p><h3 id="cfg-preview-title"></h3><p id="cfg-preview-intro"></p><span class="config-preview-start" id="cfg-preview-start"></span><div id="cfg-preview-counter"><strong id="cfg-preview-count"></strong><span id="cfg-preview-label"></span></div></aside></div></section>
+ <section class="card setting-panel config-page" data-config-page="intro"><div class="row-flex"><h3>صفحهٔ شروع</h3><a class="btn btn-ghost" id="configPublicLink" target="_blank" rel="noopener">لینک عمومی پویش</a></div><div class="config-intro"><div class="config-fields">${fields.intro}</div><aside class="config-preview"><small>پیش‌نمایش صفحهٔ شروع</small><p id="cfg-preview-campaign"></p><h3 id="cfg-preview-title"></h3><p id="cfg-preview-intro"></p><span class="config-preview-start" id="cfg-preview-start"></span><div id="cfg-preview-counter"><strong id="cfg-preview-count"></strong><span id="cfg-preview-label"></span></div></aside></div></section>
  <section class="card setting-panel config-page" data-config-page="design"><h3>طراحی پوستر</h3><div class="config-fields">${fields.design}</div></section>
  <section class="card setting-panel config-page" data-config-page="questions"><h3>سؤال‌ها و جمله‌های پیشنهادی</h3><div class="config-fields">${fields.questions}</div></section>
+ <section class="card setting-panel config-page" data-config-page="output"><h3>خروجی پوستر</h3><div class="config-fields">${fields.output}</div></section>
+ <section class="card setting-panel config-page" data-config-page="stats">${campaignAnalyticsHTML(c)}</section>
  <section class="card setting-panel config-page" data-config-page="features"><h3>امکانات دانش‌آموز</h3><h4>بخش‌های قابل مشاهده</h4>
   ${settingCheck('student','studio','نمایش استودیوی پوسترساز',p.student.studio)}
   ${settingCheck('student','invites','نمایش دعوت دوستان',p.student.invites)}
@@ -692,16 +834,27 @@ function renderPermissions(){
   ${settingCheck('leaderboard','showScore','نمایش امتیاز کاربران',p.leaderboard.showScore)}
   <div class="config-fields">${fields.teams}</div>
  </section>
- <div class="config-actions config-save"><span id="configStatus" role="status">ذخیره در همین مرورگر</span><div><button class="btn btn-primary" data-action="save-permissions">ذخیره تغییرات</button><details class="config-export"><summary>انتشار برای دانش‌آموزها</summary><div class="card"><p>فایل تنظیمات را بگیر و در ریشهٔ مخزن جایگزین کن.</p><button class="btn btn-ghost" id="exportStudentSettings">دانلود فایل تنظیمات</button></div></details></div></div>
+ <div class="config-actions config-save"><span id="configStatus" role="status">ذخیره در همین مرورگر</span><div><button class="btn btn-primary" data-action="save-permissions">ذخیره تغییرات</button><a class="btn btn-ghost" href="./?preview=1&amp;campaign=${encodeURIComponent(c.id)}" id="configStudentPreview" target="_blank" rel="noopener">پیش‌نمایش دانش‌آموز</a><details class="config-export"><summary>انتشار برای دانش‌آموزها</summary><div class="card"><p>فایل تنظیمات را بگیر و در ریشهٔ مخزن جایگزین کن.</p><button class="btn btn-ghost" id="exportStudentSettings">دانلود فایل تنظیمات</button></div></details></div></div>
  `;
- bindCardImages($('view-permissions'));
+ bindCampaignImages($('view-permissions'));
  $('exportStudentSettings').onclick=()=>{if(savePermissions())exportStudentSettings()};
  const panel=$('view-permissions'),select=$('configCampaign');
  select.value=configCampaignId;
  let dirty=false;
+ panel.querySelector('[data-action="new-campaign"]').onclick=e=>{
+  if(dirty&&!window.confirm('تغییرات این پویش ذخیره نشده‌اند. پویش جدید بسازیم؟'))e.stopPropagation();
+ };
+ const previewLink=$('configStudentPreview');
+ const publicLink=new URL(/\/admin(?:\/index\.html|\/)?$/.test(location.pathname)?'../':'./',location.href);
+ publicLink.searchParams.set('campaign',c.id);
+ $('configPublicLink').href=publicLink.href;
+ previewLink.onclick=e=>{if(dirty){e.preventDefault();toast('برای پیش‌نمایش، اول تغییرات را ذخیره کنید.')}};
  panel.querySelectorAll('[data-config-step]').forEach(button=>button.onclick=()=>showConfigSection(button.dataset.configStep));
  const updatePreview=()=>{
   const value=key=>panel.querySelector('[data-content="'+key+'"]').value.trim();
+  $('cfg-preview-title').parentElement.style.setProperty('--uiAccent',value('uiAccent'));
+  $('cfg-preview-title').parentElement.style.backgroundColor=value('uiBackground');
+  $('cfg-preview-title').parentElement.style.color=value('uiText');
   $('cfg-preview-campaign').textContent=value('title');
   const guided=readField('studio','showText')&&readField('studio','guidedQuestions');
   const headline=studentCampaignArt(c)?(guided?'شماره ۷؛ حالا نوبت توئه.':'شماره ۷؛ نوبت توئه.'):[value('title'),guided?'داستانت رو بساز.':'داستان تو، تصویر تو.'].join(' ');
@@ -742,7 +895,7 @@ function savePermissions(){
  const {title,description,base,defaultText,teams,...content}=values;
  if(!title){showConfigSection('intro');controls.find(el=>el.dataset.content==='title').focus();toast('نام پویش را وارد کنید.');return false}
  c.teams=[...new Set(teams.split(/[,،]/).map(name=>name.trim()).filter(Boolean))];c.title=title;c.description=description;c.base=Number(base);c.defaultText=defaultText;
- c.studentContent={...content,counter:readField('display','counter')};
+ c.studentContent={...c.studentContent,...content,counter:readField('display','counter'),showCards:readField('display','showCards')};
  delete studentGuidedQuiz[c.id];
  c.permissions={
   student:{studio:readField('student','studio'),invites:readField('student','invites'),leaderboard:readField('student','leaderboard')},
@@ -823,10 +976,10 @@ function submitPoster(){
   return;
  }
  const c=getCamp(state.selectedCampaign),name=$('studioName')?.value.trim(),text=$('studioText')?.value.trim();if(!name||!text){toast('لطفاً نام نمایشی و متن پوستر را وارد کن.');return}const p={id:'p'+Date.now(),campaignId:c.id,authorId:LOCAL_POST_AUTHOR,author:name.slice(0,30),text:text.slice(0,110),team:($('studioTeam')?.disabled?'':$('studioTeam')?.value)||'',likes:0,comments:[],date:Date.now(),status:'pending',emoji:c.emoji};state.posts.unshift(p);state.userDisplay=name;save();toast('پوستر برای تأیید مدیریت مرکزی ثبت شد.');showModal(`<span class="pill pill-orange">در انتظار تأیید</span><h3>پوسترت ثبت شد! ✨</h3><p>محتوای تو در این نمونه ثبت شده و پس از تأیید مدیر مرکزی در فید نمایش داده می‌شود.</p><div class="row-flex">${role==='central'?'<button class="btn btn-primary" data-action="close-and-admin">بررسی در بک‌آفیس</button>':''}<button class="btn btn-ghost" data-action="close-modal">بستن</button></div>`)}
-function saveImage(){const canvas=$('posterCanvas');if(!canvas)return;const a=document.createElement('a');a.download='poster-saz-demo.png';a.href=canvas.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();toast('نسخه نمونه PNG ذخیره شد. این خروجی انتشار در شاد نیست.')}
+function saveImage(){const canvas=$('posterCanvas');if(!canvas)return;const a=document.createElement('a');a.download='poster-saz-demo.png';a.href=canvas.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();toast(role==='student'?contentValue(getCamp(state.selectedCampaign),'downloadNotice',STUDENT_COPY.downloadNotice[2]):'نسخه نمونه PNG ذخیره شد.')}
 async function recordVideo(){if(recording)return;const canvas=$('posterCanvas');if(!canvas?.captureStream||typeof MediaRecorder==='undefined'){toast('مرورگر تو ضبط ویدئوی Canvas را پشتیبانی نمی‌کند.');return}recording=true;const btn=$('videoBtn');if(btn){btn.disabled=true;btn.textContent='در حال ضبط ویدئو…'}let stream,rec;try{stream=canvas.captureStream(24);const preferred=['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'].find(s=>MediaRecorder.isTypeSupported(s));rec=new MediaRecorder(stream,preferred?{mimeType:preferred}:undefined);const chunks=[];rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};rec.onstop=()=>{const blob=new Blob(chunks,{type:rec.mimeType||'video/webm'}),u=URL.createObjectURL(blob);const el=$('videoResult');if(el)el.innerHTML=`<a class="btn btn-primary btn-sm" id="videoLink" download="poster-saz-demo.webm">↓ دریافت ویدئوی آزمایشی WebM</a>`;const l=$('videoLink');if(l)l.href=u;stream.getTracks().forEach(t=>t.stop());drawPoster();recording=false;if(btn){btn.disabled=false;btn.textContent='▶ ساخت ویدئوی ۵ ثانیه‌ای'}toast('ویدئوی آزمایشی آماده شد.')};rec.start();let start=performance.now();function frame(t){if(!recording)return;const elapsed=(t-start)/1000;drawPoster(elapsed/5);if(elapsed<5)requestAnimationFrame(frame);else rec.stop()}requestAnimationFrame(frame)}catch(e){recording=false;stream?.getTracks().forEach(t=>t.stop());if(btn){btn.disabled=false;btn.textContent='▶ ساخت ویدئوی ۵ ثانیه‌ای'}toast('ساخت ویدئو در این مرورگر ممکن نشد.')}}
-function createCampaign(){const title=$('newCampTitle')?.value.trim(),desc=$('newCampDesc')?.value.trim(),goal=Number($('newCampGoal')?.value),type=$('newCampType')?.value;if(!title||!desc||!goal||goal<1){toast('عنوان، توضیح و هدف معتبر را تکمیل کن.');return}const id='camp'+Date.now();state.campaigns.push({id,title:title.slice(0,80),description:desc.slice(0,280),goal:Math.round(goal),base:0,type,emoji:'✨',color1:'#5244ac',color2:'#a68ef3',teams:type==='رقابتی'?['گروه اول','گروه دوم']:[],defaultText:'من در این پویش مشارکت می‌کنم!',enabled:true});save();closeModal();configCampaignId=id;toast('پویش ایجاد شد.');navigate('permissions')}
-function action(a,el){const id=el.dataset.id;if(a==='save-permissions'){savePermissions();return}if(role!=='central'&&['reset-data','confirm-reset','new-campaign','create-campaign','approve','reject','draw-lottery','show-invoice','close-and-admin'].includes(a)){toast('این عملیات فقط برای مدیریت مرکزی فعال است.');return}if(role==='org'){toast('پنل نهاد فقط برای مشاهده خروجی رویداد است.');return}if(role==='student'&&!['submit-poster','reset-form','color','save-image','make-video','share-demo','copy-invite','simulate-invite','simulate-special','close-modal','like','toggle-comments','comment','join'].includes(a)){toast('این عملیات برای دانش‌آموز فعال نیست.');return}switch(a){case 'reset-data':showModal(`<h3>بازنشانی نمونه</h3><p>تمام تغییرات، کامنت‌ها، پوسترهای جدید و امتیازهای آزمایشی این مرورگر پاک می‌شوند.</p><div class="row-flex"><button class="btn btn-red" data-action="confirm-reset">بازنشانی</button><button class="btn btn-ghost" data-action="close-modal">انصراف</button></div>`);break;case 'confirm-reset':state=defaultState();save();closeModal();navigate('overview');toast('نمونه بازنشانی شد.');break;case 'join':state.selectedCampaign=id;state.selectedTeam=getCamp(id).teams?.[0]||'';save();navigate('studio');break;case 'color':posterVariant=el.dataset.value;document.querySelectorAll('.color-option').forEach(x=>x.classList.toggle('selected',x===el));drawPoster();break;case 'reset-form':photoImage=null;renderStudio();break;case 'submit-poster':submitPoster();break;case 'save-image':saveImage();break;case 'make-video':recordVideo();break;case 'share-demo':showModal(`<h3>انتشار مستقیم در شاد</h3><p>در محصول نهایی، این دکمه باید به API مجاز اشتراک‌گذاری، مخاطبان و استوری شاد متصل شود.</p><div class="alert">در این نمونه HTML هیچ پیام یا پوستری در شاد ارسال نشده است.</div><button class="btn btn-primary" data-action="close-modal">متوجه شدم</button>`);break;case 'like':{const p=state.posts.find(x=>x.id===id);if(!p)return;const i=state.likesByMe.indexOf(id);if(i>=0){state.likesByMe.splice(i,1);p.likes=Math.max(0,p.likes-1)}else{state.likesByMe.push(id);p.likes++}save();renderFeedCards();break}case 'toggle-comments':feedExpandedComment=feedExpandedComment===id?null:id;renderFeedCards();break;case 'comment':{const p=state.posts.find(x=>x.id===id),inp=$('comment-'+id);if(!p||!inp?.value.trim())return;p.comments.push({by:'کاربر نمونه',text:inp.value.trim().slice(0,140)});save();renderFeedCards();toast('دیدگاه در این نمونه ثبت شد؛ در محصول واقعی نظارت محتوا لازم است.');break}case 'copy-invite':navigator.clipboard?.writeText($('inviteCode').value).then(()=>toast('شناسه دعوت کپی شد.')).catch(()=>fallbackCopy());if(!navigator.clipboard)fallbackCopy();break;case 'simulate-invite':case 'simulate-special':{const ir=rulesFor(state.selectedCampaign).invites;const special=a==='simulate-special';if(role==='student'&&((special&&!ir.special)||(!special&&!ir.normal))){toast('این نوع دعوت برای این رویداد غیرفعال شده است.');return}state.demoInvites??={};const used=state.demoInvites[state.selectedCampaign]||0;if(role==='student'&&used>=ir.maxInvites){toast('سقف دعوت این رویداد تکمیل شده است.');return}state.demoInvites[state.selectedCampaign]=used+1;let p=state.leaders.find(x=>x.name==='کاربر نمونه');if(!p){p={name:'کاربر نمونه',invites:0,score:0};state.leaders.push(p)}p.invites++;p.score+=special?ir.specialPoints:ir.normalPoints;state.sentDemo++;save();renderInvites();toast(a==='simulate-special'?'دعوت ویژه آزمایشی ثبت شد.':'دعوت موفق آزمایشی ثبت شد.');break}case 'draw-lottery':{if(role!=='central')return;const eligible=state.leaders.filter(p=>p.invites>=3);if(!eligible.length){toast('هنوز فرد واجد شرایطی وجود ندارد.');return}const picked=eligible[Math.floor(Math.random()*eligible.length)];$('lotteryResult').innerHTML=`<div class="lottery-winner">🎉 برنده آزمایشی: ${esc(picked.name)} 🎉</div>`;toast('انتخاب نمایشی انجام شد؛ این نتیجه معتبر حقوقی نیست.');break}case 'approve':case 'reject':{if(role!=='central')return;const p=state.posts.find(x=>x.id===id);if(!p)return;p.status=a==='approve'?'approved':'rejected';save();renderAdmin();toast(a==='approve'?'محتوا تأیید و در فید قابل مشاهده شد.':'محتوا رد شد.');break}case 'new-campaign':if(role!=='central')return;showModal(`<h3>پویش جدید</h3><div class="field"><label>عنوان پویش</label><input class="form-control" id="newCampTitle" maxlength="80"/></div><div style="height:12px"></div><div class="field"><label>توضیحات</label><textarea class="form-control" id="newCampDesc" maxlength="280"></textarea></div><div style="height:12px"></div><div class="form-grid"><div class="field"><label>هدف مشارکت</label><input class="form-control" id="newCampGoal" type="number" min="1" value="10000"/></div><div class="field"><label>نوع پویش</label><select class="form-control" id="newCampType"><option>مناسبتی</option><option>رقابتی</option><option>دعوت‌محور</option><option>فرهنگی</option></select></div></div><div class="divider"></div><button class="btn btn-primary" data-action="create-campaign">ایجاد پویش</button>`);break;case 'create-campaign':createCampaign();break;case 'show-invoice':{let n=state.posts.filter(p=>!p.id.startsWith('s')).length;showModal(`<span class="pill pill-grey">غیررسمی / صرفاً نمایشی</span><h3>صورتحساب نمونه</h3><div class="meter-line"><span>تعداد تولیدهای جدید</span><strong>${fmt(n)}</strong></div><div class="meter-line"><span>تعرفه هر تولید</span><strong>${money(state.unitPrice)}</strong></div><div class="divider"></div><div class="meter-line"><strong>جمع هزینه آزمایشی</strong><strong>${money(n*state.unitPrice)}</strong></div><p class="muted" style="font-size:11px">این سند فاکتور واقعی یا مبنای پرداخت نیست.</p><button class="btn btn-primary" data-action="close-modal">بستن</button>`);break}case 'close-modal':closeModal();break;case 'close-and-admin':closeModal();role='central';$('roleSelect').value='central';navigate('admin');break}}
+function createCampaign(){const title=$('newCampTitle')?.value.trim(),desc=$('newCampDesc')?.value.trim(),goal=Number($('newCampGoal')?.value),type=$('newCampType')?.value;if(!title||!desc||!goal||goal<1){toast('عنوان، توضیح و هدف معتبر را تکمیل کن.');return}const id='camp'+Date.now();state.campaigns.push({id,title:title.slice(0,80),description:desc.slice(0,280),goal:Math.round(goal),base:0,type,emoji:'✨',color1:'#5244ac',color2:'#a68ef3',teams:type==='رقابتی'?['گروه اول','گروه دوم']:[],defaultText:'من در این پویش مشارکت می‌کنم!',studentContent:{showCards:true},enabled:true});save();closeModal();configCampaignId=id;configSection='intro';toast('پویش ایجاد شد.');navigate('permissions')}
+function action(a,el){const id=el.dataset.id;if(a==='save-permissions'){savePermissions();return}if(role!=='central'&&['reset-data','confirm-reset','new-campaign','create-campaign','approve','reject','draw-lottery','show-invoice','close-and-admin'].includes(a)){toast('این عملیات فقط برای مدیریت مرکزی فعال است.');return}if(role==='org'){toast('پنل نهاد فقط برای مشاهده خروجی رویداد است.');return}if(role==='student'&&!['submit-poster','reset-form','color','save-image','make-video','share-demo','copy-invite','simulate-invite','simulate-special','close-modal','like','toggle-comments','comment','join'].includes(a)){toast('این عملیات برای دانش‌آموز فعال نیست.');return}switch(a){case 'reset-data':showModal(`<h3>بازنشانی نمونه</h3><p>تمام تغییرات، کامنت‌ها، پوسترهای جدید و امتیازهای آزمایشی این مرورگر پاک می‌شوند.</p><div class="row-flex"><button class="btn btn-red" data-action="confirm-reset">بازنشانی</button><button class="btn btn-ghost" data-action="close-modal">انصراف</button></div>`);break;case 'confirm-reset':state=defaultState();save();closeModal();navigate('overview');toast('نمونه بازنشانی شد.');break;case 'join':state.selectedCampaign=id;state.selectedTeam=getCamp(id).teams?.[0]||'';save();navigate('studio');break;case 'color':posterVariant=el.dataset.value;document.querySelectorAll('.color-option').forEach(x=>x.classList.toggle('selected',x===el));drawPoster();break;case 'reset-form':photoImage=null;renderStudio();break;case 'submit-poster':submitPoster();break;case 'save-image':saveImage();break;case 'make-video':recordVideo();break;case 'share-demo':{const c=getCamp(state.selectedCampaign);showModal(`<h3>${studentCopy(c,"shareTitle")}</h3><p>${studentCopy(c,"shareBody")}</p><div class="alert">${studentCopy(c,"shareNotice")}</div><button class="btn btn-primary" data-action="close-modal">${studentCopy(c,"shareOk")}</button>`);break}case 'like':{const p=state.posts.find(x=>x.id===id);if(!p)return;const i=state.likesByMe.indexOf(id);if(i>=0){state.likesByMe.splice(i,1);p.likes=Math.max(0,p.likes-1)}else{state.likesByMe.push(id);p.likes++}save();renderFeedCards();break}case 'toggle-comments':feedExpandedComment=feedExpandedComment===id?null:id;renderFeedCards();break;case 'comment':{const p=state.posts.find(x=>x.id===id),inp=$('comment-'+id);if(!p||!inp?.value.trim())return;p.comments.push({by:'کاربر نمونه',text:inp.value.trim().slice(0,140)});save();renderFeedCards();toast('دیدگاه در این نمونه ثبت شد؛ در محصول واقعی نظارت محتوا لازم است.');break}case 'copy-invite':navigator.clipboard?.writeText($('inviteCode').value).then(()=>toast('شناسه دعوت کپی شد.')).catch(()=>fallbackCopy());if(!navigator.clipboard)fallbackCopy();break;case 'simulate-invite':case 'simulate-special':{const ir=rulesFor(state.selectedCampaign).invites;const special=a==='simulate-special';if(role==='student'&&((special&&!ir.special)||(!special&&!ir.normal))){toast('این نوع دعوت برای این رویداد غیرفعال شده است.');return}state.demoInvites??={};const used=state.demoInvites[state.selectedCampaign]||0;if(role==='student'&&used>=ir.maxInvites){toast('سقف دعوت این رویداد تکمیل شده است.');return}state.demoInvites[state.selectedCampaign]=used+1;let p=state.leaders.find(x=>x.name==='کاربر نمونه');if(!p){p={name:'کاربر نمونه',invites:0,score:0};state.leaders.push(p)}p.invites++;p.score+=special?ir.specialPoints:ir.normalPoints;state.sentDemo++;save();renderInvites();toast(a==='simulate-special'?'دعوت ویژه آزمایشی ثبت شد.':'دعوت موفق آزمایشی ثبت شد.');break}case 'draw-lottery':{if(role!=='central')return;const eligible=state.leaders.filter(p=>p.invites>=3);if(!eligible.length){toast('هنوز فرد واجد شرایطی وجود ندارد.');return}const picked=eligible[Math.floor(Math.random()*eligible.length)];$('lotteryResult').innerHTML=`<div class="lottery-winner">🎉 برنده آزمایشی: ${esc(picked.name)} 🎉</div>`;toast('انتخاب نمایشی انجام شد؛ این نتیجه معتبر حقوقی نیست.');break}case 'approve':case 'reject':{if(role!=='central')return;const p=state.posts.find(x=>x.id===id);if(!p)return;p.status=a==='approve'?'approved':'rejected';save();renderAdmin();toast(a==='approve'?'محتوا تأیید و در فید قابل مشاهده شد.':'محتوا رد شد.');break}case 'new-campaign':if(role!=='central')return;showModal(`<h3>پویش جدید</h3><div class="field"><label>عنوان پویش</label><input class="form-control" id="newCampTitle" maxlength="80"/></div><div style="height:12px"></div><div class="field"><label>توضیحات</label><textarea class="form-control" id="newCampDesc" maxlength="280"></textarea></div><div style="height:12px"></div><div class="form-grid"><div class="field"><label>هدف مشارکت</label><input class="form-control" id="newCampGoal" type="number" min="1" value="10000"/></div><div class="field"><label>نوع پویش</label><select class="form-control" id="newCampType"><option>مناسبتی</option><option>رقابتی</option><option>دعوت‌محور</option><option>فرهنگی</option></select></div></div><div class="divider"></div><button class="btn btn-primary" data-action="create-campaign">ایجاد پویش</button>`);break;case 'create-campaign':createCampaign();break;case 'show-invoice':{let n=state.posts.filter(p=>!p.id.startsWith('s')).length;showModal(`<span class="pill pill-grey">غیررسمی / صرفاً نمایشی</span><h3>صورتحساب نمونه</h3><div class="meter-line"><span>تعداد تولیدهای جدید</span><strong>${fmt(n)}</strong></div><div class="meter-line"><span>تعرفه هر تولید</span><strong>${money(state.unitPrice)}</strong></div><div class="divider"></div><div class="meter-line"><strong>جمع هزینه آزمایشی</strong><strong>${money(n*state.unitPrice)}</strong></div><p class="muted" style="font-size:11px">این سند فاکتور واقعی یا مبنای پرداخت نیست.</p><button class="btn btn-primary" data-action="close-modal">بستن</button>`);break}case 'close-modal':closeModal();break;case 'close-and-admin':closeModal();role='central';$('roleSelect').value='central';navigate('admin');break}}
 function fallbackCopy(){let el=$('inviteCode');el.select();try{document.execCommand('copy');toast('شناسه دعوت کپی شد.')}catch{toast('شناسه را به‌صورت دستی کپی کن.')}}
 
 /* Optional per-campaign student warm-up: five short questions and rule-based prompts.
@@ -900,13 +1053,15 @@ function createGuidedSuggestions(answers,c){
 function renderStudentGuidedQuiz(c){
  if(role!=='student'||!rulesFor(c).student.studio)return;
  const q=guidedQuizFor(c.id),isSeven=c.id==='number7';
- const cover=isSeven?`--gq-bg:url('${STUDENT_ASSETS.focus}')`:'';
+ const coverArt=studentCover(c,'quiz',isSeven?'focus':'');
+ const cover=coverArt?`--gq-bg:url('${coverArt}')`:'';
  const top=`<div class="gq-topline"><span class="gq-tag">✦ ${esc(c.title)}</span></div>`;
  if(!q.introSeen){
   const welcomeTitle=isSeven?'شماره ۷؛<em>حالا نوبت توئه.</em>':`${esc(c.title)}<em>داستانت رو بساز.</em>`;
-  const introCover=isSeven?`--gq-bg:url('${STUDENT_ASSETS.legacy}')`:cover;
-  $('view-studio').innerHTML=`<div class="student-studio"><section class="gq-intro-shell" ${introCover?`style="${introCover}"`:''}>
-   <div class="gq-intro-inner"><span class="gq-intro-tag">✦ ${esc(c.title)}</span><div class="gq-intro-kicker">YOUR STORY · YOUR SEVEN</div>
+  const introArt=studentCover(c,'cover',isSeven?'legacy':'');
+   const introCover=introArt?`--gq-bg:url('${introArt}')`:'';
+  $('view-studio').innerHTML=`<div class="student-studio" style="${studentStyle(c)}"><section class="gq-intro-shell" ${introCover?`style="${introCover}"`:''}>
+   <div class="gq-intro-inner"><span class="gq-intro-tag">✦ ${esc(c.title)}</span><div class="gq-intro-kicker">${studentCopy(c,"kicker")}</div>
    <h1 class="gq-intro-heading">${c.studentContent?.headline?esc(c.studentContent.headline):welcomeTitle}</h1>
    <p class="gq-intro-desc">${esc(contentValue(c,'intro','داستان از تو شروع می‌شه.'))}</p>
    
@@ -921,9 +1076,10 @@ function renderStudentGuidedQuiz(c){
    const screen=button.closest('.gq-intro-shell');
    const stillCurrent=()=>screen.isConnected&&role==='student'&&view==='studio'&&state.selectedCampaign===c.id;
    button.disabled=true;
-   if(isSeven){
-    studentImage('focus');
-    const art=STUDENT_IMAGE_CACHE.focus;
+   if(coverArt){
+     const key=c.id+'-quiz';
+    studentImage(key,coverArt);
+    const art=STUDENT_IMAGE_CACHE[key];
     if(art?.decode&&!art.complete){
      const skeleton=window.setTimeout(()=>{
       if(!stillCurrent())return;
@@ -941,12 +1097,12 @@ function renderStudentGuidedQuiz(c){
  }
  if(q.step>=5){
   if(!q.suggestions.length)q.suggestions=createGuidedSuggestions(q.answers,c);
-  $('view-studio').innerHTML=`<div class="student-studio"><section class="gq-shell" ${cover?`style="${cover}"`:''}><div class="gq-inner">${top}
-    <h2 class="gq-title">جملهٔ پوسترت رو انتخاب کن</h2>
+  $('view-studio').innerHTML=`<div class="student-studio" style="${studentStyle(c)}"><section class="gq-shell" ${cover?`style="${cover}"`:''}><div class="gq-inner">${top}
+    <h2 class="gq-title">${studentCopy(c,"suggestTitle")}</h2>
     <div class="gq-suggestions" role="group" aria-label="جمله‌های پیشنهادی">
-      ${q.suggestions.map((suggestion,i)=>`<button type="button" class="gq-suggestion" data-gq-suggestion="${i}"><strong>«${esc(suggestion)}»</strong><span class="gq-use" aria-hidden="true">انتخاب جمله ←</span></button>`).join('')}
+      ${q.suggestions.map((suggestion,i)=>`<button type="button" class="gq-suggestion" data-gq-suggestion="${i}"><strong>«${esc(suggestion)}»</strong><span class="gq-use" aria-hidden="true">${studentCopy(c,"suggestUse")} ←</span></button>`).join('')}
     </div>
-    <div class="gq-controls"><button class="gq-back" id="gq-edit-answers" type="button">→ تغییر جواب‌ها</button><button class="gq-free" id="gq-write-own" type="button">جمله خودم رو می‌نویسم</button></div>
+    <div class="gq-controls"><button class="gq-back" id="gq-edit-answers" type="button">${studentCopy(c,"suggestBack")}</button><button class="gq-free" id="gq-write-own" type="button">${studentCopy(c,"suggestOwn")}</button></div>
    </div></section></div>`;
   document.querySelectorAll('[data-gq-suggestion]').forEach(button=>button.addEventListener('click',()=>{
    finishGuidedQuiz(c,q.suggestions[Number(button.dataset.gqSuggestion)]);
@@ -956,12 +1112,12 @@ function renderStudentGuidedQuiz(c){
   return;
  }
  const question=questionFor(c,q.step);const selected=q.answers[q.step];
- const opts=question.options.map(opt=>`<button type="button" class="gq-choice" data-gq-answer="${opt.id}" aria-pressed="${selected===opt.id}"><span class="gq-emoji">${opt.emoji}</span><span><strong>${esc(opt.label)}</strong><small>${esc(opt.sub)}</small></span></button>`).join('');
- $('view-studio').innerHTML=`<div class="student-studio"><section class="gq-shell" ${cover?`style="${cover}"`:''}><div class="gq-inner">${top}
+ const opts=question.options.map(opt=>`<button type="button" class="gq-choice" data-gq-answer="${opt.id}" aria-pressed="${selected===opt.id}"><span class="gq-emoji">${esc(opt.emoji)}</span><span><strong>${esc(opt.label)}</strong><small>${esc(opt.sub)}</small></span></button>`).join('');
+ $('view-studio').innerHTML=`<div class="student-studio" style="${studentStyle(c)}"><section class="gq-shell" ${cover?`style="${cover}"`:''}><div class="gq-inner">${top}
   <div class="gq-progress" role="progressbar" aria-label="پیشرفت پنج سؤال" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${q.step}">${Array.from({length:5},(_,i)=>`<span class="${i<=q.step?'done':''}"></span>`).join('')}</div>
   <div class="gq-overline">سؤال ${fmt(q.step+1)} از ۵</div><h1 class="gq-title">${esc(question.title)}</h1><p class="gq-desc">${esc(question.hint)}</p>
   <div class="gq-choices" role="group" aria-label="گزینه‌های پاسخ">${opts}</div>
-  <div class="gq-controls"><button class="gq-back" type="button" id="gq-back" ${q.step===0?'disabled':''}>→ سؤال قبلی</button><button class="gq-next" type="button" id="gq-next" ${selected?'':'disabled'}>${q.step===4?'دیدن جمله‌های پیشنهادی ✨':'سؤال بعدی ←'}</button></div>
+  <div class="gq-controls"><button class="gq-back" type="button" id="gq-back" ${q.step===0?'disabled':''}>${studentCopy(c,"quizPrevious")}</button><button class="gq-next" type="button" id="gq-next" ${selected?'':'disabled'}>${q.step===4?studentCopy(c,'quizFinish'):studentCopy(c,'quizNext')+' ←'}</button></div>
   
  </div></section></div>`;
  document.querySelectorAll('[data-gq-answer]').forEach(b=>b.addEventListener('click',()=>{
@@ -1013,51 +1169,52 @@ function renderStudentStudio(){
  const cardsById=cardsFor(c),theme=cardsById[studentTheme]||cardsById.never;
  const palette=paletteFor(c);if(!palette.some(([color])=>color===studentAccent)||!p.allowColors)studentAccent=palette[0][0];
  const heroTitle=isSeven?'شماره ۷؛<em>نوبت توئه.</em>':`${esc(c.title)}<em>داستان تو، تصویر تو.</em>`;
- const heroImage=isSeven?`style="--ss-cover:url('${STUDENT_ASSETS.legacy}')"`:'';
+ const coverArt=studentCover(c,'cover',isSeven?'legacy':'');
+ const heroImage=coverArt?`style="--ss-cover:url('${coverArt}')"`:'';
  const guide=guidedQuizFor(c.id);
  const steps=(current)=>Array.from({length:3},(_,i)=>`<span class="${current===i+1?'now':current>i+1?'done':''}"></span>`).join('');
  const progress=(current, title)=>`<div class="ss-wizard-top"><span>✦ ${esc(c.title)}</span><div class="ss-wizard-count"><small>${fmt(current)} / ۳</small><div class="ss-wizard-dots">${steps(current)}</div></div></div>${title ? `<h2>${title}</h2>` : ''}`;
- $('view-studio').innerHTML=`<div class="student-studio" id="studentCinematicStudio">
+ $('view-studio').innerHTML=`<div class="student-studio" id="studentCinematicStudio" style="${studentStyle(c)}">
  <section class="ss-wizard" ${heroImage}>
   <div class="ss-wizard-screen ss-wizard-cover" data-ss-screen="0">
    <span class="ss-hero-number" aria-hidden="true">7</span>
-   <div class="ss-wizard-cover-inner"><span class="ss-pill">✦ ${esc(c.title)}</span><div class="ss-eyebrow">YOUR STORY · YOUR SEVEN</div><h1>${c.studentContent?.headline?esc(c.studentContent.headline):heroTitle}</h1><p>${esc(contentValue(c,'intro','قصه تو، تصویر تو.'))}</p>
+   <div class="ss-wizard-cover-inner"><span class="ss-pill">✦ ${esc(c.title)}</span><div class="ss-eyebrow">${studentCopy(c,"kicker")}</div><h1>${c.studentContent?.headline?esc(c.studentContent.headline):heroTitle}</h1><p>${esc(contentValue(c,'intro','قصه تو، تصویر تو.'))}</p>
     <button type="button" class="ss-action" data-ss-page="1">${esc(contentValue(c,'start','ساخت پوستر رو شروع کنیم'))} <span aria-hidden="true">←</span></button></div>
    ${campaignParticipantsHTML(c)}
   </div>
   <div class="ss-wizard-screen" data-ss-screen="1">
-   <div class="ss-wizard-page">${progress(1,'حالا تو بگو؛ داستانت چیه؟')}
+   <div class="ss-wizard-page">${progress(1,studentCopy(c,'writeTitle'))}
     <div class="ss-wizard-fields ss-wizard-write" id="ss-write-fields">
-      <div class="ss-field" id="ss-text-field" ${p.showText?'':'hidden'}><label class="ss-label" for="studioText">جمله تو</label><textarea class="ss-input" id="studioText" maxlength="140" rows="4" placeholder="${esc(theme.starter)}">${esc(guide.chosenText||(c.studentContent?c.defaultText:''))}</textarea><div class="ss-counter"><span>هر طور دوست داری بنویس</span><span><b id="ss-count">۰</b> / ۱۴۰</span></div></div>
-      <div class="ss-field" id="ss-name-field" ${p.showName?'':'hidden'}><label class="ss-label" for="studioName">نام یا لقب (اختیاری)</label><input class="ss-input" id="studioName" maxlength="30" placeholder="مثلاً یک رؤیاباف" value="${state.userDisplay==='کاربر نمونه'?'':esc(state.userDisplay||'')}" /></div>
-      <div class="ss-field" id="ss-team-field" ${c.teams?.length?'':'hidden'}><label class="ss-label" for="studioTeam">تیم</label><select class="ss-input" id="studioTeam">${(c.teams||[]).map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('')}</select></div>
-      ${guide.finished&&p.guidedQuestions?`<button type="button" class="ss-return-quiz" id="ss-retake-quiz">↺ تغییر پاسخ‌ها</button>`:''}
+      <div class="ss-field" id="ss-text-field" ${p.showText?'':'hidden'}><label class="ss-label" for="studioText">${studentCopy(c,"textLabel")}</label><textarea class="ss-input" id="studioText" maxlength="140" rows="4" placeholder="${esc(theme.starter)}">${esc(guide.chosenText||(c.studentContent?c.defaultText:''))}</textarea><div class="ss-counter"><span>${studentCopy(c,"textHelp")}</span><span><b id="ss-count">۰</b> / ۱۴۰</span></div></div>
+      <div class="ss-field" id="ss-name-field" ${p.showName?'':'hidden'}><label class="ss-label" for="studioName">${studentCopy(c,"nameLabel")}</label><input class="ss-input" id="studioName" maxlength="30" placeholder="${studentCopy(c,"namePlaceholder")}" value="${state.userDisplay==='کاربر نمونه'?'':esc(state.userDisplay||'')}" /></div>
+      <div class="ss-field" id="ss-team-field" ${c.teams?.length?'':'hidden'}><label class="ss-label" for="studioTeam">${studentCopy(c,"teamLabel")}</label><select class="ss-input" id="studioTeam">${(c.teams||[]).map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('')}</select></div>
+      ${guide.finished&&p.guidedQuestions?`<button type="button" class="ss-return-quiz" id="ss-retake-quiz">${studentCopy(c,"retake")}</button>`:''}
     </div>
-    <div class="ss-wizard-footer"><button type="button" class="ss-wizard-back" data-ss-page="0">→ قبلی</button><button type="button" class="ss-wizard-next" data-ss-page="2">ادامه <span>←</span></button></div>
+    <div class="ss-wizard-footer"><button type="button" class="ss-wizard-back" data-ss-page="0">${studentCopy(c,"back")}</button><button type="button" class="ss-wizard-next" data-ss-page="2">${studentCopy(c,"continue")} <span>←</span></button></div>
    </div>
   </div>
   <div class="ss-wizard-screen" data-ss-screen="2">
-   <div class="ss-wizard-page">${progress(2,'پوسترت رو شخصی کن')}
+   <div class="ss-wizard-page">${progress(2,studentCopy(c,'designTitle'))}
     <div class="ss-wizard-design">
      <div class="ss-wizard-fields ss-design-fields" id="ss-design-fields">
-      ${isSeven?`<fieldset class="ss-card-picker"><legend class="ss-label">کارت رونالدو</legend><div class="ss-card-options">${Object.entries(cardsById).map(([id,card])=>`<button type="button" data-ss-card="${id}" aria-pressed="${studentTheme===id}"><img src="${esc(contentValue(c,id+'Photo',STUDENT_ASSETS[card.image]))}" alt=""><span>${esc(card.label)}</span></button>`).join('')}</div></fieldset>`:''}
-      <div class="ss-field" id="ss-colors-field" ${p.allowColors?'':'hidden'}><label class="ss-label">رنگ پوستر</label><div class="ss-choice-row">${palette.map(([color,label])=>`<button type="button" class="ss-color" data-ss-color="${color}" aria-label="${esc(label)}" aria-pressed="${studentAccent===color}" style="background:${color}"></button>`).join('')}</div></div>
+      ${campaignHasCards(c)?`<fieldset class="ss-card-picker"><legend class="ss-label">${studentCopy(c,"cardsLabel",isSeven?"کارت رونالدو":"کارت پوستر")}</legend><div class="ss-card-options">${Object.entries(cardsById).map(([id,card])=>`<button type="button" data-ss-card="${id}" aria-pressed="${studentTheme===id}"><img src="${esc(contentValue(c,id+'Photo',STUDENT_ASSETS[card.image]))}" alt=""><span>${esc(card.label)}</span></button>`).join('')}</div></fieldset>`:''}
+      <div class="ss-field" id="ss-colors-field" ${p.allowColors?'':'hidden'}><label class="ss-label">${studentCopy(c,"colorsLabel")}</label><div class="ss-choice-row">${palette.map(([color,label])=>`<button type="button" class="ss-color" data-ss-color="${color}" aria-label="${esc(label)}" aria-pressed="${studentAccent===color}" style="background:${color}"></button>`).join('')}</div></div>
      </div>
      <div id="ss-poster-design-host" class="ss-wizard-art-host"><div class="ss-canvas-frame" id="ss-canvas-box"><canvas width="750" height="1000" id="posterCanvas" aria-label="پوستر شخصی‌سازی‌شده"></canvas></div></div>
     </div>
-    <div class="ss-wizard-footer"><button type="button" class="ss-wizard-back" data-ss-page="1">→ قبلی</button><button type="button" class="ss-wizard-next" data-ss-page="3">دیدن پوستر <span>←</span></button></div>
+    <div class="ss-wizard-footer"><button type="button" class="ss-wizard-back" data-ss-page="1">${studentCopy(c,"back")}</button><button type="button" class="ss-wizard-next" data-ss-page="3">${studentCopy(c,"viewPoster")} <span>←</span></button></div>
    </div>
   </div>
   <div class="ss-wizard-screen" data-ss-screen="3">
-   <section class="ss-wizard-page ss-wizard-result" id="ss-result-title" aria-label="نتیجهٔ پوستر" tabindex="-1">
+   <section class="ss-wizard-page ss-wizard-result" id="ss-result-title" aria-label="${studentCopy(c,'resultLabel')}" tabindex="-1">
     <div class="ss-result-edge ss-result-edge--top">
-     <button type="button" class="ss-result-close" id="ss-result-close" aria-label="بستن نتیجه و بازگشت به شروع"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+     <button type="button" class="ss-result-close" id="ss-result-close" aria-label="${studentCopy(c,'close')}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     </div>
     <div class="ss-wizard-result-body"><div id="ss-poster-result-host" class="ss-wizard-final-host"></div></div>
     <div class="ss-result-edge" role="group" aria-label="کارهای پوستر">
-     <button type="button" class="ss-result-primary" data-action="save-image"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4"/></svg> دانلود</button>
-     <button type="button" data-action="share-demo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/></svg> اشتراک‌گذاری</button>
-     <button type="button" data-ss-page="2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6 4 4M4 20l1-5L16.5 3.5a2.8 2.8 0 0 1 4 4L9 19l-5 1Z"/></svg> ویرایش</button>
+     <button type="button" class="ss-result-primary" data-action="save-image"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4"/></svg> ${studentCopy(c,"download")}</button>
+     <button type="button" data-action="share-demo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/></svg> ${studentCopy(c,"share")}</button>
+     <button type="button" data-ss-page="2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6 4 4M4 20l1-5L16.5 3.5a2.8 2.8 0 0 1 4 4L9 19l-5 1Z"/></svg> ${studentCopy(c,"edit")}</button>
     </div>
    </section>
   </div>
@@ -1158,35 +1315,37 @@ function drawStudentPoster(animation=0){
  const W=canvas.width,H=canvas.height,c=getCamp(state.selectedCampaign),isSeven=studentCampaignArt(c),rules=rulesFor(c).studio;
  const isVideo=(typeof animation==='number'&&animation>0);const t=cardsFor(c)[studentTheme];
  const photo=contentValue(c,studentTheme+'Photo');
- const bg=isSeven?(photo?studentImage(c.id+'-'+studentTheme,photo):studentImage(t.image)):null;
+ const backing=studentCover(c,'poster','');
+ const bg=campaignHasCards(c)?(photo?studentImage(c.id+'-'+studentTheme,photo):studentImage(t.image)):(backing?studentImage(c.id+'-poster',backing):null);
  ctx.clearRect(0,0,W,H);ctx.fillStyle='#102017';ctx.fillRect(0,0,W,H);
  if(bg){const scale=Math.max(W/bg.naturalWidth,H/bg.naturalHeight);const dw=bg.naturalWidth*scale,dh=bg.naturalHeight*scale;ctx.drawImage(bg,(W-dw)/2,(H-dh)/2,dw,dh)}
- else {const g=ctx.createLinearGradient(0,0,750,1000);g.addColorStop(0,c.color1||'#203323');g.addColorStop(1,'#0e1711');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.save();ctx.globalAlpha=.1;ctx.font='900 480px IRANSansXFaNum,Tahoma';ctx.fillStyle='#fff';ctx.fillText(c.emoji||'✦',90,630);ctx.restore()}
+ else {const g=ctx.createLinearGradient(0,0,750,1000);g.addColorStop(0,contentValue(c,'posterBackground')?designColor(c,'posterBackground'):(c.color1||'#203323'));g.addColorStop(1,'#0e1711');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.save();ctx.globalAlpha=.1;ctx.font='900 480px IRANSansXFaNum,Tahoma';ctx.fillStyle='#fff';ctx.fillText(c.emoji||'✦',90,630);ctx.restore()}
  const shade=ctx.createLinearGradient(0,0,0,H);shade.addColorStop(0,'#070f0abe');shade.addColorStop(.35,'#08120a22');shade.addColorStop(.55,'#08120a77');shade.addColorStop(1,'#071009fc');ctx.fillStyle=shade;ctx.fillRect(0,0,W,H);
  ctx.save();ctx.strokeStyle='#ffffff64';ctx.lineWidth=2;ctx.strokeRect(28,28,694,944);ctx.restore();
  ctx.textAlign='right';ctx.direction='rtl';ctx.fillStyle='#f9fff4';ctx.font='bold 30px IRANSansXFaNum,Tahoma';
- ctx.textAlign='left';ctx.direction='ltr';ctx.fillStyle=studentAccent;ctx.font='900 73px IRANSansXFaNum,Tahoma';ctx.fillText(isSeven?'07':'✦',60,107);
+ ctx.textAlign='left';ctx.direction='ltr';ctx.fillStyle=studentAccent;ctx.font='900 73px IRANSansXFaNum,Tahoma';ctx.fillText(contentValue(c,'posterMark',isSeven?'07':'✦'),60,107);
  ctx.fillStyle='#f1ffdf';ctx.textAlign='right';ctx.direction='rtl';studentFitSingleLine(ctx,c.title,510,27,13);ctx.fillText(c.title,685,166);
  const bottom=ctx.createLinearGradient(0,590,0,1000);bottom.addColorStop(0,'#09140b20');bottom.addColorStop(.45,'#0b150ef5');bottom.addColorStop(1,'#0b150fff');ctx.fillStyle=bottom;ctx.fillRect(0,580,W,420);
  ctx.fillStyle=studentAccent;ctx.fillRect(595,642,90+Math.sin(animation*Math.PI*2)*16,5);
- ctx.textAlign='right';ctx.direction='rtl';ctx.fillStyle=studentAccent;ctx.font='bold 24px IRANSansXFaNum,Tahoma';ctx.fillText(isSeven?'YOUR NEXT CHAPTER':'YOUR NEXT STORY',685,623);
- const text=rules.showText?($('studioText')?.value.trim()||'یک جمله از خودت بنویس؛ داستان از همین‌جا شروع می‌شه.'):c.defaultText;
+ ctx.textAlign='right';ctx.direction='rtl';ctx.fillStyle=studentAccent;ctx.font='bold 24px IRANSansXFaNum,Tahoma';ctx.fillText(contentValue(c,'posterHeading',isSeven?'YOUR NEXT CHAPTER':'YOUR NEXT STORY'),685,623);
+ const text=rules.showText?($('studioText')?.value.trim()||contentValue(c,'posterPlaceholder',STUDENT_COPY.posterPlaceholder[2])):c.defaultText;
  // The content area ends before the footer divider. Scale text down until ALL
  // lines fit both horizontally and vertically, including longer guided suggestions.
  const contentBox={x:61,y:663,w:624,h:195};
  const fitted=studentFitLines(ctx,text,contentBox.w,contentBox.h,42);
  canvas.dataset.posterTextSize=String(fitted.size);
  canvas.dataset.posterLineCount=String(fitted.lines.length);
- ctx.fillStyle='#f4f9f0';ctx.save();ctx.beginPath();ctx.rect(contentBox.x,contentBox.y,contentBox.w,contentBox.h);ctx.clip();
+ ctx.fillStyle=designColor(c,'posterTextColor');ctx.save();ctx.beginPath();ctx.rect(contentBox.x,contentBox.y,contentBox.w,contentBox.h);ctx.clip();
  ctx.textAlign='right';ctx.direction='rtl';ctx.font=`900 ${fitted.size}px IRANSansXFaNum,Tahoma,sans-serif`;
  fitted.lines.forEach((line,i)=>ctx.fillText(line,contentBox.x+contentBox.w,contentBox.y+fitted.size+i*fitted.lineHeight));
  ctx.restore();
- const name=rules.showName?($('studioName')?.value.trim()||'یک رؤیاباف'):'یک شرکت‌کننده';
+ const name=rules.showName?($('studioName')?.value.trim()||contentValue(c,'posterName',STUDENT_COPY.posterName[2])):contentValue(c,'posterAnon',STUDENT_COPY.posterAnon[2]);
  const footerY=940;ctx.fillStyle='#ffffff52';ctx.fillRect(60,footerY-58,625,1);
  ctx.fillStyle='#eef9e3';ctx.textAlign='right';ctx.direction='rtl';studentFitSingleLine(ctx,'— '+name,320,24,12);ctx.fillText('— '+name,680,footerY-17);
- ctx.textAlign='left';ctx.direction='ltr';ctx.font='bold 21px IRANSansXFaNum,Tahoma';ctx.fillStyle=studentAccent;ctx.fillText(isSeven?'CR7 → YOU':'CREATE → SHARE',63,footerY-16);
+ ctx.textAlign='left';ctx.direction='ltr';ctx.font='bold 21px IRANSansXFaNum,Tahoma';ctx.fillStyle=studentAccent;ctx.fillText(contentValue(c,'posterFooter',isSeven?'CR7 → YOU':'CREATE → SHARE'),63,footerY-16);
 }
 
+document.addEventListener('click',trackStudentClick,true);
 document.addEventListener('click',e=>{const nav=e.target.closest('[data-nav]');if(nav){navigate(nav.dataset.nav);return}const a=e.target.closest('[data-action]');if(a){action(a.dataset.action,a);return}});
 $('roleSelect').addEventListener('change',e=>{role=e.target.value;prepareRole();navigate(role==='student'?'studio':role==='org'?'org-results':'permissions');toast('پیش‌نمایش نقش تغییر کرد؛ برای امنیت واقعی به سرور و احراز هویت نیاز است.')});$('activeCampaignSelect').addEventListener('change',e=>{state.selectedCampaign=e.target.value;state.selectedTeam=getCamp(state.selectedCampaign).teams?.[0]||'';save();prepareRole();navigate(role==='student'?'studio':'org-results')});$('globalSearch').addEventListener('input',e=>{searchTerm=e.target.value.trim();if(searchTerm&&view!=='campaigns')navigate('campaigns');else if(view==='campaigns')renderCampaigns()});$('menuToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));$('modalOverlay').addEventListener('click',e=>{if(e.target===$('modalOverlay'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 if(location.hash.includes('invite=')){navigate('campaigns');toast('این یک لینک آزمایشی است؛ انتساب دعوت واقعی نیازمند سرور است.')}else{$('roleSelect').value=role;prepareRole();navigate(role==='student'?'studio':role==='central'?'permissions':'org-results')};
