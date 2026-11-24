@@ -203,7 +203,7 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .gq-intro-kicker{color:#dfff69;font-weight:900;letter-spacing:1px;font-size:12px;margin:32px 0 13px;direction:ltr;text-align:right}
 .student-studio .gq-intro-heading{font-size:clamp(42px,6.7vw,83px);line-height:1.25;letter-spacing:-2px;font-weight:900;color:#fff;max-width:760px;margin:0 0 20px}
 .student-studio .gq-intro-heading em{font-style:normal;color:#dfff69;display:block}
-.student-studio .campaign-participants{width:100%;text-align:center;color:#e9f4e6;background:radial-gradient(ellipse at center,#23432ee6,#0b1510db 75%);border-block:1px solid #dfff695e;padding:clamp(10px,2.5svh,22px) 16px;margin:0 0 16px;line-height:1.4}
+.student-studio .campaign-participants{width:100%;text-align:center;color:#e9f4e6;background:radial-gradient(ellipse at center,#23432ee6,#0b1510db 75%);border-block:1px solid #dfff695e;padding:clamp(10px,2.5svh,22px) 16px;margin:0;flex:none;line-height:1.4}
 .student-studio .campaign-participants strong{display:block;color:#dfff69;font-size:clamp(36px,7vw,68px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
 .student-studio .campaign-participants span{display:block;margin-top:4px;font-size:clamp(13px,2.5vw,17px);font-weight:800}
 .student-studio .campaign-participants small{display:block;margin-top:3px;color:#d3dfcf;font-size:10px}
@@ -353,13 +353,13 @@ body[data-role="student"].studio-paginated .gq-free{font-size:11px}
 
 /* The counter spans the cover while the other content keeps its usual gutters. */
 body[data-role="student"].studio-paginated .gq-intro-shell,
-body[data-role="student"].studio-paginated .ss-wizard-cover{padding-inline:0;overflow-y:auto}
+body[data-role="student"].studio-paginated .ss-wizard-cover{padding-inline:0;padding-block-end:0;overflow-y:auto;flex-direction:column}
 body[data-role="student"].studio-paginated .gq-intro-inner,
-body[data-role="student"].studio-paginated .ss-wizard-cover-inner{display:grid;width:100%;grid-template-columns:minmax(clamp(18px,5vw,64px),1fr) minmax(0,var(--cover-content-width,950px)) minmax(clamp(18px,5vw,64px),1fr);justify-items:start}
-body[data-role="student"].studio-paginated .ss-wizard-cover-inner{--cover-content-width:1120px;flex:none}
+body[data-role="student"].studio-paginated .ss-wizard-cover-inner{display:grid;width:100%;flex:none;margin:auto 0;grid-template-columns:minmax(clamp(18px,5vw,64px),1fr) minmax(0,var(--cover-content-width,950px)) minmax(clamp(18px,5vw,64px),1fr);justify-items:start}
+body[data-role="student"].studio-paginated .ss-wizard-cover-inner{--cover-content-width:1120px}
 body[data-role="student"].studio-paginated .gq-intro-inner > *,
 body[data-role="student"].studio-paginated .ss-wizard-cover-inner > *{grid-column:2}
-body[data-role="student"].studio-paginated .campaign-participants{grid-column:1/-1}
+body[data-role="student"].studio-paginated .gq-skeleton ~ .campaign-participants{display:none}
 body[data-role="student"].studio-paginated .gq-skeleton{width:min(790px,calc(100% - 36px))}
 
 
@@ -773,9 +773,9 @@ function renderStudentGuidedQuiz(c){
    <h1 class="gq-intro-heading">${welcomeTitle}</h1>
    <p class="gq-intro-desc">داستان از تو شروع می‌شه.</p>
    
-    ${campaignParticipantsHTML(c)}
    <button id="gq-start" type="button" class="gq-intro-start">شروع کنیم <span aria-hidden="true">←</span></button>
    </div>
+   ${campaignParticipantsHTML(c)}
    <template><div class="gq-skeleton" role="status" aria-label="در حال بارگذاری سؤال‌ها">
     <div aria-hidden="true"><span class="gq-skeleton-title"></span><span class="gq-skeleton-line"></span><div class="gq-choices"><span></span><span></span><span></span><span></span></div></div>
    </div></template>
@@ -883,8 +883,8 @@ function renderStudentStudio(){
   <div class="ss-wizard-screen ss-wizard-cover" data-ss-screen="0">
    <span class="ss-hero-number" aria-hidden="true">7</span>
    <div class="ss-wizard-cover-inner"><span class="ss-pill">✦ ${esc(c.title)}</span><div class="ss-eyebrow">YOUR STORY · YOUR SEVEN</div><h1>${heroTitle}</h1><p>قصه تو، تصویر تو.</p>
-   ${campaignParticipantsHTML(c)}
     <button type="button" class="ss-action" data-ss-page="1">ساخت پوستر رو شروع کنیم <span aria-hidden="true">←</span></button></div>
+   ${campaignParticipantsHTML(c)}
   </div>
   <div class="ss-wizard-screen" data-ss-screen="1">
    <div class="ss-wizard-page">${progress(1,'حالا تو بگو؛ داستانت چیه؟')}
