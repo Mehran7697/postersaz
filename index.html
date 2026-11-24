@@ -122,7 +122,7 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .ss-input:focus{border-color:#436d20!important;box-shadow:0 0 0 3px #7ba33922!important}
 .student-studio textarea.ss-input{min-height:145px;resize:vertical;line-height:2}
 .student-studio .ss-counter{display:flex;justify-content:space-between;font-size:10px;color:#758860;margin-top:5px}
-.student-studio .ss-choice-row{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.student-studio .ss-choice-row{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:4px}
 .student-studio .ss-color{width:39px;height:39px;border-radius:50%;border:3px solid #f5ffda;outline:1px solid #789363;cursor:pointer}
 .student-studio .ss-color[aria-pressed="true"]{outline:3px solid #1c3019}
 .student-studio .ss-helper{font-size:11px;line-height:1.9;color:#657859;margin:8px 0}
@@ -169,8 +169,6 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .gq-emoji{width:47px;height:47px;border-radius:11px;background:#ffffff15;display:grid;place-items:center;font-size:22px;flex:none}
 .student-studio .gq-choice strong{font-size:13px;font-weight:800;line-height:1.7}
 .student-studio .gq-choice small{display:block;color:#b4c4b4;font-size:10px;margin-top:3px}
-.student-studio .gq-check{margin-right:auto;margin-left:0;color:#dfff69;font-size:22px;font-weight:900;opacity:0}
-.student-studio .gq-choice[aria-pressed="true"] .gq-check{opacity:1}
 .student-studio .gq-controls{display:flex;justify-content:space-between;gap:12px;margin-top:28px;align-items:center}
 .student-studio .gq-back{background:#ffffff14;border:1px solid #ffffff48;border-radius:5px;color:#f5f9f1;min-height:48px;padding:12px 19px;font-size:12px;font-weight:700}
 .student-studio .gq-next{border:0;background:#dfff69;color:#112016;border-radius:5px;padding:12px 27px;min-height:48px;font-weight:900;font-size:13px}
@@ -376,7 +374,6 @@ body[data-role="student"].studio-paginated .gq-skeleton{width:min(790px,calc(100
 .ss-card-options img{display:block;width:100%;height:clamp(48px,9vh,92px);object-fit:cover;object-position:center 30%}
 .ss-card-options span{display:block;padding:3px;font-size:11px;font-weight:700}
 .ss-card-options button[aria-pressed=true]{border-color:#dfff69;color:#dfff69}
-.ss-card-options button[aria-pressed=true]::before{content:"✓";position:absolute;top:3px;inset-inline-start:3px;border-radius:50%;width:20px;background:#dfff69;color:#152017}
 .ss-card-options button:focus-visible{outline:2px solid white;outline-offset:2px}
 body[data-role="student"].studio-paginated .ss-design-fields{max-height:100%;overflow-y:auto;justify-content:safe center}
 @media(max-width:820px){body[data-role="student"].studio-paginated .ss-wizard-design:has(.ss-card-picker){grid-template-rows:minmax(0,auto) minmax(110px,1fr)}
@@ -959,7 +956,7 @@ function renderStudentGuidedQuiz(c){
   return;
  }
  const question=questionFor(c,q.step);const selected=q.answers[q.step];
- const opts=question.options.map(opt=>`<button type="button" class="gq-choice" data-gq-answer="${opt.id}" aria-pressed="${selected===opt.id}"><span class="gq-emoji">${opt.emoji}</span><span><strong>${esc(opt.label)}</strong><small>${esc(opt.sub)}</small></span><span class="gq-check">✓</span></button>`).join('');
+ const opts=question.options.map(opt=>`<button type="button" class="gq-choice" data-gq-answer="${opt.id}" aria-pressed="${selected===opt.id}"><span class="gq-emoji">${opt.emoji}</span><span><strong>${esc(opt.label)}</strong><small>${esc(opt.sub)}</small></span></button>`).join('');
  $('view-studio').innerHTML=`<div class="student-studio"><section class="gq-shell" ${cover?`style="${cover}"`:''}><div class="gq-inner">${top}
   <div class="gq-progress" role="progressbar" aria-label="پیشرفت پنج سؤال" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${q.step}">${Array.from({length:5},(_,i)=>`<span class="${i<=q.step?'done':''}"></span>`).join('')}</div>
   <div class="gq-overline">سؤال ${fmt(q.step+1)} از ۵</div><h1 class="gq-title">${esc(question.title)}</h1><p class="gq-desc">${esc(question.hint)}</p>
