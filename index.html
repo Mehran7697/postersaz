@@ -384,9 +384,30 @@ body[data-role="student"].studio-paginated .ss-design-fields textarea.ss-input{h
 @media(max-height:540px) and (orientation:landscape){body[data-role="student"].studio-paginated .ss-wizard-design:has(.ss-card-picker){grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr)}}
 .config-thumb{display:block;width:72px;height:96px;object-fit:cover;border-radius:8px;margin:8px 0}.config-fields{display:grid;gap:12px;margin-block-start:16px}.config-fields fieldset{min-width:0;border:1px solid #ccd2ce;border-radius:12px;padding:12px}.config-fields .field{display:grid;gap:5px}.config-fields input[type=color]{width:100%;min-height:40px}.setting-panel summary{cursor:pointer;font-weight:800}.setting-grid{align-items:start}.config-actions{flex-wrap:wrap}
 .config-top{max-width:440px;margin-block:16px}.config-top label{display:grid;gap:6px;font-weight:700}.config-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}.config-nav button[aria-current=true]{background:#ddd5ff;color:#35237d}.config-page{margin-bottom:12px}.config-page[hidden],.config-preview [hidden]{display:none!important}.config-page h3{margin:0 0 12px}.config-page h4{margin-top:12px}.config-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}.config-preview{background:#122119;color:#edf6ec;border-radius:16px;padding:22px;text-align:center;margin-top:16px;overflow-wrap:anywhere}.config-preview small{color:#afc3b3}.config-preview p,.config-preview h3{color:inherit;margin:10px 0}.config-preview-start{display:inline-block;background:#dfff69;color:#152213;border-radius:8px;padding:7px 12px}.config-preview strong,.config-preview #cfg-preview-label{display:block;color:#dfff69}.config-preview strong{font-size:32px;margin-top:12px}.config-palette,.config-cards{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,135px),1fr))}.config-save{position:sticky;bottom:0;z-index:4;background:#fff;border:1px solid #d9d5e4;border-radius:12px;padding:10px 14px;box-shadow:0 -4px 18px #30235812}.config-save>div{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.config-export{position:relative}.config-export summary{cursor:pointer}.config-export .card{position:absolute;bottom:calc(100% + 12px);inset-inline-end:0;width:220px;padding:12px}.config-page .config-fields{min-width:0}@media(max-width:680px){.config-intro{grid-template-columns:1fr}.config-nav button{flex:1 1 auto}.config-save>div{width:100%;justify-content:space-between}}
+/* Keep unfinished navigation and footer out of the first paint. */
+.app-booting{background:#0c1611}
+.app-booting .app{display:none}
+body[data-role="student"] .copyright{display:none}
+#startupSkeleton{display:none}
+.app-booting #startupSkeleton{
+ display:grid;align-content:center;justify-items:start;gap:16px;
+ min-height:100vh;min-height:100dvh;padding:clamp(24px,8vw,130px);
+ visibility:hidden;animation:showStartupSkeleton 0s 180ms forwards;
+}
+#startupSkeleton span{display:block;background:#ffffff24;border-radius:10px}
+#startupSkeleton span:nth-child(1){width:100px;height:22px}
+#startupSkeleton span:nth-child(2){width:min(70vw,460px);height:clamp(50px,11vw,95px)}
+#startupSkeleton span:nth-child(3){width:min(55vw,300px);height:18px}
+#startupSkeleton span:nth-child(4){width:132px;height:44px;margin-block-start:8px}
+@keyframes showStartupSkeleton{to{visibility:visible}}
 </style>
 </head>
-<body data-role="student">
+<body class="app-booting" data-role="student">
+<div id="startupSkeleton" role="status" aria-label="در حال آماده‌سازی پوسترساز">
+ <span aria-hidden="true"></span><span aria-hidden="true"></span>
+ <span aria-hidden="true"></span><span aria-hidden="true"></span>
+</div>
+<noscript><style>#startupSkeleton{display:none!important}</style><p>برای باز کردن پوسترساز، جاوااسکریپت مرورگر را فعال کن.</p></noscript>
 <div class="app">
 <aside class="sidebar" id="sidebar">
  <div class="brand"><div class="brand-symbol"><span>✦</span></div><div><h1>پوسترساز</h1><small>رسانه را با هم می‌سازیم</small></div></div>
@@ -1172,6 +1193,7 @@ function drawStudentPoster(animation=0){
 document.addEventListener('click',e=>{const nav=e.target.closest('[data-nav]');if(nav){navigate(nav.dataset.nav);return}const a=e.target.closest('[data-action]');if(a){action(a.dataset.action,a);return}});
 $('roleSelect').addEventListener('change',e=>{role=e.target.value;prepareRole();navigate(role==='student'?'studio':role==='org'?'org-results':'permissions');toast('پیش‌نمایش نقش تغییر کرد؛ برای امنیت واقعی به سرور و احراز هویت نیاز است.')});$('activeCampaignSelect').addEventListener('change',e=>{state.selectedCampaign=e.target.value;state.selectedTeam=getCamp(state.selectedCampaign).teams?.[0]||'';save();prepareRole();navigate(role==='student'?'studio':'org-results')});$('globalSearch').addEventListener('input',e=>{searchTerm=e.target.value.trim();if(searchTerm&&view!=='campaigns')navigate('campaigns');else if(view==='campaigns')renderCampaigns()});$('menuToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));$('modalOverlay').addEventListener('click',e=>{if(e.target===$('modalOverlay'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 if(location.hash.includes('invite=')){navigate('campaigns');toast('این یک لینک آزمایشی است؛ انتساب دعوت واقعی نیازمند سرور است.')}else{$('roleSelect').value=role;prepareRole();navigate(role==='student'?'studio':role==='central'?'permissions':'org-results')};
+document.body.classList.remove('app-booting');
 if(document.fonts?.ready)document.fonts.ready.then(()=>{if(view==='studio')drawPoster()});
 </script>
 </body>
