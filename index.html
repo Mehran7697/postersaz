@@ -289,16 +289,19 @@ body[data-role="student"].studio-paginated .ss-canvas-frame{display:flex;align-i
 body[data-role="student"].studio-paginated #posterCanvas{display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:3/4;object-fit:contain;border-radius:6px;box-shadow:0 14px 45px #0008}
 body[data-role="student"].studio-paginated [data-ss-screen="3"]{overflow-y:auto}
 body[data-role="student"].studio-paginated .ss-wizard-result{
- display:grid;width:100%;grid-template-rows:auto minmax(180px,1fr);
+ display:grid;width:100%;grid-template-rows:auto minmax(180px,1fr) auto;
  padding:clamp(6px,1.3vw,14px);gap:6px;
  background:radial-gradient(ellipse at center,#304938 0%,#0c1611 78%);
 }
 .ss-result-edge{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:5px}
+.ss-result-edge--top{justify-content:flex-end;direction:rtl}
 .ss-result-edge button{
+ display:inline-flex;align-items:center;justify-content:center;gap:5px;
  font:inherit;font-size:11px;font-weight:750;line-height:1.4;min-height:36px;
  padding:5px 10px;border:1px solid #e0f8dc45;border-radius:9px;
  background:#eafbe81a;color:#f4ffef;backdrop-filter:blur(12px);cursor:pointer;
 }
+.ss-result-edge .ss-result-close{min-width:36px;padding-inline:6px}
 .ss-result-edge .ss-result-primary{background:#dfff6933;border-color:#dfff6980;color:#f1ffb1}
 .ss-result-edge button:hover{background:#eafbe833}
 .ss-result-edge button:focus-visible{outline:2px solid #dfff69;outline-offset:2px}
@@ -1029,12 +1032,15 @@ function renderStudentStudio(){
   </div>
   <div class="ss-wizard-screen" data-ss-screen="3">
    <section class="ss-wizard-page ss-wizard-result" id="ss-result-title" aria-label="نتیجهٔ پوستر" tabindex="-1">
-    <div class="ss-result-edge">
-     <button type="button" class="ss-result-primary" data-action="save-image"><span aria-hidden="true">↓</span> دانلود</button>
-     <button type="button" data-ss-page="2"><span aria-hidden="true">✎</span> ویرایش</button>
-     <button type="button" data-action="share-demo">اشتراک‌گذاری</button>
+    <div class="ss-result-edge ss-result-edge--top">
+     <button type="button" class="ss-result-close" id="ss-result-close" aria-label="بستن نتیجه و بازگشت به شروع"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     </div>
     <div class="ss-wizard-result-body"><div id="ss-poster-result-host" class="ss-wizard-final-host"></div></div>
+    <div class="ss-result-edge" role="group" aria-label="کارهای پوستر">
+     <button type="button" class="ss-result-primary" data-action="save-image"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4"/></svg> دانلود</button>
+     <button type="button" data-action="share-demo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/></svg> اشتراک‌گذاری</button>
+     <button type="button" data-ss-page="2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6 4 4M4 20l1-5L16.5 3.5a2.8 2.8 0 0 1 4 4L9 19l-5 1Z"/></svg> ویرایش</button>
+    </div>
    </section>
   </div>
  </section></div>`;
@@ -1060,6 +1066,10 @@ function renderStudentStudio(){
   const next=Number(btn.dataset.ssPage);showPage(next);
   if(next===3&&studentStudioPage===3){$('ss-result-title').closest('[data-ss-screen]').scrollTop=0;$('ss-result-title').focus({preventScroll:true})}
  }));
+ $('ss-result-close').addEventListener('click',()=>{
+  showPage(0);
+  document.querySelector('[data-ss-screen="0"] [data-ss-page="1"]')?.focus();
+ });
  document.querySelectorAll('[data-ss-view]').forEach(btn=>btn.addEventListener('click',()=>navigate(btn.dataset.ssView)));
   const cards=document.querySelectorAll('[data-ss-card]');
  cards.forEach(button=>button.addEventListener('click',()=>{
