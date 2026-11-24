@@ -28,8 +28,24 @@ jobs:
       - name: Prepare static site
         shell: bash
         run: |
-          mkdir -p _site
+          mkdir -p _site/admin _site/org
           cp index.html _site/index.html
+          python3 - <<'PY'
+          from pathlib import Path
+
+          html = Path('index.html').read_text(encoding='utf-8')
+          role_initializer = "let role=(new URLSearchParams(location.search).get('role')||'student'),"
+          if html.count(role_initializer) != 1:
+              raise SystemExit('Expected one PosterSaz role initializer in index.html')
+
+          for route, role, title in (
+              ('admin', 'central', 'مدیریت مرکزی'),
+              ('org', 'org', 'پنل سازمانی'),
+          ):
+              panel = html.replace(role_initializer, f"let role='{role}',", 1)
+              panel = panel.replace('<title>', f'<title>{title} | ', 1)
+              Path(f'_site/{route}/index.html').write_text(panel, encoding='utf-8')
+          PY
           touch _site/.nojekyll
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
