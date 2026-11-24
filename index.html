@@ -288,26 +288,27 @@ body[data-role="student"].studio-paginated .ss-wizard-art-host{display:flex;alig
 body[data-role="student"].studio-paginated .ss-canvas-frame{display:flex;align-items:center;justify-content:center;height:100%;width:100%;min-height:0}
 body[data-role="student"].studio-paginated #posterCanvas{display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:3/4;object-fit:contain;border-radius:6px;box-shadow:0 14px 45px #0008}
 body[data-role="student"].studio-paginated [data-ss-screen="3"]{overflow-y:auto}
-body[data-role="student"].studio-paginated .ss-wizard-result{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,280px);grid-template-rows:auto minmax(320px,1fr);align-items:center;gap:clamp(12px,2vw,24px)}
-body[data-role="student"].studio-paginated .ss-wizard-result>.ss-wizard-top{grid-column:1/-1}
-body[data-role="student"].studio-paginated .ss-wizard-result-body{height:100%;min-height:0;display:grid;place-items:center}
-body[data-role="student"].studio-paginated .ss-wizard-final-host,
-body[data-role="student"].studio-paginated .ss-wizard-final-host .ss-canvas-frame{height:100%;width:100%;min-height:0;display:flex;align-items:center;justify-content:center}
-.ss-result-card{align-self:safe center;background:#15251c;border:1px solid #526a51;border-radius:14px;padding:12px;min-width:0}
-body[data-role="student"].studio-paginated .ss-result-card h2{color:#f3ffec;margin:0 0 8px;font-size:16px}
-.ss-result-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}
-.ss-result-card details{margin-top:4px}
-.ss-result-card summary{cursor:pointer;width:max-content;max-width:100%;padding:10px 4px;color:#e2eedf;font-size:12px}
-.ss-result-extra{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
-.ss-result-card button{font:inherit;font-size:13px;font-weight:800;line-height:1.45;min-height:44px;padding:8px;color:#f2ffe9;background:#24392b;border:1px solid #5c7558;border-radius:10px;cursor:pointer}
-.ss-result-card button:hover,.ss-result-card button:focus-visible,.ss-result-card summary:focus-visible{outline:2px solid #dfff69;outline-offset:2px}
-.ss-result-card button[hidden],.ss-result-card .ss-video-result:empty{display:none}
-.ss-result-extra .ss-result-submit{grid-column:1/-1}
-.ss-result-actions .ss-result-primary{background:#dfff69;color:#152110;border-color:#dfff69}
-@media(max-width:680px){
- body[data-role="student"].studio-paginated .ss-wizard-result{grid-template-columns:minmax(0,1fr);grid-template-rows:auto clamp(220px,48dvh,460px) auto;height:auto;min-height:100%;padding-bottom:20px}
- .ss-result-card{width:min(100%,320px);justify-self:center}
+body[data-role="student"].studio-paginated .ss-wizard-result{
+ display:grid;width:100%;grid-template-rows:auto minmax(180px,1fr) auto;
+ padding:clamp(6px,1.3vw,14px);gap:6px;
+ background:radial-gradient(ellipse at center,#304938 0%,#0c1611 78%);
 }
+.ss-result-edge{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:5px}
+.ss-result-edge button,.ss-result-edge .ss-video-result a{
+ font:inherit;font-size:11px;font-weight:750;line-height:1.4;min-height:36px;
+ padding:5px 10px;border:1px solid #e0f8dc45;border-radius:9px;
+ background:#eafbe81a;color:#f4ffef;backdrop-filter:blur(12px);cursor:pointer;
+}
+.ss-result-edge .ss-result-primary{background:#dfff6933;border-color:#dfff6980;color:#f1ffb1}
+.ss-result-edge button:hover{background:#eafbe833}
+.ss-result-edge button:focus-visible,.ss-result-edge a:focus-visible{outline:2px solid #dfff69;outline-offset:2px}
+.ss-result-edge button[hidden],.ss-result-edge .ss-video-result:empty{display:none}
+.ss-result-edge .ss-video-result{margin:0}
+body[data-role="student"].studio-paginated .ss-wizard-result-body,
+body[data-role="student"].studio-paginated .ss-wizard-final-host{height:100%;width:100%;min-height:0}
+body[data-role="student"].studio-paginated .ss-wizard-final-host .ss-canvas-frame{container-type:size}
+body[data-role="student"].studio-paginated .ss-wizard-final-host #posterCanvas{width:min(100%,75cqh);height:auto}
+@media(pointer:coarse){.ss-result-edge button,.ss-result-edge .ss-video-result a{min-height:44px}}
 /* Intro / five questions / suggestions: occupy one screen instead of creating a long page. */
 body[data-role="student"].studio-paginated .gq-intro-shell,
 body[data-role="student"].studio-paginated .gq-shell{height:100dvh;min-height:0;max-height:100dvh;overflow:hidden;padding:clamp(16px,3vh,36px) clamp(18px,5vw,64px)}
@@ -1029,27 +1030,21 @@ function renderStudentStudio(){
    </div>
   </div>
   <div class="ss-wizard-screen" data-ss-screen="3">
-   <div class="ss-wizard-page ss-wizard-result">${progress(3,'')}
+   <section class="ss-wizard-page ss-wizard-result" id="ss-result-title" aria-label="نتیجهٔ پوستر" tabindex="-1">
+    <div class="ss-result-edge">
+     <button type="button" class="ss-result-primary" data-action="save-image"><span aria-hidden="true">↓</span> دانلود</button>
+     <button type="button" data-ss-page="2"><span aria-hidden="true">✎</span> ویرایش</button>
+    </div>
     <div class="ss-wizard-result-body"><div id="ss-poster-result-host" class="ss-wizard-final-host"></div></div>
-    <section class="ss-result-card" aria-labelledby="ss-result-title">
-     <h2 id="ss-result-title" tabindex="-1">پوسترت آماده‌ست!</h2>
-     <div class="ss-result-actions">
-      <button type="button" class="ss-result-primary" data-action="save-image"><span aria-hidden="true">↓</span> دانلود</button>
-      <button type="button" data-ss-page="2"><span aria-hidden="true">✎</span> ویرایش</button>
-     </div>
-     <details>
-      <summary>گزینه‌های بیشتر</summary>
-      <div class="ss-result-extra">
-       <button type="button" data-action="share-demo">اشتراک‌گذاری</button>
-       <button type="button" data-action="make-video" id="videoBtn" ${p.allowVideo?'':'hidden'}>▶ ویدئوی کوتاه</button>
-       <button type="button" class="ss-result-submit" data-action="submit-poster"><span aria-hidden="true">✓</span> ارسال برای تأیید</button>
-       ${roleAllowedViews().includes('invites')?'<button type="button" data-ss-view="invites">دعوت دوستان</button>':''}
-       ${roleAllowedViews().includes('leaderboard')?'<button type="button" data-ss-view="leaderboard">جدول رقابت</button>':''}
-      </div>
-      <div class="ss-video-result" id="videoResult"></div>
-     </details>
-    </section>
-   </div>
+    <div class="ss-result-edge">
+     <button type="button" data-action="submit-poster">ارسال برای تأیید</button>
+     <button type="button" data-action="share-demo">اشتراک‌گذاری</button>
+     <button type="button" data-action="make-video" id="videoBtn" ${p.allowVideo?'':'hidden'}>ویدئوی کوتاه</button>
+     ${roleAllowedViews().includes('invites')?'<button type="button" data-ss-view="invites">دعوت دوستان</button>':''}
+     ${roleAllowedViews().includes('leaderboard')?'<button type="button" data-ss-view="leaderboard">جدول رقابت</button>':''}
+     <div class="ss-video-result" id="videoResult"></div>
+    </div>
+   </section>
   </div>
  </section></div>`;
  const showPage=(next)=>{
