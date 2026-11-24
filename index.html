@@ -287,16 +287,25 @@ body[data-role="student"].studio-paginated .ss-design-fields{justify-content:cen
 body[data-role="student"].studio-paginated .ss-wizard-art-host{display:flex;align-items:center;justify-content:center;min-height:0;height:100%;max-height:100%}
 body[data-role="student"].studio-paginated .ss-canvas-frame{display:flex;align-items:center;justify-content:center;height:100%;width:100%;min-height:0}
 body[data-role="student"].studio-paginated #posterCanvas{display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:3/4;object-fit:contain;border-radius:6px;box-shadow:0 14px 45px #0008}
-body[data-role="student"].studio-paginated .ss-wizard-result-body{display:flex;justify-content:center;align-items:center;min-height:0;flex:1}
-body[data-role="student"].studio-paginated .ss-wizard-final-host{height:100%;max-height:100%;width:100%;display:flex;align-items:center;justify-content:center}
-body[data-role="student"].studio-paginated .ss-wizard-final-host .ss-canvas-frame{width:100%;height:100%}
-body[data-role="student"].studio-paginated .ss-wizard-downloads{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;flex:none}
-body[data-role="student"].studio-paginated .ss-wizard-downloads button{border:1px solid #5d7656;background:#1b3022;color:#f3ffe8;border-radius:8px;font-size:11px;padding:9px 13px;min-height:41px;font-weight:800}
-body[data-role="student"].studio-paginated .ss-wizard-downloads button:hover{border-color:#dfff69}
-body[data-role="student"].studio-paginated .ss-video-result{min-height:0;flex:none;text-align:center}
-body[data-role="student"].studio-paginated .ss-wizard-other{display:flex;justify-content:center;gap:20px;flex:none}
-body[data-role="student"].studio-paginated .ss-wizard-other button{border:0;background:none;color:#daffa1;font-size:11px;text-decoration:underline;text-underline-offset:4px}
-body[data-role="student"].studio-paginated .ss-wizard-result{gap:clamp(6px,1.15vh,13px)}
+body[data-role="student"].studio-paginated [data-ss-screen="3"]{overflow-y:auto}
+body[data-role="student"].studio-paginated .ss-wizard-result{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);grid-template-rows:auto minmax(320px,1fr);align-items:center;gap:clamp(12px,2vw,24px)}
+body[data-role="student"].studio-paginated .ss-wizard-result>.ss-wizard-top{grid-column:1/-1}
+body[data-role="student"].studio-paginated .ss-wizard-result-body{height:100%;min-height:0;display:grid;place-items:center}
+body[data-role="student"].studio-paginated .ss-wizard-final-host,
+body[data-role="student"].studio-paginated .ss-wizard-final-host .ss-canvas-frame{height:100%;width:100%;min-height:0;display:flex;align-items:center;justify-content:center}
+.ss-result-card{background:#15251c;border:1px solid #526a51;border-radius:18px;padding:clamp(14px,2vw,24px);min-width:0}
+body[data-role="student"].studio-paginated .ss-result-card h2{color:#f3ffec;margin:0 0 14px;font-size:clamp(20px,3vw,27px)}
+.ss-result-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ss-result-actions button{font:inherit;font-size:13px;font-weight:800;line-height:1.45;min-height:44px;padding:8px;color:#f2ffe9;background:#24392b;border:1px solid #5c7558;border-radius:10px;cursor:pointer}
+.ss-result-actions button:hover,.ss-result-actions button:focus-visible{outline:2px solid #dfff69;outline-offset:2px}
+.ss-result-actions button[hidden],.ss-result-card .ss-video-result:empty{display:none}
+.ss-result-actions .ss-result-primary,.ss-result-actions .ss-result-submit{grid-column:1/-1}
+.ss-result-actions .ss-result-primary{background:#dfff69;color:#152110;border-color:#dfff69;font-size:16px}
+.ss-result-links{margin-top:12px;padding-top:12px;border-top:1px solid #526a51}
+@media(max-width:680px){
+ body[data-role="student"].studio-paginated .ss-wizard-result{grid-template-columns:minmax(0,1fr);grid-template-rows:auto clamp(220px,48dvh,460px) auto;height:auto;min-height:100%;padding-bottom:20px}
+ .ss-result-card{width:min(100%,460px);justify-self:center}
+}
 /* Intro / five questions / suggestions: occupy one screen instead of creating a long page. */
 body[data-role="student"].studio-paginated .gq-intro-shell,
 body[data-role="student"].studio-paginated .gq-shell{height:100dvh;min-height:0;max-height:100dvh;overflow:hidden;padding:clamp(16px,3vh,36px) clamp(18px,5vw,64px)}
@@ -328,7 +337,6 @@ body[data-role="student"].studio-paginated .gq-free{font-size:11px}
  body[data-role="student"].studio-paginated .ss-design-fields .ss-field{margin:0}
  body[data-role="student"].studio-paginated .ss-wizard-art-host{max-height:100%;min-height:0;align-self:stretch}
  body[data-role="student"].studio-paginated .ss-wizard-fields textarea.ss-input{height:clamp(92px,19vh,148px)}
- body[data-role="student"].studio-paginated .ss-wizard-downloads button{padding:8px 9px;font-size:10px}
  body[data-role="student"].studio-paginated .gq-choices{grid-template-columns:1fr}
  body[data-role="student"].studio-paginated .gq-choice{min-height:clamp(53px,9.1vh,69px)}
  body[data-role="student"].studio-paginated .gq-shell{padding:16px 18px}
@@ -339,7 +347,6 @@ body[data-role="student"].studio-paginated .gq-free{font-size:11px}
  body[data-role="student"].studio-paginated .ss-wizard-page h2{font-size:clamp(19px,3.5vw,25px)}
  body[data-role="student"].studio-paginated .ss-wizard-fields textarea.ss-input{height:88px}
  body[data-role="student"].studio-paginated .ss-wizard-footer button{min-height:38px;padding-top:6px;padding-bottom:6px}
- body[data-role="student"].studio-paginated .ss-wizard-downloads button{min-height:33px;padding:6px 8px}
  body[data-role="student"].studio-paginated .gq-choice{min-height:48px;padding:6px}
  body[data-role="student"].studio-paginated .gq-emoji{width:32px;height:32px}
  body[data-role="student"].studio-paginated .gq-progress{margin-bottom:8px}
@@ -1022,10 +1029,18 @@ function renderStudentStudio(){
   <div class="ss-wizard-screen" data-ss-screen="3">
    <div class="ss-wizard-page ss-wizard-result">${progress(3,'')}
     <div class="ss-wizard-result-body"><div id="ss-poster-result-host" class="ss-wizard-final-host"></div></div>
-    <div class="ss-wizard-downloads"><button type="button" data-action="save-image">↓ ذخیره تصویر</button><button type="button" data-action="make-video" id="videoBtn" ${p.allowVideo?'':'hidden'}>▶ ویدئوی کوتاه</button><button type="button" data-action="share-demo">↗ اشتراک‌گذاری</button></div>
-    <div class="ss-video-result" id="videoResult"></div>
-    <div class="ss-wizard-footer ss-wizard-final-footer"><button type="button" class="ss-wizard-back" data-ss-page="2">→ ویرایش</button><button type="button" class="ss-wizard-next" data-action="submit-poster">ثبت پوستر برای تأیید ✓</button></div>
-    <div class="ss-wizard-other">${roleAllowedViews().includes('invites')?'<button type="button" data-ss-view="invites">دعوت دوستان ↗</button>':''}${roleAllowedViews().includes('leaderboard')?'<button type="button" data-ss-view="leaderboard">جدول رقابت ↗</button>':''}</div>
+    <section class="ss-result-card" aria-labelledby="ss-result-title">
+     <h2 id="ss-result-title" tabindex="-1">پوسترت آماده‌ست!</h2>
+     <div class="ss-result-actions">
+      <button type="button" class="ss-result-primary" data-action="save-image"><span aria-hidden="true">↓</span> دانلود پوستر</button>
+      <button type="button" data-ss-page="2"><span aria-hidden="true">✎</span> ویرایش پوستر</button>
+      <button type="button" data-action="share-demo"><span aria-hidden="true">↗</span> اشتراک‌گذاری</button>
+      <button type="button" data-action="make-video" id="videoBtn" ${p.allowVideo?'':'hidden'}>▶ ویدئوی کوتاه</button>
+      <button type="button" class="ss-result-submit" data-action="submit-poster"><span aria-hidden="true">✓</span> ارسال برای تأیید</button>
+     </div>
+     <div class="ss-video-result" id="videoResult"></div>
+     ${roleAllowedViews().some(name=>name==='invites'||name==='leaderboard')?`<nav class="ss-result-actions ss-result-links" aria-label="بخش‌های پویش">${roleAllowedViews().includes('invites')?'<button type="button" data-ss-view="invites">دعوت دوستان</button>':''}${roleAllowedViews().includes('leaderboard')?'<button type="button" data-ss-view="leaderboard">جدول رقابت</button>':''}</nav>`:''}
+    </section>
    </div>
   </div>
  </section></div>`;
@@ -1047,7 +1062,10 @@ function renderStudentStudio(){
   document.body.dataset.studioPage=String(studentStudioPage);
   drawPoster();
  };
- document.querySelectorAll('[data-ss-page]').forEach(btn=>btn.addEventListener('click',()=>showPage(Number(btn.dataset.ssPage))));
+ document.querySelectorAll('[data-ss-page]').forEach(btn=>btn.addEventListener('click',()=>{
+  const next=Number(btn.dataset.ssPage);showPage(next);
+  if(next===3&&studentStudioPage===3){$('ss-result-title').closest('[data-ss-screen]').scrollTop=0;$('ss-result-title').focus({preventScroll:true})}
+ }));
  document.querySelectorAll('[data-ss-view]').forEach(btn=>btn.addEventListener('click',()=>navigate(btn.dataset.ssView)));
   const cards=document.querySelectorAll('[data-ss-card]');
  cards.forEach(button=>button.addEventListener('click',()=>{
