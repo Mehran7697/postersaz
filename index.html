@@ -203,6 +203,9 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .gq-intro-kicker{color:#dfff69;font-weight:900;letter-spacing:1px;font-size:12px;margin:32px 0 13px;direction:ltr;text-align:right}
 .student-studio .gq-intro-heading{font-size:clamp(42px,6.7vw,83px);line-height:1.25;letter-spacing:-2px;font-weight:900;color:#fff;max-width:760px;margin:0 0 20px}
 .student-studio .gq-intro-heading em{font-style:normal;color:#dfff69;display:block}
+.student-studio .campaign-participants{display:table;color:#e9f4e6;background:#0b1510cc;border:1px solid #dfff6952;border-radius:8px;padding:7px 12px;margin:0 0 16px;font-size:clamp(12px,2.5vw,15px);line-height:1.55}
+.student-studio .campaign-participants strong{color:#dfff69}
+.student-studio .campaign-participants small{display:block;color:#d3dfcf;font-size:10px}
 .student-studio .gq-intro-desc{font-size:clamp(13px,1.5vw,17px);line-height:2.2;max-width:580px;color:#dce8dc;margin:0 0 25px}
 .student-studio .gq-intro-facts{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
 .student-studio .gq-intro-facts span{border:1px solid #ffffff3f;background:#16251bc9;color:#f3f8ed;padding:9px 13px;font-size:11px;border-radius:6px;font-weight:700}
@@ -443,6 +446,10 @@ function posterStats(posts){
  }
  const authors=[...byAuthor.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'fa'));
  return {total:posts.length,authors};
+}
+function campaignParticipantsHTML(campaignId){
+ const {authors}=posterStats(state.posts.filter(post=>post.campaignId===campaignId));
+ return `<div class="campaign-participants"><strong>${fmt(authors.length)}</strong> شرکت‌کننده در این پویش<small>آمار آزمایشی این مرورگر</small></div>`;
 }
 function posterAuthorsTable(authors){
  return `<section class="card module-box poster-authors"><h4>تعداد پوسترهای هر سازنده</h4>${authors.length?`<div class="table-wrap"><table class="table"><thead><tr><th scope="col">نام نمایشی</th><th scope="col">تعداد پوسترهای ثبت‌شده</th></tr></thead><tbody>${authors.map(({name,count})=>`<tr><td class="name">${esc(name)}</td><td>${fmt(count)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">هنوز پوستری ثبت نشده است.</p>'}</section>`;
@@ -751,6 +758,7 @@ function renderStudentGuidedQuiz(c){
    <h1 class="gq-intro-heading">${welcomeTitle}</h1>
    <p class="gq-intro-desc">داستان از تو شروع می‌شه.</p>
    
+    ${campaignParticipantsHTML(c.id)}
    <button id="gq-start" type="button" class="gq-intro-start">شروع کنیم <span aria-hidden="true">←</span></button>
    </div>
   </section></div>`;
@@ -845,7 +853,8 @@ function renderStudentStudio(){
   <div class="ss-wizard-screen ss-wizard-cover" data-ss-screen="0">
    <span class="ss-hero-number" aria-hidden="true">7</span>
    <div class="ss-wizard-cover-inner"><span class="ss-pill">✦ ${esc(c.title)}</span><div class="ss-eyebrow">YOUR STORY · YOUR SEVEN</div><h1>${heroTitle}</h1><p>قصه تو، تصویر تو.</p>
-   <button type="button" class="ss-action" data-ss-page="1">ساخت پوستر رو شروع کنیم <span aria-hidden="true">←</span></button></div>
+   ${campaignParticipantsHTML(c.id)}
+    <button type="button" class="ss-action" data-ss-page="1">ساخت پوستر رو شروع کنیم <span aria-hidden="true">←</span></button></div>
   </div>
   <div class="ss-wizard-screen" data-ss-screen="1">
    <div class="ss-wizard-page">${progress(1,'حالا تو بگو؛ داستانت چیه؟')}
