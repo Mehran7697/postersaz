@@ -203,27 +203,24 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .gq-intro-kicker{color:#dfff69;font-weight:900;letter-spacing:1px;font-size:12px;margin:32px 0 13px;direction:ltr;text-align:right}
 .student-studio .gq-intro-heading{font-size:clamp(42px,6.7vw,83px);line-height:1.25;letter-spacing:-2px;font-weight:900;color:#fff;max-width:760px;margin:0 0 20px}
 .student-studio .gq-intro-heading em{font-style:normal;color:#dfff69;display:block}
-.student-studio .campaign-participants{display:table;color:#e9f4e6;background:#0b1510cc;border:1px solid #dfff6952;border-radius:8px;padding:7px 12px;margin:0 0 16px;font-size:clamp(12px,2.5vw,15px);line-height:1.55}
-.student-studio .campaign-participants strong{color:#dfff69}
-.student-studio .campaign-participants small{display:block;color:#d3dfcf;font-size:10px}
+.student-studio .campaign-participants{display:table;color:#e9f4e6;background:#0b1510cc;border:1px solid #dfff6980;border-radius:12px;padding:10px 18px;margin:0 0 16px;line-height:1.4}
+.student-studio .campaign-participants strong{display:block;color:#dfff69;font-size:clamp(36px,7vw,68px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
+.student-studio .campaign-participants span{display:block;margin-top:4px;font-size:clamp(13px,2.5vw,17px);font-weight:800}
+.student-studio .campaign-participants small{display:block;margin-top:3px;color:#d3dfcf;font-size:10px}
 .student-studio .gq-intro-desc{font-size:clamp(13px,1.5vw,17px);line-height:2.2;max-width:580px;color:#dce8dc;margin:0 0 25px}
 .student-studio .gq-intro-facts{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
 .student-studio .gq-intro-facts span{border:1px solid #ffffff3f;background:#16251bc9;color:#f3f8ed;padding:9px 13px;font-size:11px;border-radius:6px;font-weight:700}
 .student-studio .gq-intro-start{background:#dfff69;border:0;border-radius:7px;color:#0e2015;padding:15px 35px;min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:24px;font-weight:900;font-size:15px;box-shadow:0 14px 45px #cfff2933;transition:transform .2s,box-shadow .2s}
 .student-studio .gq-intro-start:hover{transform:translateY(-3px);box-shadow:0 17px 48px #cfff2955}
 .student-studio .gq-intro-foot{font-size:11px;color:#a8baa7;margin:15px 0 0;line-height:2}
-.student-studio .gq-loader{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 43%,#23462d 0%,#101d16 35%,#070d0a 80%);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:21px;color:#e8f6e2;overflow:hidden;text-align:center;padding:24px;animation:gqFadeIn .18s ease both}
-.student-studio .gq-loader:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 30px,#ffffff08 31px 32px);opacity:.28;pointer-events:none}
-.student-studio .gq-loader-ring{height:154px;width:154px;display:grid;place-items:center;border-radius:50%;border:1px solid #dfff6966;position:relative;background:#dfff690b;box-shadow:0 0 65px #c9ff281a,inset 0 0 55px #bfff190a}
-.student-studio .gq-loader-ring:before{content:"";position:absolute;inset:-8px;border-radius:50%;border:4px solid transparent;border-top-color:#dfff69;border-right-color:#dfff69a9;animation:gqRingSpin .85s cubic-bezier(.5,.1,.3,.9) infinite}
-.student-studio .gq-loader-seven{font-size:102px;font-weight:900;line-height:1;direction:ltr;color:#dfff69;filter:drop-shadow(0 0 18px #dfff6955);animation:gqSevenPulse .75s ease-in-out infinite alternate}
-.student-studio .gq-loader-name{font-size:16px;color:#f4ffed;font-weight:900;line-height:1.9;position:relative}
-.student-studio .gq-loader-caption{font-size:11px;color:#b4c6b2;position:relative;line-height:1.8}
-@keyframes gqRingSpin{to{transform:rotate(360deg)}}
-@keyframes gqSevenPulse{from{transform:scale(.89);opacity:.84}to{transform:scale(1.05);opacity:1}}
-@keyframes gqFadeIn{from{opacity:0}to{opacity:1}}
+.student-studio .gq-skeleton{width:min(790px,100%);margin:auto}
+.student-studio .gq-skeleton .gq-choices{margin-top:22px}
+.student-studio .gq-skeleton span{display:block;background:#ffffff25;border-radius:8px}
+.student-studio .gq-skeleton .gq-skeleton-title{width:min(75%,440px);height:30px;margin-bottom:12px}
+.student-studio .gq-skeleton .gq-skeleton-line{width:min(50%,270px);height:12px}
+.student-studio .gq-skeleton .gq-choices span{height:clamp(48px,9vh,78px)}
 @media(max-width:760px){.student-studio .gq-intro-shell{min-height:calc(100svh - 150px);padding:44px 24px}.student-studio .gq-intro-shell:before{background-image:linear-gradient(0deg,#0b1510 0%,#0b1510ea 27%,#0b151091 70%,#0b1510b5 100%),var(--gq-bg,radial-gradient(circle,#27402c,#0b1510));background-position:center 26%}.student-studio .gq-intro-heading{font-size:clamp(40px,10vw,57px);letter-spacing:-1px}.student-studio .gq-intro-kicker{margin-top:18px}.student-studio .gq-intro-desc{font-size:13px}.student-studio .gq-intro-start{width:100%}.student-studio .gq-intro-facts{gap:7px}.student-studio .gq-intro-facts span{font-size:10px}}
-@media(prefers-reduced-motion:reduce){.student-studio .gq-loader,.student-studio .gq-loader-ring:before,.student-studio .gq-loader-seven{animation:none!important}.student-studio .gq-intro-start{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.student-studio .gq-intro-start{transition:none!important}}
 
 
 /* دانش‌آموز: حذف کامل نوار بالایی (عنوان، پیش‌نمایش نقش، رویداد، حالت آزمایشی) */
@@ -447,9 +444,10 @@ function posterStats(posts){
  const authors=[...byAuthor.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'fa'));
  return {total:posts.length,authors};
 }
-function campaignParticipantsHTML(campaignId){
- const {authors}=posterStats(state.posts.filter(post=>post.campaignId===campaignId));
- return `<div class="campaign-participants"><strong>${fmt(authors.length)}</strong> شرکت‌کننده در این پویش<small>آمار آزمایشی این مرورگر</small></div>`;
+function campaignParticipantsHTML(c){
+ const {authors}=posterStats(state.posts.filter(post=>post.campaignId===c.id));
+ const total=(c.base||0)+authors.length;
+ return `<div class="campaign-participants"><strong>${fmt(total)}</strong><span>شرکت‌کننده در این پویش</span><small>آمار نمایشی پویش</small></div>`;
 }
 function posterAuthorsTable(authors){
  return `<section class="card module-box poster-authors"><h4>تعداد پوسترهای هر سازنده</h4>${authors.length?`<div class="table-wrap"><table class="table"><thead><tr><th scope="col">نام نمایشی</th><th scope="col">تعداد پوسترهای ثبت‌شده</th></tr></thead><tbody>${authors.map(({name,count})=>`<tr><td class="name">${esc(name)}</td><td>${fmt(count)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">هنوز پوستری ثبت نشده است.</p>'}</section>`;
@@ -708,7 +706,7 @@ const GUIDED_QUESTIONS=[
 ];
 const studentGuidedQuiz=Object.create(null);
 function guidedQuizFor(campId){
- if(!studentGuidedQuiz[campId])studentGuidedQuiz[campId]={step:0,answers:[null,null,null,null,null],suggestions:[],finished:false,chosenText:'',introSeen:false,transitioning:false};
+ if(!studentGuidedQuiz[campId])studentGuidedQuiz[campId]={step:0,answers:[null,null,null,null,null],suggestions:[],finished:false,chosenText:'',introSeen:false};
  return studentGuidedQuiz[campId];
 }
 const QUIZ_GOALS={
@@ -758,11 +756,33 @@ function renderStudentGuidedQuiz(c){
    <h1 class="gq-intro-heading">${welcomeTitle}</h1>
    <p class="gq-intro-desc">داستان از تو شروع می‌شه.</p>
    
-    ${campaignParticipantsHTML(c.id)}
+    ${campaignParticipantsHTML(c)}
    <button id="gq-start" type="button" class="gq-intro-start">شروع کنیم <span aria-hidden="true">←</span></button>
    </div>
+   <template><div class="gq-skeleton" role="status" aria-label="در حال بارگذاری سؤال‌ها">
+    <div aria-hidden="true"><span class="gq-skeleton-title"></span><span class="gq-skeleton-line"></span><div class="gq-choices"><span></span><span></span><span></span><span></span></div></div>
+   </div></template>
   </section></div>`;
-  $('gq-start')?.addEventListener('click',()=>{q.introSeen=true;renderStudentGuidedQuiz(c);window.scrollTo({top:0,behavior:'instant'});});
+  $('gq-start')?.addEventListener('click',async({currentTarget:button})=>{
+   const screen=button.closest('.gq-intro-shell');
+   const stillCurrent=()=>screen.isConnected&&role==='student'&&view==='studio'&&state.selectedCampaign===c.id;
+   button.disabled=true;
+   if(isSeven){
+    studentImage('focus');
+    const art=STUDENT_IMAGE_CACHE.focus;
+    if(art?.decode&&!art.complete){
+     const skeleton=window.setTimeout(()=>{
+      if(!stillCurrent())return;
+      screen.querySelector('.gq-intro-inner').replaceWith(screen.querySelector('template').content.cloneNode(true));
+     },180);
+     try{await art.decode()}catch{}finally{window.clearTimeout(skeleton)}
+    }
+   }
+   if(!stillCurrent()){button.disabled=false;return}
+   q.introSeen=true;
+   renderStudentGuidedQuiz(c);
+   window.scrollTo({top:0,behavior:'instant'});
+  });
   return;
  }
  if(q.step>=5){
@@ -796,18 +816,11 @@ function renderStudentGuidedQuiz(c){
   $('gq-next').disabled=false;
  }));
  $('gq-next')?.addEventListener('click',()=>{
-  if(!q.answers[q.step]||q.transitioning)return;
-  q.transitioning=true;
-  const button=$('gq-next');if(button)button.disabled=true;
-  const currentQuestion=q.step;
-  const nextLabel=currentQuestion===4?'در حال آماده‌سازی جمله‌های تو...':'در حال رفتن به سؤال بعدی...';
-  document.querySelector('.student-studio .gq-shell')?.insertAdjacentHTML('beforeend',`<div class="gq-loader" role="status" aria-live="polite" aria-label="${nextLabel}"><div class="gq-loader-ring"><span class="gq-loader-seven" aria-hidden="true">7</span></div><div class="gq-loader-name">${nextLabel}</div></div>`);
-  const delay=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?180:820;
-  window.setTimeout(()=>{
-   q.transitioning=false;
-   if(role!=='student'||view!=='studio'||state.selectedCampaign!==c.id||q.step!==currentQuestion)return;
-   q.step=Math.min(5,q.step+1);q.suggestions=[];renderStudentGuidedQuiz(c);window.scrollTo({top:0,behavior:'instant'});
-  },delay);
+  if(!q.answers[q.step])return;
+  q.step++;
+  q.suggestions=[];
+  renderStudentGuidedQuiz(c);
+  window.scrollTo({top:0,behavior:'instant'});
  });
  $('gq-back')?.addEventListener('click',()=>{if(q.step>0){q.step--;renderStudentGuidedQuiz(c)}});
 }
@@ -853,7 +866,7 @@ function renderStudentStudio(){
   <div class="ss-wizard-screen ss-wizard-cover" data-ss-screen="0">
    <span class="ss-hero-number" aria-hidden="true">7</span>
    <div class="ss-wizard-cover-inner"><span class="ss-pill">✦ ${esc(c.title)}</span><div class="ss-eyebrow">YOUR STORY · YOUR SEVEN</div><h1>${heroTitle}</h1><p>قصه تو، تصویر تو.</p>
-   ${campaignParticipantsHTML(c.id)}
+   ${campaignParticipantsHTML(c)}
     <button type="button" class="ss-action" data-ss-page="1">ساخت پوستر رو شروع کنیم <span aria-hidden="true">←</span></button></div>
   </div>
   <div class="ss-wizard-screen" data-ss-screen="1">
@@ -910,7 +923,7 @@ function renderStudentStudio(){
  $('photoInput')?.addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;if(f.size>6*1024*1024){toast('عکس باید کمتر از ۶ مگابایت باشه.');return;}const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{photoImage=img;$('ss-upload-text').textContent='✓ '+f.name;drawPoster();URL.revokeObjectURL(url)};img.onerror=()=>{toast('این تصویر قابل خواندن نیست.');URL.revokeObjectURL(url)};img.src=url});
  $('ss-reset-design')?.addEventListener('click',()=>{studentAccent='#dfff69';photoImage=null;$('photoInput').value='';$('ss-upload-text')&&( $('ss-upload-text').textContent='انتخاب تصویر' );document.querySelectorAll('[data-ss-color]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.ssColor===studentAccent)));drawPoster()});
  $('studioTeam')&&( $('studioTeam').value=c.teams?.includes(state.selectedTeam)?state.selectedTeam:(c.teams?.[0]||'') );
- $('ss-retake-quiz')?.addEventListener('click',()=>{studentGuidedQuiz[c.id]={step:0,answers:[null,null,null,null,null],finished:false,chosenText:'',suggestions:[],introSeen:false,transitioning:false};studentStudioPage=0;photoImage=null;renderStudentGuidedQuiz(c)});
+ $('ss-retake-quiz')?.addEventListener('click',()=>{studentGuidedQuiz[c.id]={step:0,answers:[null,null,null,null,null],finished:false,chosenText:'',suggestions:[],introSeen:false};studentStudioPage=0;photoImage=null;renderStudentGuidedQuiz(c)});
  ['focus','legacy','celebration'].forEach(studentImage);
  if($('studioText')?.value)$('ss-count').textContent=fmt($('studioText').value.length);
  showPage(studentStudioPage);
