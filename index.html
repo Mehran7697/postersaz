@@ -371,7 +371,7 @@ body[data-role="student"].studio-paginated .ss-design-fields{max-height:100%;ove
 @media(max-width:820px){body[data-role="student"].studio-paginated .ss-wizard-design:has(.ss-card-picker){grid-template-rows:minmax(0,auto) minmax(110px,1fr)}
 body[data-role="student"].studio-paginated .ss-design-fields textarea.ss-input{height:clamp(62px,10vh,95px)}}
 @media(max-height:540px) and (orientation:landscape){body[data-role="student"].studio-paginated .ss-wizard-design:has(.ss-card-picker){grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr)}}
-</style>
+.config-thumb{display:block;width:72px;height:96px;object-fit:cover;border-radius:8px;margin:8px 0}.config-fields{display:grid;gap:12px;margin-block-start:16px}.config-fields fieldset{min-width:0;border:1px solid #ccd2ce;border-radius:12px;padding:12px}.config-fields .field{display:grid;gap:5px}.config-fields input[type=color]{width:100%;min-height:40px}.setting-panel summary{cursor:pointer;font-weight:800}.setting-grid{align-items:start}.config-actions{flex-wrap:wrap}</style>
 </head>
 <body data-role="student">
 <div class="app">
@@ -391,7 +391,7 @@ body[data-role="student"].studio-paginated .ss-design-fields textarea.ss-input{h
  <nav class="nav-list">
   <button class="nav-btn" data-nav="admin"><span class="ic">⚙</span>بک‌آفیس</button>
   <button class="nav-btn" data-nav="billing"><span class="ic">▣</span>قرارداد و مصرف</button>
-<button class="nav-btn" data-nav="permissions"><span class="ic">☷</span>تنظیم دسترسی رویدادها</button>
+<button class="nav-btn" data-nav="permissions"><span class="ic">☷</span>تنظیمات پنل دانش‌آموز</button>
 <button class="nav-btn" data-nav="org-results"><span class="ic">▤</span>خروجی رویداد</button>
  </nav>
  <div class="side-bottom"><div class="support-card"><strong>نسخه نمایشی تعاملی</strong><p>همه داده‌ها در همین مرورگر ذخیره می‌شوند. اتصال واقعی به شاد و سرور هنوز وجود ندارد.</p><button data-action="reset-data">بازنشانی اطلاعات آزمایشی</button></div></div>
@@ -419,6 +419,7 @@ body[data-role="student"].studio-paginated .ss-design-fields textarea.ss-input{h
 </div>
 <div class="overlay" id="modalOverlay" role="presentation"><div class="modal" role="dialog" aria-modal="true"><button class="modal-close" data-action="close-modal" aria-label="بستن پنجره">✕</button><div id="modalContent"></div></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="student-settings.js"></script>
 <script>
 'use strict';
 const STORE='PosterSazInteractiveV2StudentCinema';
@@ -440,6 +441,14 @@ const SAMPLE_POSTS=[
 const SAMPLE_LEADERS=[{name:'ستاره آبی',invites:5,score:120},{name:'آوا',invites:3,score:90},{name:'ماه‌بانو',invites:3,score:85},{name:'کاربر نمونه',invites:1,score:40},{name:'هوادار سرخ',invites:2,score:35}];
 function defaultState(){return{campaigns:structuredClone(SAMPLE_CAMPAIGNS),posts:structuredClone(SAMPLE_POSTS),leaders:structuredClone(SAMPLE_LEADERS),selectedCampaign:'number7',userDisplay:'',refsCreated:7,sentDemo:14,likesByMe:[],unitPrice:1200,selectedTeam:'آبی'}}
 let state;try{const old=JSON.parse(localStorage.getItem(STORE));state=old?.campaigns?.length&&Array.isArray(old.posts)?{...defaultState(),...old}:defaultState()}catch{state=defaultState()}
+const publishedSettings=window.posterSettings;
+if(publishedSettings?.revision&&publishedSettings.revision!==state.settingsRevision){
+ for(const cfg of publishedSettings.campaigns){
+  const c=state.campaigns.find(item=>item.id===cfg.id);
+  if(c){const {permissions,...fields}=cfg;Object.assign(c,fields);c.permissions={...c.permissions,...permissions}}
+ }
+ state.settingsRevision=publishedSettings.revision;
+}
 let role=(new URLSearchParams(location.search).get('role')||'student'),view='studio',photoImage=null,posterVariant='purple',toastTimer,recording=false,searchTerm='',feedExpandedComment=null;
 if(!['student','central','org'].includes(role))role='student';
 const $=id=>document.getElementById(id);
@@ -470,14 +479,15 @@ function posterStats(posts){
  return {total:posts.length,authors};
 }
 function campaignParticipantsHTML(c){
+ if(c.studentContent?.counter===false)return '';
  const {authors}=posterStats(state.posts.filter(post=>post.campaignId===c.id));
  const total=(c.base||0)+authors.length;
- return `<div class="campaign-participants"><strong>${fmt(total)}</strong><span>شرکت‌کننده در این پویش</span><small>آمار نمایشی پویش</small></div>`;
+ return `<div class="campaign-participants"><strong>${fmt(total)}</strong><span>${esc(contentValue(c,'counterLabel','شرکت‌کننده در این پویش'))}</span><small>آمار نمایشی پویش</small></div>`;
 }
 function posterAuthorsTable(authors){
  return `<section class="card module-box poster-authors"><h4>تعداد پوسترهای هر سازنده</h4>${authors.length?`<div class="table-wrap"><table class="table"><thead><tr><th scope="col">نام نمایشی</th><th scope="col">تعداد پوسترهای ثبت‌شده</th></tr></thead><tbody>${authors.map(({name,count})=>`<tr><td class="name">${esc(name)}</td><td>${fmt(count)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">هنوز پوستری ثبت نشده است.</p>'}</section>`;
 }
-function save(){try{localStorage.setItem(STORE,JSON.stringify(state))}catch(e){toast('حافظه مرورگر پر شده است؛ داده‌های حجیم ذخیره نمی‌شوند.')}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(state));return true}catch(e){toast('حافظه مرورگر پر شده است؛ داده‌های حجیم ذخیره نمی‌شوند.')}}
 function toast(s){const el=$('toast');el.textContent=s;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),3500)}
 function sectionHead(title,desc,action=''){return`<div class="section-head"><div><h3>${title}</h3><p>${desc}</p></div>${action}</div>`}
 function renderOverview(){const count=state.campaigns.reduce((a,c)=>a+campTotal(c),0);const {total,authors}=posterStats(state.posts);const approved=state.posts.filter(p=>p.status==='approved').length;const top=state.campaigns.slice(0,3);$('view-overview').innerHTML=`<div class="hero"><div class="hero-copy"><span class="hero-kicker">✦ خلاقیت، مشارکت، انتشار</span><h2>هر پوستر، شروع یک جریان تازه!</h2><p>پویش بساز، با یک هویت بصری مشترک محتوا تولید کن و دوستانت را در دنیای شاد به چالش دعوت کن.</p><div class="row-flex"><button class="btn btn-white" data-nav="studio">✦ شروع ساخت پوستر</button><button class="btn btn-ghost" style="background:transparent;color:white;border-color:#ffffff78" data-nav="campaigns">مشاهده پویش‌ها</button></div></div><div class="hero-art"><div class="fly"></div><div class="fly"></div><span class="poster-icon">🖼️</span></div></div><div class="stats-grid poster-stats">${statHTML('مشارکت در پویش‌های نمونه',fmt(count),'♙','bg-violet','آمار اولیه، نمایشی')}${statHTML('پویش فعال',fmt(state.campaigns.length),'▤','bg-blue','قابل تنظیم')}${statHTML('کل پوسترهای ثبت‌شده',fmt(total),'✦','bg-orange','شامل داده‌های آزمایشی')}${statHTML('سازندگان یکتا',fmt(authors.length),'♙','bg-violet','بر اساس ثبت‌های این مرورگر')}${statHTML('محتوای تأییدشده',fmt(approved),'♥','bg-mint','با نظارت مرکزی')}</div>${posterAuthorsTable(authors)}${sectionHead('پویش‌های فعال','یک پویش را انتخاب کن و پوستر اختصاصی‌ات را بساز.',`<button class="btn btn-ghost btn-sm" data-nav="campaigns">مشاهده همه پویش‌ها ←</button>`)}<div class="grid-campaigns">${top.map(campaignHTML).join('')}</div><div style="height:24px"></div><div class="two-col"><div class="card module-box"><div class="section-head"><div><h3 style="font-size:15px">آخرین فعالیت‌ها</h3><p>نمونه‌ای از محتوای منتشرشده</p></div><button class="btn btn-soft btn-sm" data-nav="feed">مشاهده فید</button></div><div class="table-wrap"><table class="table"><thead><tr><th>شرکت‌کننده</th><th>پویش</th><th>محبوبیت</th><th>وضعیت</th></tr></thead><tbody>${state.posts.slice().filter(p=>p.status==='approved').sort((a,b)=>b.date-a.date).slice(0,5).map(p=>`<tr><td class="name">${esc(p.author)}</td><td>${esc(getCamp(p.campaignId).title)}</td><td>♥ ${fmt(p.likes)}</td><td><span class="pill pill-green">منتشر شده</span></td></tr>`).join('')}</tbody></table></div></div><div class="card module-box"><h4>مسیرهای اصلی پوسترساز</h4><div class="mini-list">${[['🎨','ساخت محتوای شخصی','عکس، متن و خروجی پوستر'],['🔗','دعوت و مشارکت','پیوند اختصاصی و دعوت موفق'],['🏆','رقابت و امتیاز','لیدربرد و قرعه‌کشی'],['🛡️','نظارت مرکزی','تأیید محتوا و دسترسی‌ها']].map(x=>`<div class="mini-item"><span class="bubble">${x[0]}</span><div class="txt"><strong>${x[1]}</strong><small>${x[2]}</small></div></div>`).join('')}</div></div></div>`}
@@ -520,7 +530,7 @@ function eligibleCampaigns(){
   return state.campaigns.filter(c=>c.enabled!==false);
 }
 function roleAllowedViews(){
-  if(role==='central')return ['overview','campaigns','studio','feed','leaderboard','invites','lottery','admin','billing','permissions'];
+  if(role==='central')return ['permissions'];
   if(role==='org')return ['org-results'];
   const r=rulesFor(state.selectedCampaign).student;
   return ['studio','invites','leaderboard'].filter(v=>r[v]);
@@ -541,8 +551,8 @@ function prepareRole(){
     n.classList.toggle('hidden',!hasVisible);
     const label=n.previousElementSibling;if(label?.classList.contains('side-label'))label.classList.toggle('hidden',!hasVisible);
   });
-  const bottom=$('sidebar').querySelector('.side-bottom');if(bottom)bottom.classList.toggle('hidden',role!=='central');
-  $('topSearch').classList.toggle('hidden',role!=='central');
+  const bottom=$('sidebar').querySelector('.side-bottom');if(bottom)bottom.classList.add('hidden');
+  $('topSearch').classList.add('hidden');
   $('campaignSwitch').classList.toggle('hidden',role==='central');
   const select=$('activeCampaignSelect');
   select.innerHTML=candidates.map(c=>`<option value="${esc(c.id)}" ${c.id===state.selectedCampaign?'selected':''}>${esc(c.title)}</option>`).join('');
@@ -557,13 +567,61 @@ function readField(section,key,type='checkbox'){
 }
 function settingCheck(section,key,label,value){return `<label class="setting-option"><input type="checkbox" data-setting="${section}.${key}" ${value?'checked':''}/><span>${esc(label)}</span></label>`}
 function settingNumber(section,key,label,value,max=100000){return `<div class="field"><label>${esc(label)}</label><input class="form-control" data-setting="${section}.${key}" type="number" min="0" max="${max}" value="${Number(value)}"/></div>`}
+const DEFAULT_COLORS=[['#dfff69','سبز نئونی'],['#f7c270','طلایی'],['#fa685a','قرمز'],['#88d7ff','آبی'],['#c8a8ff','بنفش یاسی']];
+function contentValue(c,key,fallback=''){return c.studentContent?.[key]||fallback}
+function paletteFor(c){return DEFAULT_COLORS.map(([color,label],i)=>[contentValue(c,'color'+i,color),contentValue(c,'colorLabel'+i,label)])}
+function cardsFor(c){
+ return Object.fromEntries(Object.entries(STUDENT_THEMES).map(([key,card])=>[key,{...card,label:contentValue(c,key+'Label',card.label),image:contentValue(c,key+'Image',card.image),starter:contentValue(c,key+'Starter',card.starter)}]));
+}
+function questionFor(c,i){
+ const q=GUIDED_QUESTIONS[i],key='q'+i;
+ const title=i===0&&studentCampaignArt(c)?'از داستان شماره ۷ رونالدو، کدوم پیام به دلت نزدیک‌تره؟':q.title;
+ return {...q,title:contentValue(c,key,title),hint:contentValue(c,key+'Hint',q.hint),options:q.options.map((o,j)=>({...o,label:contentValue(c,key+'Label'+j,o.label),sub:contentValue(c,key+'Sub'+j,o.sub)}))};
+}
+function designSettings(c){
+ const field=(key,label,value,type='text',max=180)=>`<label class="field">${esc(label)}<input class="form-control" data-content="${key}" type="${type}" maxlength="${max}" ${type==='number'?'min="0" step="1" max="999999999"':''} value="${esc(value)}"></label>`;
+ const group=(title,body)=>`<details class="card setting-panel"><summary>${esc(title)}</summary><div class="config-fields">${body}</div></details>`;
+ const custom=(key,label,fallback='')=>field(key,label,contentValue(c,key,fallback));
+ const intro=field('teams','نام تیم‌ها (جداشده با ویرگول)',(c.teams||[]).join('، '))+field('title','نام پویش',c.title)+field('description','توضیح پویش',c.description)+custom('headline','عنوان صفحه شروع (اختیاری)')+custom('intro','متن خوشامد','داستان از تو شروع می‌شه.')+custom('start','دکمه شروع','شروع کنیم')+field('base','تعداد اولیه شرکت‌کنندگان',c.base||0,'number')+custom('counterLabel','عنوان شمارنده','شرکت‌کننده در این پویش')+settingCheck('display','counter','نمایش شمارنده شرکت‌کنندگان',c.studentContent?.counter!==false);
+ const cards=Object.entries(cardsFor(c)).map(([key,card],i)=>`<fieldset><legend>کارت ${fmt(i+1)}</legend>${field(key+'Label','نام کارت',card.label)}${field(key+'Starter','راهنمای نوشتن جمله',card.starter)}<label class="field">تصویر کارت<select class="form-control" data-content="${key}Image" data-art-select="${key}">${Object.values(STUDENT_THEMES).map(t=>`<option value="${t.image}" ${card.image===t.image?'selected':''}>${esc(t.label)}</option>`).join('')}</select></label><img class="config-thumb" data-art-preview="${key}" src="${esc(contentValue(c,key+'Photo',STUDENT_ASSETS[card.image]))}" alt="پیش‌نمایش کارت"><label class="field">تصویر دلخواه کارت<input type="file" data-art-file="${key}" accept="image/jpeg,image/png,image/webp"></label><input type="hidden" data-content="${key}Photo" value="${esc(contentValue(c,key+'Photo'))}"></fieldset>`).join('');
+ const colors=paletteFor(c).map(([color,label],i)=>`<fieldset><legend>رنگ ${fmt(i+1)}</legend>${field('color'+i,'رنگ',color,'color')}${field('colorLabel'+i,'نام رنگ',label)}</fieldset>`).join('');
+ const questions=GUIDED_QUESTIONS.map((_,i)=>{const q=questionFor(c,i),key='q'+i;return group('سؤال '+fmt(i+1),field(key,'صورت سؤال',q.title)+field(key+'Hint','راهنما',q.hint)+q.options.map((o,j)=>field(key+'Label'+j,'گزینه '+fmt(j+1),o.label)+field(key+'Sub'+j,'توضیح گزینه '+fmt(j+1),o.sub)).join(''))}).join('');
+ return group('پویش و صفحه شروع',intro)+group('متن و رنگ پوستر',field('defaultText','متن پیش‌فرض پوستر',c.defaultText,'text',140)+colors)+(studentCampaignArt(c)?group('کارت‌های رونالدو',cards):'')+group('پرسش‌ها و جمله‌های پیشنهادی',questions+[0,1,2,3].map(i=>field('suggest'+i,'جمله پیشنهادی '+fmt(i+1)+' (خالی برای پیشنهاد خودکار)',contentValue(c,'suggest'+i),'text',140)).join(''));
+}
+function bindCardImages(panel){
+ panel.querySelectorAll('[data-art-file]').forEach(input=>{
+  const key=input.dataset.artFile,select=panel.querySelector('[data-art-select="'+key+'"]'),preview=panel.querySelector('[data-art-preview="'+key+'"]'),photo=panel.querySelector('[data-content="'+key+'Photo"]');
+  select.onchange=()=>{input.value='';delete input.dataset.loading;photo.value='';preview.src=STUDENT_ASSETS[select.value]};
+  input.onchange=async()=>{
+   const file=input.files[0];if(!file)return;
+   const url=URL.createObjectURL(file),img=new Image();
+   input.dataset.loading='true';
+   try{
+    img.src=url;await img.decode();if(file!==input.files[0])return;
+    const scale=Math.min(1,800/Math.max(img.width,img.height)),canvas=document.createElement('canvas');
+    canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));
+    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);photo.value=canvas.toDataURL('image/jpeg',0.75);preview.src=photo.value;
+   }catch{toast('تصویر خوانده نشد. فایل دیگری انتخاب کنید.')}
+   finally{URL.revokeObjectURL(url);if(file===input.files[0])delete input.dataset.loading}
+  };
+ });
+}
+function exportStudentSettings(){
+ const campaigns=state.campaigns.map(c=>{
+  const {student,studio,invites,leaderboard}=rulesFor(c);
+  return {id:c.id,title:c.title,description:c.description,teams:c.teams||[],base:c.base,defaultText:c.defaultText,studentContent:c.studentContent||{},permissions:{student,studio,invites,leaderboard}};
+ });
+ const data={revision:new Date().toISOString(),campaigns};
+ const url=URL.createObjectURL(new Blob(['window.posterSettings = '+JSON.stringify(data,null,2)+';\n'],{type:'text/javascript;charset=utf-8'}));
+ const a=document.createElement('a');a.href=url;a.download='student-settings.js';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
 function renderPermissions(){
  if(role!=='central')return;
  const c=state.campaigns.find(x=>x.id===configCampaignId)||state.campaigns[0];
  configCampaignId=c.id;
  const p=rulesFor(c);
  $('view-permissions').innerHTML=`
- ${sectionHead('مدیریت دسترسی‌ها و تجربه هر رویداد','مدیریت مرکزی مشخص می‌کند دانش‌آموز چه بخش‌هایی ببیند و نهاد برگزارکننده چه خروجی‌هایی مشاهده کند.')}
+ ${sectionHead('تنظیمات پنل دانش‌آموز','پویش را انتخاب کنید و بخش‌های آن را ویرایش کنید.')}
  <div class="card setting-panel" style="margin-bottom:17px"><div class="row-flex" style="justify-content:space-between;flex-wrap:wrap"><div><span class="eyebrow">رویداد انتخاب‌شده</span><h4>${esc(c.title)}</h4><p>${esc(c.description)}</p></div><div class="field" style="min-width:min(280px,100%)"><label>انتخاب رویداد برای تنظیم</label><select class="form-control" id="configCampaign">${optionsHTML(state.campaigns).replace(`value="${esc(state.selectedCampaign)}" selected`,`value="${esc(state.selectedCampaign)}"`) .replace(`value="${esc(c.id)}"`,`value="${esc(c.id)}" selected`)}</select></div></div></div>
  <div class="setting-grid">
   <div class="card setting-panel"><span class="role-capsule">🎨 تجربه دانش‌آموز</span><h4 style="margin-top:12px">بخش‌های قابل مشاهده</h4><p>دانش‌آموز فقط بخش‌های انتخاب‌شده از میان سه گزینه زیر را می‌بیند؛ سایر بخش‌ها برای او نمایش داده نمی‌شوند.</p>
@@ -574,7 +632,7 @@ function renderPermissions(){
   ${settingCheck('studio','showName','اجازه وارد کردن نام نمایشی',p.studio.showName)}
   ${settingCheck('studio','showText','اجازه ویرایش متن پوستر',p.studio.showText)}
   ${settingCheck('studio','guidedQuestions','نمایش ۵ سؤال و پیشنهاد جمله قبل از استودیو',p.studio.guidedQuestions)}
-  ${settingCheck('studio','allowPhoto','اجازه بارگذاری عکس',p.studio.allowPhoto)}
+
   ${settingCheck('studio','allowColors','اجازه انتخاب رنگ',p.studio.allowColors)}
   ${settingCheck('studio','allowVideo','امکان تولید ویدئوی کوتاه',p.studio.allowVideo)}
   </div>
@@ -592,37 +650,35 @@ function renderPermissions(){
   ${settingCheck('leaderboard','showInvites','نمایش تعداد دعوت‌های موفق',p.leaderboard.showInvites)}
   ${settingCheck('leaderboard','showScore','نمایش امتیاز کاربران',p.leaderboard.showScore)}
   </div>
-  <div class="card setting-panel"><span class="role-capsule">🏢 نهاد برگزارکننده</span><h4 style="margin-top:12px">دسترسی فقط به خروجی رویداد</h4><p>نهاد امکان ایجاد، ویرایش یا تأیید پویش ندارد. فقط داده‌هایی را می‌بیند که مدیر مرکزی اینجا فعال کرده است.</p>
-  ${settingCheck('organizer','enabled','اجازه مشاهده این رویداد توسط نهاد',p.organizer.enabled)}
-  ${settingCheck('organizer','summary','نمایش معرفی و مشخصات رویداد',p.organizer.summary)}
-  ${settingCheck('organizer','statistics','نمایش شاخص‌ها و آمار خروجی',p.organizer.statistics)}
-  ${settingCheck('organizer','gallery','نمایش پوسترهای تأییدشده',p.organizer.gallery)}
-  ${settingCheck('organizer','rankings','نمایش خروجی رقابت و رتبه‌ها',p.organizer.rankings)}
-  ${settingCheck('organizer','referrals','نمایش گزارش کلی دعوت‌ها',p.organizer.referrals)}
-  </div>
-  <div class="card setting-panel"><span class="role-capsule">🔐 سیاست نمایش</span><h4 style="margin-top:12px">پیش‌نمایش نقش‌ها</h4><p>برای تست، تنظیمات را ذخیره کن و از بالای صفحه به نقش دانش‌آموز یا نهاد برو.</p>
-    <div class="role-note">تنظیمات به‌صورت جداگانه برای هر رویداد ذخیره می‌شوند. برای نمونه می‌توان جدول را در یک رویداد خاموش و دعوت ویژه را در رویداد دیگر روشن کرد.</div>
-    <div class="divider"></div><strong>محدودیت این نسخه نمایشی</strong>
-    <p>تغییر نقش از منوی بالای صفحه، صرفاً شبیه‌سازی است. این فایل بدون سرور، سیستم ورود و احراز هویت، کنترل دسترسی امنیتی واقعی ندارد.</p>
-    <div class="role-note">در پیاده‌سازی واقعی، کنترل مجوزها باید در API و پایگاه داده نیز اعمال شود تا پنهان کردن منوها تنها روش محافظت از داده نباشد.</div>
-  </div>
+  ${designSettings(c)}
  </div>
- <div class="config-actions"><div class="config-note">هر تغییری برای رویداد انتخاب‌شده اعمال می‌شود و با عوض کردن نقش، نتیجه آن را می‌بینی.</div><button class="btn btn-primary" data-action="save-permissions">✓ ذخیره تنظیمات این رویداد</button></div>
+ <div class="config-actions"><div class="config-note">ذخیره برای پیش‌نمایش در همین مرورگر است. برای انتشار عمومی، فایل تنظیمات را در ریشه مخزن جایگزین کنید.</div><button class="btn btn-primary" data-action="save-permissions">ذخیره تنظیمات پویش</button><button class="btn btn-ghost" id="exportStudentSettings">دریافت فایل تنظیمات برای انتشار</button></div>
  `;
+ bindCardImages($('view-permissions'));
+ $('exportStudentSettings').onclick=()=>{if(savePermissions())exportStudentSettings()};
  const select=$('configCampaign');select.value=configCampaignId;
  select.addEventListener('change',e=>{configCampaignId=e.target.value;renderPermissions()});
 }
 function savePermissions(){
  if(role!=='central')return;
  const c=getCamp(configCampaignId);
+ if($('view-permissions').querySelector('[data-loading]')){toast('در حال آماده‌سازی تصویر کارت هستیم.');return false}
+ const controls=[...$('view-permissions').querySelectorAll('[data-content]')];
+ for(const el of controls){if(!el.reportValidity())return false}
+ const values=Object.fromEntries(controls.map(el=>[el.dataset.content,el.value.trim()]));
+ const {title,description,base,defaultText,teams,...content}=values;
+ if(!title){toast('نام پویش را وارد کنید.');return false}
+ c.teams=[...new Set(teams.split(/[,،]/).map(name=>name.trim()).filter(Boolean))];c.title=title;c.description=description;c.base=Number(base);c.defaultText=defaultText;
+ c.studentContent={...content,counter:readField('display','counter')};
+ delete studentGuidedQuiz[c.id];
  c.permissions={
   student:{studio:readField('student','studio'),invites:readField('student','invites'),leaderboard:readField('student','leaderboard')},
-  studio:{showName:readField('studio','showName'),showText:readField('studio','showText'),allowPhoto:readField('studio','allowPhoto'),allowColors:readField('studio','allowColors'),allowVideo:readField('studio','allowVideo'),guidedQuestions:readField('studio','guidedQuestions')},
+  studio:{showName:readField('studio','showName'),showText:readField('studio','showText'),allowPhoto:rulesFor(c).studio.allowPhoto,allowColors:readField('studio','allowColors'),allowVideo:readField('studio','allowVideo'),guidedQuestions:readField('studio','guidedQuestions')},
   invites:{normal:readField('invites','normal'),special:readField('invites','special'),maxInvites:readField('invites','maxInvites','number'),normalPoints:readField('invites','normalPoints','number'),specialPoints:readField('invites','specialPoints','number')},
   leaderboard:{individual:readField('leaderboard','individual'),teams:readField('leaderboard','teams'),showInvites:readField('leaderboard','showInvites'),showScore:readField('leaderboard','showScore')},
-  organizer:{enabled:readField('organizer','enabled'),summary:readField('organizer','summary'),statistics:readField('organizer','statistics'),gallery:readField('organizer','gallery'),rankings:readField('organizer','rankings'),referrals:readField('organizer','referrals')}
+  organizer:rulesFor(c).organizer
  };
- save();toast(`تنظیمات دسترسی «${c.title}» ذخیره شد.`);renderPermissions();
+ if(!save())return false;toast(`تنظیمات «${c.title}» ذخیره شد.`);renderPermissions();return true;
 }
 function applyStudioRules(){
  if(role!=='student')return;
@@ -678,7 +734,7 @@ function renderOrgResults(){
  dest.innerHTML=`<div class="org-banner"><span class="hero-kicker">پنل نهاد برگزارکننده</span><h3>خروجی رویداد «${esc(c.title)}»</h3><p>نمای فقط خواندنی و قابل تنظیم توسط مدیریت مرکزی</p></div>${blocks.join('')||'<div class="card empty-role"><div class="big">▢</div><h3>بخش خروجی برای این رویداد انتخاب نشده است</h3><p>مدیریت مرکزی می‌تواند بخش‌های قابل مشاهده را فعال کند.</p></div>'}<div class="role-notice" style="margin-top:16px">🔒 این پنل فقط خروجی رویداد را نمایش می‌دهد و امکان مدیریت پویش، مشاهده هویت واقعی کاربران یا تأیید محتوا را ندارد.</div>`;
 }
 
-const VIEWS={overview:['داشبورد پوسترساز',renderOverview],campaigns:['پویش‌ها',renderCampaigns],studio:['استودیوی پوسترساز',renderStudio],feed:['فید و تعاملات',renderFeed],leaderboard:['رقابت و لیدربرد',renderLeaderboard],invites:['دعوت دوستان',renderInvites],lottery:['قرعه‌کشی',renderLottery],admin:['بک‌آفیس',renderAdmin],billing:['قرارداد و مصرف',renderBilling],permissions:['تنظیم دسترسی رویدادها',renderPermissions],'org-results':['خروجی رویداد',renderOrgResults]};
+const VIEWS={overview:['داشبورد پوسترساز',renderOverview],campaigns:['پویش‌ها',renderCampaigns],studio:['استودیوی پوسترساز',renderStudio],feed:['فید و تعاملات',renderFeed],leaderboard:['رقابت و لیدربرد',renderLeaderboard],invites:['دعوت دوستان',renderInvites],lottery:['قرعه‌کشی',renderLottery],admin:['بک‌آفیس',renderAdmin],billing:['قرارداد و مصرف',renderBilling],permissions:['تنظیمات پنل دانش‌آموز',renderPermissions],'org-results':['خروجی رویداد',renderOrgResults]};
 function navigate(v){prepareRole();const allowed=roleAllowedViews();if(!allowed.includes(v)){v=allowed[0]|| (role==='org'?'org-results':'student-empty')}if(v==='student-empty'){$('pageTitle').textContent='امکانات دانش‌آموز';document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));$('view-studio').classList.add('active');$('view-studio').innerHTML='<div class="card empty-role"><div class="big">🔒</div><h3>هیچ بخشی برای این رویداد فعال نیست</h3><p>مدیریت مرکزی امکانات قابل مشاهده دانش‌آموز را تنظیم می‌کند.</p></div>';view=v;return}view=v;document.body.classList.toggle('studio-paginated',role==='student'&&v==='studio');document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===`view-${v}`));document.querySelectorAll('[data-nav]').forEach(x=>x.classList.toggle('active',x.dataset.nav===v));$('pageTitle').textContent=VIEWS[v][0];$('sidebar').classList.remove('open');VIEWS[v][1]();window.scrollTo({top:0,behavior:'instant'})}
 function showModal(html){$('modalContent').innerHTML=html;$('modalOverlay').classList.add('open')}
 function closeModal(){$('modalOverlay').classList.remove('open')}
@@ -766,7 +822,7 @@ function createGuidedSuggestions(answers,c){
   `به خودم قول دادم برای ${goal.noun} ادامه بدم. ${takeaway}!`
  ];
  // Suggestions are short enough to remain fully editable in the 140-character studio field.
- return [...new Set(options.map(x=>x.trim()).filter(x=>x.length<=140))].slice(0,4);
+ return [...new Set(options.slice(0,4).map((x,i)=>contentValue(c,'suggest'+i,x.trim())).filter(x=>x.length<=140))].slice(0,4);
 }
 function renderStudentGuidedQuiz(c){
  if(role!=='student'||!rulesFor(c).student.studio)return;
@@ -777,11 +833,11 @@ function renderStudentGuidedQuiz(c){
   const welcomeTitle=isSeven?'شماره ۷؛<em>حالا نوبت توئه.</em>':`${esc(c.title)}<em>داستانت رو بساز.</em>`;
   const introCover=isSeven?`--gq-bg:url('${STUDENT_ASSETS.legacy}')`:cover;
   $('view-studio').innerHTML=`<div class="student-studio"><section class="gq-intro-shell" ${introCover?`style="${introCover}"`:''}>
-   <div class="gq-intro-inner"><span class="gq-intro-tag">✦ شماره ۷؛ نوبت توئه</span><div class="gq-intro-kicker">YOUR STORY · YOUR SEVEN</div>
-   <h1 class="gq-intro-heading">${welcomeTitle}</h1>
-   <p class="gq-intro-desc">داستان از تو شروع می‌شه.</p>
+   <div class="gq-intro-inner"><span class="gq-intro-tag">✦ ${esc(c.title)}</span><div class="gq-intro-kicker">YOUR STORY · YOUR SEVEN</div>
+   <h1 class="gq-intro-heading">${c.studentContent?.headline?esc(c.studentContent.headline):welcomeTitle}</h1>
+   <p class="gq-intro-desc">${esc(contentValue(c,'intro','داستان از تو شروع می‌شه.'))}</p>
    
-   <button id="gq-start" type="button" class="gq-intro-start">شروع کنیم <span aria-hidden="true">←</span></button>
+   <button id="gq-start" type="button" class="gq-intro-start">${esc(contentValue(c,'start','شروع کنیم'))} <span aria-hidden="true">←</span></button>
    </div>
    ${campaignParticipantsHTML(c)}
    <template><div class="gq-skeleton" role="status" aria-label="در حال بارگذاری سؤال‌ها">
@@ -826,7 +882,7 @@ function renderStudentGuidedQuiz(c){
   $('gq-write-own')?.addEventListener('click',()=>finishGuidedQuiz(c,''));
   return;
  }
- const question={...GUIDED_QUESTIONS[q.step]};if(q.step===0&&isSeven)question.title='از داستان شماره ۷ رونالدو، کدوم پیام به دلت نزدیک‌تره؟';const selected=q.answers[q.step];
+ const question=questionFor(c,q.step);const selected=q.answers[q.step];
  const opts=question.options.map(opt=>`<button type="button" class="gq-choice" data-gq-answer="${opt.id}" aria-pressed="${selected===opt.id}"><span class="gq-emoji">${opt.emoji}</span><span><strong>${esc(opt.label)}</strong><small>${esc(opt.sub)}</small></span><span class="gq-check">✓</span></button>`).join('');
  $('view-studio').innerHTML=`<div class="student-studio"><section class="gq-shell" ${cover?`style="${cover}"`:''}><div class="gq-inner">${top}
   <div class="gq-progress" role="progressbar" aria-label="پیشرفت پنج سؤال" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${q.step}">${Array.from({length:5},(_,i)=>`<span class="${i<=q.step?'done':''}"></span>`).join('')}</div>
@@ -866,12 +922,13 @@ const STUDENT_THEMES={
 };
 let studentTheme='never';let studentAccent='#dfff69';let studentStudioPage=0;
 const STUDENT_IMAGE_CACHE={};
-function studentImage(key){
- if(!STUDENT_ASSETS[key])return null;
- if(!STUDENT_IMAGE_CACHE[key]){
+function studentImage(key,customSource){
+ const source=typeof customSource==='string'&&customSource?customSource:STUDENT_ASSETS[key];
+ if(!source)return null;
+ if(STUDENT_IMAGE_CACHE[key]?.src!==source){
    let img=new Image();STUDENT_IMAGE_CACHE[key]=img;
    img.onload=()=>{if(role==='student'&&view==='studio')drawPoster()};
-   img.src=STUDENT_ASSETS[key];
+   img.src=source;
  }
  return STUDENT_IMAGE_CACHE[key].complete&&STUDENT_IMAGE_CACHE[key].naturalWidth?STUDENT_IMAGE_CACHE[key]:null;
 }
@@ -880,7 +937,8 @@ function renderStudentStudio(){
  const c=getCamp(state.selectedCampaign),p=rulesFor(c).studio;
  if(p.showText && p.guidedQuestions && !guidedQuizFor(c.id).finished){renderStudentGuidedQuiz(c);return}
  const isSeven=studentCampaignArt(c);
- const theme=STUDENT_THEMES[studentTheme]||STUDENT_THEMES.never;
+ const cardsById=cardsFor(c),theme=cardsById[studentTheme]||cardsById.never;
+ const palette=paletteFor(c);if(!palette.some(([color])=>color===studentAccent)||!p.allowColors)studentAccent=palette[0][0];
  const heroTitle=isSeven?'شماره ۷؛<em>نوبت توئه.</em>':`${esc(c.title)}<em>داستان تو، تصویر تو.</em>`;
  const heroImage=isSeven?`style="--ss-cover:url('${STUDENT_ASSETS.legacy}')"`:'';
  const guide=guidedQuizFor(c.id);
@@ -890,14 +948,14 @@ function renderStudentStudio(){
  <section class="ss-wizard" ${heroImage}>
   <div class="ss-wizard-screen ss-wizard-cover" data-ss-screen="0">
    <span class="ss-hero-number" aria-hidden="true">7</span>
-   <div class="ss-wizard-cover-inner"><span class="ss-pill">✦ ${esc(c.title)}</span><div class="ss-eyebrow">YOUR STORY · YOUR SEVEN</div><h1>${heroTitle}</h1><p>قصه تو، تصویر تو.</p>
-    <button type="button" class="ss-action" data-ss-page="1">ساخت پوستر رو شروع کنیم <span aria-hidden="true">←</span></button></div>
+   <div class="ss-wizard-cover-inner"><span class="ss-pill">✦ ${esc(c.title)}</span><div class="ss-eyebrow">YOUR STORY · YOUR SEVEN</div><h1>${c.studentContent?.headline?esc(c.studentContent.headline):heroTitle}</h1><p>${esc(contentValue(c,'intro','قصه تو، تصویر تو.'))}</p>
+    <button type="button" class="ss-action" data-ss-page="1">${esc(contentValue(c,'start','ساخت پوستر رو شروع کنیم'))} <span aria-hidden="true">←</span></button></div>
    ${campaignParticipantsHTML(c)}
   </div>
   <div class="ss-wizard-screen" data-ss-screen="1">
    <div class="ss-wizard-page">${progress(1,'حالا تو بگو؛ داستانت چیه؟')}
     <div class="ss-wizard-fields ss-wizard-write" id="ss-write-fields">
-      <div class="ss-field" id="ss-text-field" ${p.showText?'':'hidden'}><label class="ss-label" for="studioText">جمله تو</label><textarea class="ss-input" id="studioText" maxlength="140" rows="4" placeholder="${esc(theme.starter)}">${esc(guide.chosenText||'')}</textarea><div class="ss-counter"><span>هر طور دوست داری بنویس</span><span><b id="ss-count">۰</b> / ۱۴۰</span></div></div>
+      <div class="ss-field" id="ss-text-field" ${p.showText?'':'hidden'}><label class="ss-label" for="studioText">جمله تو</label><textarea class="ss-input" id="studioText" maxlength="140" rows="4" placeholder="${esc(theme.starter)}">${esc(guide.chosenText||(c.studentContent?c.defaultText:''))}</textarea><div class="ss-counter"><span>هر طور دوست داری بنویس</span><span><b id="ss-count">۰</b> / ۱۴۰</span></div></div>
       <div class="ss-field" id="ss-name-field" ${p.showName?'':'hidden'}><label class="ss-label" for="studioName">نام یا لقب (اختیاری)</label><input class="ss-input" id="studioName" maxlength="30" placeholder="مثلاً یک رؤیاباف" value="${state.userDisplay==='کاربر نمونه'?'':esc(state.userDisplay||'')}" /></div>
       <div class="ss-field" id="ss-team-field" ${c.teams?.length?'':'hidden'}><label class="ss-label" for="studioTeam">تیم</label><select class="ss-input" id="studioTeam">${(c.teams||[]).map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('')}</select></div>
       ${guide.finished&&p.guidedQuestions?`<button type="button" class="ss-return-quiz" id="ss-retake-quiz">↺ تغییر پاسخ‌ها</button>`:''}
@@ -909,8 +967,8 @@ function renderStudentStudio(){
    <div class="ss-wizard-page">${progress(2,'پوسترت رو شخصی کن')}
     <div class="ss-wizard-design">
      <div class="ss-wizard-fields ss-design-fields" id="ss-design-fields">
-      ${isSeven?`<fieldset class="ss-card-picker"><legend class="ss-label">کارت رونالدو</legend><div class="ss-card-options">${Object.entries(STUDENT_THEMES).map(([id,card])=>`<button type="button" data-ss-card="${id}" aria-pressed="${studentTheme===id}"><img src="${STUDENT_ASSETS[card.image]}" alt=""><span>${esc(card.label)}</span></button>`).join('')}</div></fieldset>`:''}
-      <div class="ss-field" id="ss-colors-field" ${p.allowColors?'':'hidden'}><label class="ss-label">رنگ پوستر</label><div class="ss-choice-row">${[['#dfff69','سبز نئونی'],['#f7c270','طلایی'],['#fa685a','قرمز'],['#88d7ff','آبی'],['#c8a8ff','بنفش یاسی']].map(([color,label])=>`<button type="button" class="ss-color" data-ss-color="${color}" aria-label="${label}" aria-pressed="${studentAccent===color}" style="background:${color}"></button>`).join('')}</div></div>
+      ${isSeven?`<fieldset class="ss-card-picker"><legend class="ss-label">کارت رونالدو</legend><div class="ss-card-options">${Object.entries(cardsById).map(([id,card])=>`<button type="button" data-ss-card="${id}" aria-pressed="${studentTheme===id}"><img src="${esc(contentValue(c,id+'Photo',STUDENT_ASSETS[card.image]))}" alt=""><span>${esc(card.label)}</span></button>`).join('')}</div></fieldset>`:''}
+      <div class="ss-field" id="ss-colors-field" ${p.allowColors?'':'hidden'}><label class="ss-label">رنگ پوستر</label><div class="ss-choice-row">${palette.map(([color,label])=>`<button type="button" class="ss-color" data-ss-color="${color}" aria-label="${esc(label)}" aria-pressed="${studentAccent===color}" style="background:${color}"></button>`).join('')}</div></div>
      </div>
      <div id="ss-poster-design-host" class="ss-wizard-art-host"><div class="ss-canvas-frame" id="ss-canvas-box"><canvas width="750" height="1000" id="posterCanvas" aria-label="پوستر شخصی‌سازی‌شده"></canvas></div></div>
     </div>
@@ -1014,8 +1072,9 @@ function studentFitSingleLine(ctx,text,maxWidth,initial=27,min=11,weight='bold')
 function drawStudentPoster(animation=0){
  const canvas=$('posterCanvas');if(!canvas)return;const ctx=canvas.getContext('2d');if(!ctx)return;
  const W=canvas.width,H=canvas.height,c=getCamp(state.selectedCampaign),isSeven=studentCampaignArt(c),rules=rulesFor(c).studio;
- const isVideo=(typeof animation==='number'&&animation>0);const t=STUDENT_THEMES[studentTheme];
- const bg=isSeven?studentImage(t.image):null;
+ const isVideo=(typeof animation==='number'&&animation>0);const t=cardsFor(c)[studentTheme];
+ const photo=contentValue(c,studentTheme+'Photo');
+ const bg=isSeven?(photo?studentImage(c.id+'-'+studentTheme,photo):studentImage(t.image)):null;
  ctx.clearRect(0,0,W,H);ctx.fillStyle='#102017';ctx.fillRect(0,0,W,H);
  if(bg){const scale=Math.max(W/bg.naturalWidth,H/bg.naturalHeight);const dw=bg.naturalWidth*scale,dh=bg.naturalHeight*scale;ctx.drawImage(bg,(W-dw)/2,(H-dh)/2,dw,dh)}
  else {const g=ctx.createLinearGradient(0,0,750,1000);g.addColorStop(0,c.color1||'#203323');g.addColorStop(1,'#0e1711');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.save();ctx.globalAlpha=.1;ctx.font='900 480px IRANSansXFaNum,Tahoma';ctx.fillStyle='#fff';ctx.fillText(c.emoji||'✦',90,630);ctx.restore()}
@@ -1045,8 +1104,8 @@ function drawStudentPoster(animation=0){
 }
 
 document.addEventListener('click',e=>{const nav=e.target.closest('[data-nav]');if(nav){navigate(nav.dataset.nav);return}const a=e.target.closest('[data-action]');if(a){action(a.dataset.action,a);return}});
-$('roleSelect').addEventListener('change',e=>{role=e.target.value;prepareRole();navigate(role==='student'?'studio':role==='org'?'org-results':'overview');toast('پیش‌نمایش نقش تغییر کرد؛ برای امنیت واقعی به سرور و احراز هویت نیاز است.')});$('activeCampaignSelect').addEventListener('change',e=>{state.selectedCampaign=e.target.value;state.selectedTeam=getCamp(state.selectedCampaign).teams?.[0]||'';save();prepareRole();navigate(role==='student'?'studio':'org-results')});$('globalSearch').addEventListener('input',e=>{searchTerm=e.target.value.trim();if(searchTerm&&view!=='campaigns')navigate('campaigns');else if(view==='campaigns')renderCampaigns()});$('menuToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));$('modalOverlay').addEventListener('click',e=>{if(e.target===$('modalOverlay'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-if(location.hash.includes('invite=')){navigate('campaigns');toast('این یک لینک آزمایشی است؛ انتساب دعوت واقعی نیازمند سرور است.')}else{$('roleSelect').value=role;prepareRole();navigate(role==='student'?'studio':'overview')};
+$('roleSelect').addEventListener('change',e=>{role=e.target.value;prepareRole();navigate(role==='student'?'studio':role==='org'?'org-results':'permissions');toast('پیش‌نمایش نقش تغییر کرد؛ برای امنیت واقعی به سرور و احراز هویت نیاز است.')});$('activeCampaignSelect').addEventListener('change',e=>{state.selectedCampaign=e.target.value;state.selectedTeam=getCamp(state.selectedCampaign).teams?.[0]||'';save();prepareRole();navigate(role==='student'?'studio':'org-results')});$('globalSearch').addEventListener('input',e=>{searchTerm=e.target.value.trim();if(searchTerm&&view!=='campaigns')navigate('campaigns');else if(view==='campaigns')renderCampaigns()});$('menuToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));$('modalOverlay').addEventListener('click',e=>{if(e.target===$('modalOverlay'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+if(location.hash.includes('invite=')){navigate('campaigns');toast('این یک لینک آزمایشی است؛ انتساب دعوت واقعی نیازمند سرور است.')}else{$('roleSelect').value=role;prepareRole();navigate(role==='student'?'studio':role==='central'?'permissions':'org-results')};
 if(document.fonts?.ready)document.fonts.ready.then(()=>{if(view==='studio')drawPoster()});
 </script>
 </body>
