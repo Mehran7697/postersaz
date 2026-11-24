@@ -288,23 +288,25 @@ body[data-role="student"].studio-paginated .ss-wizard-art-host{display:flex;alig
 body[data-role="student"].studio-paginated .ss-canvas-frame{display:flex;align-items:center;justify-content:center;height:100%;width:100%;min-height:0}
 body[data-role="student"].studio-paginated #posterCanvas{display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:3/4;object-fit:contain;border-radius:6px;box-shadow:0 14px 45px #0008}
 body[data-role="student"].studio-paginated [data-ss-screen="3"]{overflow-y:auto}
-body[data-role="student"].studio-paginated .ss-wizard-result{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);grid-template-rows:auto minmax(320px,1fr);align-items:center;gap:clamp(12px,2vw,24px)}
+body[data-role="student"].studio-paginated .ss-wizard-result{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,280px);grid-template-rows:auto minmax(320px,1fr);align-items:center;gap:clamp(12px,2vw,24px)}
 body[data-role="student"].studio-paginated .ss-wizard-result>.ss-wizard-top{grid-column:1/-1}
 body[data-role="student"].studio-paginated .ss-wizard-result-body{height:100%;min-height:0;display:grid;place-items:center}
 body[data-role="student"].studio-paginated .ss-wizard-final-host,
 body[data-role="student"].studio-paginated .ss-wizard-final-host .ss-canvas-frame{height:100%;width:100%;min-height:0;display:flex;align-items:center;justify-content:center}
-.ss-result-card{background:#15251c;border:1px solid #526a51;border-radius:18px;padding:clamp(14px,2vw,24px);min-width:0}
-body[data-role="student"].studio-paginated .ss-result-card h2{color:#f3ffec;margin:0 0 14px;font-size:clamp(20px,3vw,27px)}
-.ss-result-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.ss-result-actions button{font:inherit;font-size:13px;font-weight:800;line-height:1.45;min-height:44px;padding:8px;color:#f2ffe9;background:#24392b;border:1px solid #5c7558;border-radius:10px;cursor:pointer}
-.ss-result-actions button:hover,.ss-result-actions button:focus-visible{outline:2px solid #dfff69;outline-offset:2px}
-.ss-result-actions button[hidden],.ss-result-card .ss-video-result:empty{display:none}
-.ss-result-actions .ss-result-primary,.ss-result-actions .ss-result-submit{grid-column:1/-1}
-.ss-result-actions .ss-result-primary{background:#dfff69;color:#152110;border-color:#dfff69;font-size:16px}
-.ss-result-links{margin-top:12px;padding-top:12px;border-top:1px solid #526a51}
+.ss-result-card{align-self:safe center;background:#15251c;border:1px solid #526a51;border-radius:14px;padding:12px;min-width:0}
+body[data-role="student"].studio-paginated .ss-result-card h2{color:#f3ffec;margin:0 0 8px;font-size:16px}
+.ss-result-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}
+.ss-result-card details{margin-top:4px}
+.ss-result-card summary{cursor:pointer;width:max-content;max-width:100%;padding:10px 4px;color:#e2eedf;font-size:12px}
+.ss-result-extra{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.ss-result-card button{font:inherit;font-size:13px;font-weight:800;line-height:1.45;min-height:44px;padding:8px;color:#f2ffe9;background:#24392b;border:1px solid #5c7558;border-radius:10px;cursor:pointer}
+.ss-result-card button:hover,.ss-result-card button:focus-visible,.ss-result-card summary:focus-visible{outline:2px solid #dfff69;outline-offset:2px}
+.ss-result-card button[hidden],.ss-result-card .ss-video-result:empty{display:none}
+.ss-result-extra .ss-result-submit{grid-column:1/-1}
+.ss-result-actions .ss-result-primary{background:#dfff69;color:#152110;border-color:#dfff69}
 @media(max-width:680px){
  body[data-role="student"].studio-paginated .ss-wizard-result{grid-template-columns:minmax(0,1fr);grid-template-rows:auto clamp(220px,48dvh,460px) auto;height:auto;min-height:100%;padding-bottom:20px}
- .ss-result-card{width:min(100%,460px);justify-self:center}
+ .ss-result-card{width:min(100%,320px);justify-self:center}
 }
 /* Intro / five questions / suggestions: occupy one screen instead of creating a long page. */
 body[data-role="student"].studio-paginated .gq-intro-shell,
@@ -1032,14 +1034,20 @@ function renderStudentStudio(){
     <section class="ss-result-card" aria-labelledby="ss-result-title">
      <h2 id="ss-result-title" tabindex="-1">پوسترت آماده‌ست!</h2>
      <div class="ss-result-actions">
-      <button type="button" class="ss-result-primary" data-action="save-image"><span aria-hidden="true">↓</span> دانلود پوستر</button>
-      <button type="button" data-ss-page="2"><span aria-hidden="true">✎</span> ویرایش پوستر</button>
-      <button type="button" data-action="share-demo"><span aria-hidden="true">↗</span> اشتراک‌گذاری</button>
-      <button type="button" data-action="make-video" id="videoBtn" ${p.allowVideo?'':'hidden'}>▶ ویدئوی کوتاه</button>
-      <button type="button" class="ss-result-submit" data-action="submit-poster"><span aria-hidden="true">✓</span> ارسال برای تأیید</button>
+      <button type="button" class="ss-result-primary" data-action="save-image"><span aria-hidden="true">↓</span> دانلود</button>
+      <button type="button" data-ss-page="2"><span aria-hidden="true">✎</span> ویرایش</button>
      </div>
-     <div class="ss-video-result" id="videoResult"></div>
-     ${roleAllowedViews().some(name=>name==='invites'||name==='leaderboard')?`<nav class="ss-result-actions ss-result-links" aria-label="بخش‌های پویش">${roleAllowedViews().includes('invites')?'<button type="button" data-ss-view="invites">دعوت دوستان</button>':''}${roleAllowedViews().includes('leaderboard')?'<button type="button" data-ss-view="leaderboard">جدول رقابت</button>':''}</nav>`:''}
+     <details>
+      <summary>گزینه‌های بیشتر</summary>
+      <div class="ss-result-extra">
+       <button type="button" data-action="share-demo">اشتراک‌گذاری</button>
+       <button type="button" data-action="make-video" id="videoBtn" ${p.allowVideo?'':'hidden'}>▶ ویدئوی کوتاه</button>
+       <button type="button" class="ss-result-submit" data-action="submit-poster"><span aria-hidden="true">✓</span> ارسال برای تأیید</button>
+       ${roleAllowedViews().includes('invites')?'<button type="button" data-ss-view="invites">دعوت دوستان</button>':''}
+       ${roleAllowedViews().includes('leaderboard')?'<button type="button" data-ss-view="leaderboard">جدول رقابت</button>':''}
+      </div>
+      <div class="ss-video-result" id="videoResult"></div>
+     </details>
     </section>
    </div>
   </div>
