@@ -203,7 +203,7 @@ body[data-role="student"] #view-studio{overflow:hidden}
 .student-studio .gq-intro-kicker{color:#dfff69;font-weight:900;letter-spacing:1px;font-size:12px;margin:32px 0 13px;direction:ltr;text-align:right}
 .student-studio .gq-intro-heading{font-size:clamp(42px,6.7vw,83px);line-height:1.25;letter-spacing:-2px;font-weight:900;color:#fff;max-width:760px;margin:0 0 20px}
 .student-studio .gq-intro-heading em{font-style:normal;color:#dfff69;display:block}
-.student-studio .campaign-participants{display:table;color:#e9f4e6;background:#0b1510cc;border:1px solid #dfff6980;border-radius:12px;padding:10px 18px;margin:0 0 16px;line-height:1.4}
+.student-studio .campaign-participants{width:100%;text-align:center;color:#e9f4e6;background:radial-gradient(ellipse at center,#23432ee6,#0b1510db 75%);border-block:1px solid #dfff695e;padding:clamp(10px,2.5svh,22px) 16px;margin:0 0 16px;line-height:1.4}
 .student-studio .campaign-participants strong{display:block;color:#dfff69;font-size:clamp(36px,7vw,68px);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
 .student-studio .campaign-participants span{display:block;margin-top:4px;font-size:clamp(13px,2.5vw,17px);font-weight:800}
 .student-studio .campaign-participants small{display:block;margin-top:3px;color:#d3dfcf;font-size:10px}
@@ -250,7 +250,7 @@ body[data-role="student"].studio-paginated .ss-wizard{height:100%;position:relat
 body[data-role="student"].studio-paginated .ss-wizard-screen{display:none;height:100%;width:100%;overflow:hidden;position:relative}
 body[data-role="student"].studio-paginated .ss-wizard-screen.is-current{display:flex;flex-direction:column;animation:ssPageIn .23s ease both}
 @keyframes ssPageIn{from{opacity:.4;transform:translateX(-12px)}to{opacity:1;transform:none}}
-body[data-role="student"].studio-paginated .ss-wizard-cover{justify-content:center;isolation:isolate;padding:clamp(16px,5vw,70px);background:radial-gradient(circle at 80% 35%,#344b37,#0c1611 67%)}
+body[data-role="student"].studio-paginated .ss-wizard-cover{isolation:isolate;padding:clamp(16px,5vw,70px);background:radial-gradient(circle at 80% 35%,#344b37,#0c1611 67%)}
 body[data-role="student"].studio-paginated .ss-wizard-cover::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--ss-cover,linear-gradient(130deg,#24472c,#10180f));background-position:center 34%;background-size:cover;opacity:.84}
 body[data-role="student"].studio-paginated .ss-wizard-cover::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(270deg,#0a1711f8 0%,#0a1711df 32%,#0a171177 71%,#0a171165),linear-gradient(0deg,#0b1711,transparent 34%)}
 body[data-role="student"].studio-paginated .ss-wizard-cover-inner{width:min(1120px,100%);margin:auto;position:relative}
@@ -345,6 +345,18 @@ body[data-role="student"].studio-paginated .gq-free{font-size:11px}
  body[data-role="student"].studio-paginated .gq-progress{margin-bottom:8px}
 }
 @media(prefers-reduced-motion:reduce){body[data-role="student"].studio-paginated .ss-wizard-screen.is-current{animation:none}}
+
+/* The counter spans the cover while the other content keeps its usual gutters. */
+body[data-role="student"].studio-paginated .gq-intro-shell,
+body[data-role="student"].studio-paginated .ss-wizard-cover{padding-inline:0;overflow-y:auto}
+body[data-role="student"].studio-paginated .gq-intro-inner,
+body[data-role="student"].studio-paginated .ss-wizard-cover-inner{display:grid;width:100%;grid-template-columns:minmax(clamp(18px,5vw,64px),1fr) minmax(0,var(--cover-content-width,950px)) minmax(clamp(18px,5vw,64px),1fr);justify-items:start}
+body[data-role="student"].studio-paginated .ss-wizard-cover-inner{--cover-content-width:1120px;flex:none}
+body[data-role="student"].studio-paginated .gq-intro-inner > *,
+body[data-role="student"].studio-paginated .ss-wizard-cover-inner > *{grid-column:2}
+body[data-role="student"].studio-paginated .campaign-participants{grid-column:1/-1}
+body[data-role="student"].studio-paginated .gq-skeleton{width:min(790px,calc(100% - 36px))}
+
 
 </style>
 </head>
