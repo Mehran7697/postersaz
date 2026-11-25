@@ -529,7 +529,7 @@ function trackStudentClick(event){
 }
 function campaignAnalyticsHTML(c){
  const data=readCampaignAnalytics(c);
- const {total,authors}=posterStats(state.posts.filter(post=>post.campaignId===c.id));
+ const {total}=posterStats(state.posts.filter(post=>post.campaignId===c.id));
  const defaults={
   'gq-start':contentValue(c,'start','شروع کنیم'),
   'page:0:1':contentValue(c,'start','ساخت پوستر رو شروع کنیم'),
@@ -553,7 +553,7 @@ function campaignAnalyticsHTML(c){
  const rows=entries.map(([key,entry])=>`<tr data-stats-group="${analyticsStage(key)}" data-click-count="${Number(entry.count)||0}"><th scope="row">${esc(entry.label)}</th><td>${fmt(entry.count)}</td></tr>`).join('');
  const cards=[
   ['شروع پویش در این مرورگر',Number(data.started)],
-  ['عدد نمایشی صفحهٔ شروع',(c.base||0)+authors.length+Number(data.started)],
+  ['پوسترهای ساخته‌شده',campaignPosterCount(c)],
   ['پوسترهای ثبت‌شده',total],
   ['مجموع کلیک‌های ثبت‌شده',entries.reduce((sum,[,entry])=>sum+(Number(entry.count)||0),0)]
  ];
@@ -591,11 +591,31 @@ function bindClickStats(){
  stage.onchange=recorded.onchange=filter;
  filter();
 }
+function campaignPosterCount(c){
+ const submitted=state.posts.filter(post=>post.campaignId===c.id&&!/^s\d+$/.test(post.id)).length;
+ return submitted+(Number(readCampaignAnalytics(c).generatedPosters)||0);
+}
+function campaignPosterLabel(c){
+ const label=contentValue(c,'counterLabel');
+ return !label||label==='شرکت‌کننده در این پویش'?'پوستر ساخته‌شده در این پویش':label;
+}
+const generatedPosterVersions=new Map();
+function recordGeneratedPoster(c){
+ if(studentPreview)return;
+ const version=JSON.stringify([$('studioText')?.value.trim(),$('studioName')?.value.trim(),$('studioTeam')?.value,studentTheme,studentAccent]);
+ const versions=generatedPosterVersions.get(c.id)||new Set();
+ if(versions.has(version))return;
+ const data=readCampaignAnalytics(c);
+ data.generatedPosters=(Number(data.generatedPosters)||0)+1;
+ try{localStorage.setItem(STORE+'-analytics-'+c.id,JSON.stringify(data))}catch{return}
+ versions.add(version);
+ generatedPosterVersions.set(c.id,versions);
+ document.querySelectorAll('.campaign-participants strong').forEach(el=>el.textContent=fmt(campaignPosterCount(c)));
+}
 function campaignParticipantsHTML(c){
  if(c.studentContent?.counter===false)return '';
- const {authors}=posterStats(state.posts.filter(post=>post.campaignId===c.id));
- const total=(c.base||0)+authors.length+Number(readCampaignAnalytics(c).started);
- return `<div class="campaign-participants"><strong>${fmt(total)}</strong><span>${esc(contentValue(c,'counterLabel','شرکت‌کننده در این پویش'))}</span><small>${studentCopy(c,'counterNote')}</small></div>`;
+ const total=campaignPosterCount(c);
+ return `<div class="campaign-participants"><strong>${fmt(total)}</strong><span>${esc(campaignPosterLabel(c))}</span><small>${studentCopy(c,'counterNote')}</small></div>`;
 }
 function posterAuthorsTable(authors){
  return `<section class="card module-box poster-authors"><h4>تعداد پوسترهای هر سازنده</h4>${authors.length?`<div class="table-wrap"><table class="table"><thead><tr><th scope="col">نام نمایشی</th><th scope="col">تعداد پوسترهای ثبت‌شده</th></tr></thead><tbody>${authors.map(({name,count})=>`<tr><td class="name">${esc(name)}</td><td>${fmt(count)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">هنوز پوستری ثبت نشده است.</p>'}</section>`;
@@ -769,7 +789,7 @@ function designSettings(c){
  const copies=section=>Object.entries(STUDENT_COPY).filter(([,entry])=>entry[0]===section).map(([key,[,label,fallback]])=>custom(key,label,fallback)).join('');
  const themeFields=(...keys)=>keys.map(key=>field(key,STUDENT_COLORS[key][0],designColor(c,key),'color')).join('');
  const photoField=(key,label,fallback)=>`<fieldset><legend>${label}</legend><img class="config-thumb" data-art-preview="${key}" src="${esc(fallback||'')}" ${fallback?'':'hidden'} alt="پیش‌نمایش تصویر"><label class="field">انتخاب عکس<input type="file" data-art-file="${key}" accept="image/jpeg,image/png,image/webp"></label><button type="button" class="btn btn-ghost" data-art-clear="${key}">بازگشت به تصویر پیش‌فرض</button><input type="hidden" data-content="${key}Photo" value="${esc(contentValue(c,key+'Photo'))}"></fieldset>`;
- const intro=field('title','نام پویش',c.title)+field('description','توضیح پویش',c.description)+custom('headline','عنوان صفحه شروع (اختیاری)')+custom('intro','متن خوشامد',guided?'داستان از تو شروع می‌شه.':'قصه تو، تصویر تو.')+custom('start','دکمه شروع',guided?'شروع کنیم':'ساخت پوستر رو شروع کنیم')+field('base','تعداد اولیه شرکت‌کنندگان',c.base||0,'number')+custom('counterLabel','عنوان شمارنده','شرکت‌کننده در این پویش')+settingCheck('display','counter','نمایش شمارنده شرکت‌کنندگان',c.studentContent?.counter!==false);
+ const intro=field('title','نام پویش',c.title)+field('description','توضیح پویش',c.description)+custom('headline','عنوان صفحه شروع (اختیاری)')+custom('intro','متن خوشامد',guided?'داستان از تو شروع می‌شه.':'قصه تو، تصویر تو.')+custom('start','دکمه شروع',guided?'شروع کنیم':'ساخت پوستر رو شروع کنیم')+field('base','تعداد اولیه شرکت‌کنندگان',c.base||0,'number')+field('counterLabel','عنوان شمارندهٔ پوستر',campaignPosterLabel(c))+settingCheck('display','counter','نمایش شمارندهٔ پوستر',c.studentContent?.counter!==false);
  const cards=Object.entries(cardsFor(c)).map(([key,card],i)=>`<fieldset><legend>کارت ${fmt(i+1)}</legend>${field(key+'Label','نام کارت',card.label)}${field(key+'Starter','راهنمای نوشتن جمله',card.starter)}<label class="field">تصویر کارت<select class="form-control" data-content="${key}Image" data-art-select="${key}">${Object.values(STUDENT_THEMES).map(t=>`<option value="${t.image}" ${card.image===t.image?'selected':''}>${esc(t.label)}</option>`).join('')}</select></label><img class="config-thumb" data-art-preview="${key}" src="${esc(contentValue(c,key+'Photo',STUDENT_ASSETS[card.image]))}" alt="پیش‌نمایش کارت"><label class="field">تصویر دلخواه کارت<input type="file" data-art-file="${key}" accept="image/jpeg,image/png,image/webp"></label><input type="hidden" data-content="${key}Photo" value="${esc(contentValue(c,key+'Photo'))}"></fieldset>`).join('');
  const colors=paletteFor(c).map(([color,label],i)=>`<fieldset><legend>رنگ ${fmt(i+1)}</legend>${field('color'+i,'رنگ',color,'color')}${field('colorLabel'+i,'نام رنگ',label)}</fieldset>`).join('');
  const questions=GUIDED_QUESTIONS.map((_,i)=>{
@@ -904,7 +924,7 @@ function renderPermissions(){
   $('cfg-preview-intro').textContent=value('intro');
   $('cfg-preview-start').textContent=value('start');
   $('cfg-preview-label').textContent=value('counterLabel');
-  $('cfg-preview-count').textContent=fmt(Number(value('base'))+posterStats(state.posts.filter(post=>post.campaignId===c.id)).authors.length);
+  $('cfg-preview-count').textContent=fmt(campaignPosterCount(c));
   $('cfg-preview-counter').hidden=!readField('display','counter');
  };
  panel.oninput=e=>{
@@ -1258,7 +1278,7 @@ function renderStudentStudio(){
  };
  document.querySelectorAll('[data-ss-page]').forEach(btn=>btn.addEventListener('click',()=>{
   const next=Number(btn.dataset.ssPage);showPage(next);
-  if(next===3&&studentStudioPage===3){$('ss-result-title').closest('[data-ss-screen]').scrollTop=0;$('ss-result-title').focus({preventScroll:true})}
+  if(next===3&&studentStudioPage===3){recordGeneratedPoster(c);$('ss-result-title').closest('[data-ss-screen]').scrollTop=0;$('ss-result-title').focus({preventScroll:true})}
  }));
  $('ss-result-close').addEventListener('click',()=>{
   showPage(0);
