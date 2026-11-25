@@ -376,6 +376,16 @@ body[data-role="student"].studio-paginated .ss-design-page .ss-design-fields{fle
 .app-booting{background:#0c1611}
 .app-booting .app{display:none}
 body[data-role="student"] .copyright{display:none}
+.config-group{border:1px solid #d9d5e4;border-radius:10px;padding:10px 12px;margin:0}
+.config-group>summary{cursor:pointer;font-weight:800;padding:5px 0}
+.config-stats-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px;margin:12px 0 16px}
+.config-stats-cards>div{border-radius:10px;background:#f4f2fb;padding:12px}
+.config-stats-cards dt{font-size:12px}
+.config-stats-cards dd{font-size:24px;font-weight:900;margin:4px 0 0}
+.config-stats-filters{display:flex;align-items:end;flex-wrap:wrap;gap:12px;margin:10px 0}
+.config-stats-filters label:first-child{min-width:min(100%,180px)}
+.config-stats-filters select{margin-top:4px}
+#configClickStats [hidden]{display:none!important}
 </style>
 </head>
 <body class="app-booting" data-role="student">
@@ -535,16 +545,49 @@ function campaignAnalyticsHTML(c){
  });
  if(campaignHasCards(c))for(const [key,card] of Object.entries(cardsFor(c)))defaults['card:'+key]=card.label;
  paletteFor(c).forEach(([,label],i)=>{defaults['color:'+i]=label});
- const rows=Object.entries({...Object.fromEntries(Object.entries(defaults).map(([key,label])=>[key,{count:0,label}])),...data.clicks})
-  .sort(([,a],[,b])=>b.count-a.count)
-  .map(([,entry])=>`<tr><td>${esc(entry.label)}</td><td>${fmt(entry.count)}</td></tr>`).join('');
- return `<h3>آمار ${esc(c.title)}</h3><p>این آمار فقط فعالیت همین مرورگر را نشان می‌دهد و با دستگاه‌های دیگر همگام نمی‌شود.</p>
- <div class="config-inline">
-  <p>شروع پویش در این مرورگر <strong>${fmt(Number(data.started))}</strong></p>
-  <p>عدد نمایشی روی صفحهٔ شروع <strong>${fmt((c.base||0)+authors.length+Number(data.started))}</strong></p>
-  <p>پوسترهای ثبت‌شده <strong>${fmt(total)}</strong></p>
+ const entries=Object.entries({...Object.fromEntries(Object.entries(defaults).map(([key,label])=>[key,{count:0,label}])),...data.clicks})
+  .sort(([,a],[,b])=>b.count-a.count);
+ const groups={start:'شروع پویش',quiz:'سؤال‌ها و پیشنهادها',design:'طراحی پوستر',result:'صفحهٔ نتیجه',other:'سایر بخش‌ها'};
+ const rows=entries.map(([key,entry])=>`<tr data-stats-group="${analyticsStage(key)}" data-click-count="${Number(entry.count)||0}"><th scope="row">${esc(entry.label)}</th><td>${fmt(entry.count)}</td></tr>`).join('');
+ const cards=[
+  ['شروع پویش در این مرورگر',Number(data.started)],
+  ['عدد نمایشی صفحهٔ شروع',(c.base||0)+authors.length+Number(data.started)],
+  ['پوسترهای ثبت‌شده',total],
+  ['مجموع کلیک‌های ثبت‌شده',entries.reduce((sum,[,entry])=>sum+(Number(entry.count)||0),0)]
+ ];
+ return `<h3>آمار ${esc(c.title)}</h3><p>فعالیت ثبت‌شده در همین مرورگر</p>
+ <dl class="config-stats-cards">${cards.map(([label,value])=>`<div><dt>${label}</dt><dd>${fmt(value)}</dd></div>`).join('')}</dl>
+ <details class="config-group" id="configClickStats">
+ <summary>جزئیات کلیک‌ها</summary>
+ <div class="config-stats-filters">
+  <label>مرحله<select class="form-control" id="configClickStage"><option value="">همهٔ مراحل</option>${Object.entries(groups).map(([key,label])=>`<option value="${key}">${label}</option>`).join('')}</select></label>
+  <label><input type="checkbox" id="configClickRecorded" checked> فقط گزینه‌هایی که کلیک شده‌اند</label>
  </div>
- <div class="table-wrap"><table class="table"><thead><tr><th scope="col">دکمه یا گزینه</th><th scope="col">تعداد کلیک</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+ <p id="configClickEmpty" role="status" hidden>برای این فیلتر کلیکی ثبت نشده است.</p>
+ <div class="table-wrap" id="configClickTable"><table class="table"><thead><tr><th scope="col">دکمه یا گزینه</th><th scope="col">تعداد کلیک</th></tr></thead><tbody>${rows}</tbody></table></div>
+ </details>`;
+}
+function analyticsStage(key){
+ if(key==='gq-start'||key==='page:0:1')return 'start';
+ if(/^(?:quiz-|answer:|suggestion:|gq-)/.test(key))return 'quiz';
+ if(/^(?:card:|color:|page:[12]:|ss-retake-quiz$)/.test(key))return 'design';
+ if(/^(?:page:3:|ss-result-close$|action:(?:save-image|share-demo):)/.test(key))return 'result';
+ return 'other';
+}
+function bindClickStats(){
+ const stage=$('configClickStage'),recorded=$('configClickRecorded');
+ const rows=$('configClickTable').querySelectorAll('[data-stats-group]');
+ const filter=()=>{
+  let visible=0;
+  rows.forEach(row=>{
+   row.hidden=Boolean((stage.value&&stage.value!==row.dataset.statsGroup)||(recorded.checked&&Number(row.dataset.clickCount)===0));
+   if(!row.hidden)visible++;
+  });
+  $('configClickEmpty').hidden=visible>0;
+  $('configClickTable').hidden=visible===0;
+ };
+ stage.onchange=recorded.onchange=filter;
+ filter();
 }
 function campaignParticipantsHTML(c){
  if(c.studentContent?.counter===false)return '';
@@ -718,7 +761,7 @@ function campaignHasCards(c){return c.studentContent?.showCards??studentCampaign
 let configSection='intro';
 function designSettings(c){
  const field=(key,label,value,type='text',max=180)=>`<label class="field">${esc(label)}<input class="form-control" data-content="${key}" type="${type}" maxlength="${max}" ${type==='number'?'min="0" step="1" max="999999999"':''} value="${esc(value)}"></label>`;
- const group=(title,body)=>`<details class="card setting-panel"><summary>${esc(title)}</summary><div class="config-fields">${body}</div></details>`;
+ const group=(title,body)=>`<details class="config-group"><summary>${esc(title)}</summary><div class="config-fields">${body}</div></details>`;
  const custom=(key,label,fallback='')=>field(key,label,contentValue(c,key,fallback));
  const guided=rulesFor(c).studio.showText&&rulesFor(c).studio.guidedQuestions;
  const copies=section=>Object.entries(STUDENT_COPY).filter(([,entry])=>entry[0]===section).map(([key,[,label,fallback]])=>custom(key,label,fallback)).join('');
@@ -728,7 +771,19 @@ function designSettings(c){
  const cards=Object.entries(cardsFor(c)).map(([key,card],i)=>`<fieldset><legend>کارت ${fmt(i+1)}</legend>${field(key+'Label','نام کارت',card.label)}${field(key+'Starter','راهنمای نوشتن جمله',card.starter)}<label class="field">تصویر کارت<select class="form-control" data-content="${key}Image" data-art-select="${key}">${Object.values(STUDENT_THEMES).map(t=>`<option value="${t.image}" ${card.image===t.image?'selected':''}>${esc(t.label)}</option>`).join('')}</select></label><img class="config-thumb" data-art-preview="${key}" src="${esc(contentValue(c,key+'Photo',STUDENT_ASSETS[card.image]))}" alt="پیش‌نمایش کارت"><label class="field">تصویر دلخواه کارت<input type="file" data-art-file="${key}" accept="image/jpeg,image/png,image/webp"></label><input type="hidden" data-content="${key}Photo" value="${esc(contentValue(c,key+'Photo'))}"></fieldset>`).join('');
  const colors=paletteFor(c).map(([color,label],i)=>`<fieldset><legend>رنگ ${fmt(i+1)}</legend>${field('color'+i,'رنگ',color,'color')}${field('colorLabel'+i,'نام رنگ',label)}</fieldset>`).join('');
  const questions=GUIDED_QUESTIONS.map((_,i)=>{const q=questionFor(c,i),key='q'+i;return group('سؤال '+fmt(i+1),field(key,'صورت سؤال',q.title)+field(key+'Hint','راهنما',q.hint)+q.options.map((o,j)=>field(key+'Label'+j,'گزینه '+fmt(j+1),o.label)+field(key+'Sub'+j,'توضیح گزینه '+fmt(j+1),o.sub)+field(key+'Emoji'+j,'نماد گزینه '+fmt(j+1),o.emoji,'text',16)).join(''))}).join('');
- return {intro:intro+copies('intro')+photoField('cover','عکس صفحهٔ شروع',studentCover(c,'cover',studentCampaignArt(c)?'legacy':''))+themeFields('uiAccent','uiBackground','uiText'),output:copies('output')+themeFields('posterTextColor','posterBackground','resultButton')+photoField('poster','پس‌زمینهٔ پوستر بدون کارت',studentCover(c,'poster','')),design:field('defaultText','متن پیش‌فرض پوستر',c.defaultText,'text',140)+`<div class="config-palette">${colors}</div>`+copies('design')+settingCheck('display','showCards','نمایش کارت‌های پوستر',campaignHasCards(c))+`<h4>کارت‌های پوستر</h4><div class="config-cards">${cards}</div>`,teams:field('teams','نام تیم‌ها (جداشده با ویرگول)',(c.teams||[]).join('، '))+copies('competition'),questions:photoField('quiz','عکس پس‌زمینهٔ سؤال‌ها',studentCover(c,'quiz',studentCampaignArt(c)?'focus':''))+copies('questions')+questions+[0,1,2,3].map(i=>field('suggest'+i,'جمله پیشنهادی '+fmt(i+1)+' (خالی برای پیشنهاد خودکار)',contentValue(c,'suggest'+i),'text',140)).join('')};
+ return {
+  intro:group('عنوان، متن و شمارنده',intro+copies('intro'))+
+   group('تصویر و رنگ رابط',photoField('cover','عکس صفحهٔ شروع',studentCover(c,'cover',studentCampaignArt(c)?'legacy':''))+themeFields('uiAccent','uiBackground','uiText')),
+  design:group('کارت‌ها',settingCheck('display','showCards','نمایش کارت‌های پوستر',campaignHasCards(c))+`<div class="config-cards">${cards}</div>`)+
+   group('رنگ‌های پوستر',`<div class="config-palette">${colors}</div>`)+
+   group('متن‌ها و دکمه‌ها',field('defaultText','متن پیش‌فرض پوستر',c.defaultText,'text',140)+copies('design')),
+  questions:questions+
+   group('تصویر و دکمه‌های سؤال‌ها',photoField('quiz','عکس پس‌زمینهٔ سؤال‌ها',studentCover(c,'quiz',studentCampaignArt(c)?'focus':''))+copies('questions'))+
+   group('جمله‌های پیشنهادی',[0,1,2,3].map(i=>field('suggest'+i,'جمله پیشنهادی '+fmt(i+1)+' (خالی برای پیشنهاد خودکار)',contentValue(c,'suggest'+i),'text',140)).join('')),
+  output:group('متن و دکمه‌ها',copies('output'))+
+   group('رنگ و تصویر پوستر',themeFields('posterTextColor','posterBackground','resultButton')+photoField('poster','پس‌زمینهٔ پوستر بدون کارت',studentCover(c,'poster',''))),
+  teams:group('نام تیم‌ها و متن‌های نمایشی',field('teams','نام تیم‌ها (جداشده با ویرگول)',(c.teams||[]).join('، '))+copies('competition'))
+ };
 }
 function bindCampaignImages(panel){
  panel.querySelectorAll('[data-art-file]').forEach(input=>{
@@ -812,6 +867,7 @@ function renderPermissions(){
  <div class="config-actions config-save"><span id="configStatus" role="status">ذخیره در همین مرورگر</span><div><button class="btn btn-primary" data-action="save-permissions">ذخیره تغییرات</button><a class="btn btn-ghost" href="./?preview=1&amp;campaign=${encodeURIComponent(c.id)}" id="configStudentPreview" target="_blank" rel="noopener">پیش‌نمایش دانش‌آموز</a><details class="config-export"><summary>انتشار برای دانش‌آموزها</summary><div class="card"><p>فایل تنظیمات را بگیر و در ریشهٔ مخزن جایگزین کن.</p><button class="btn btn-ghost" id="exportStudentSettings">دانلود فایل تنظیمات</button></div></details></div></div>
  `;
  bindCampaignImages($('view-permissions'));
+ bindClickStats();
  $('exportStudentSettings').onclick=()=>{if(savePermissions())exportStudentSettings()};
  const panel=$('view-permissions'),select=$('configCampaign');
  select.value=configCampaignId;
@@ -864,11 +920,12 @@ function savePermissions(){
  for(const el of controls){
   if(el.validity.valid)continue;
   showConfigSection(el.closest('[data-config-page]').dataset.configPage);
+  for(let group=el.closest('details');group;group=group.parentElement.closest('details'))group.open=true;
   el.reportValidity();return false;
  }
  const values=Object.fromEntries(controls.map(el=>[el.dataset.content,el.value.trim()]));
  const {title,description,base,defaultText,teams,...content}=values;
- if(!title){showConfigSection('intro');controls.find(el=>el.dataset.content==='title').focus();toast('نام پویش را وارد کنید.');return false}
+ if(!title){showConfigSection('intro');const input=controls.find(el=>el.dataset.content==='title');input.closest('details').open=true;input.focus();toast('نام پویش را وارد کنید.');return false}
  c.teams=[...new Set(teams.split(/[,،]/).map(name=>name.trim()).filter(Boolean))];c.title=title;c.description=description;c.base=Number(base);c.defaultText=defaultText;
  c.studentContent={...c.studentContent,...content,counter:readField('display','counter'),showCards:readField('display','showCards')};
  delete studentGuidedQuiz[c.id];
