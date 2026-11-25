@@ -377,7 +377,9 @@ body[data-role="student"].studio-paginated .ss-design-page .ss-design-fields{fle
 .app-booting .app{display:none}
 body[data-role="student"] .copyright{display:none}
 .config-group{border:1px solid #d9d5e4;border-radius:10px;padding:10px 12px;margin:0}
-.config-group>summary{cursor:pointer;font-weight:800;padding:5px 0}
+.config-question-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:10px}
+.config-question-options legend{font-weight:700;overflow-wrap:anywhere}
+.config-group>summary{overflow-wrap:anywhere;cursor:pointer;font-weight:800;padding:5px 0}
 .config-stats-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px;margin:12px 0 16px}
 .config-stats-cards>div{border-radius:10px;background:#f4f2fb;padding:12px}
 .config-stats-cards dt{font-size:12px}
@@ -770,7 +772,16 @@ function designSettings(c){
  const intro=field('title','نام پویش',c.title)+field('description','توضیح پویش',c.description)+custom('headline','عنوان صفحه شروع (اختیاری)')+custom('intro','متن خوشامد',guided?'داستان از تو شروع می‌شه.':'قصه تو، تصویر تو.')+custom('start','دکمه شروع',guided?'شروع کنیم':'ساخت پوستر رو شروع کنیم')+field('base','تعداد اولیه شرکت‌کنندگان',c.base||0,'number')+custom('counterLabel','عنوان شمارنده','شرکت‌کننده در این پویش')+settingCheck('display','counter','نمایش شمارنده شرکت‌کنندگان',c.studentContent?.counter!==false);
  const cards=Object.entries(cardsFor(c)).map(([key,card],i)=>`<fieldset><legend>کارت ${fmt(i+1)}</legend>${field(key+'Label','نام کارت',card.label)}${field(key+'Starter','راهنمای نوشتن جمله',card.starter)}<label class="field">تصویر کارت<select class="form-control" data-content="${key}Image" data-art-select="${key}">${Object.values(STUDENT_THEMES).map(t=>`<option value="${t.image}" ${card.image===t.image?'selected':''}>${esc(t.label)}</option>`).join('')}</select></label><img class="config-thumb" data-art-preview="${key}" src="${esc(contentValue(c,key+'Photo',STUDENT_ASSETS[card.image]))}" alt="پیش‌نمایش کارت"><label class="field">تصویر دلخواه کارت<input type="file" data-art-file="${key}" accept="image/jpeg,image/png,image/webp"></label><input type="hidden" data-content="${key}Photo" value="${esc(contentValue(c,key+'Photo'))}"></fieldset>`).join('');
  const colors=paletteFor(c).map(([color,label],i)=>`<fieldset><legend>رنگ ${fmt(i+1)}</legend>${field('color'+i,'رنگ',color,'color')}${field('colorLabel'+i,'نام رنگ',label)}</fieldset>`).join('');
- const questions=GUIDED_QUESTIONS.map((_,i)=>{const q=questionFor(c,i),key='q'+i;return group('سؤال '+fmt(i+1),field(key,'صورت سؤال',q.title)+field(key+'Hint','راهنما',q.hint)+q.options.map((o,j)=>field(key+'Label'+j,'گزینه '+fmt(j+1),o.label)+field(key+'Sub'+j,'توضیح گزینه '+fmt(j+1),o.sub)+field(key+'Emoji'+j,'نماد گزینه '+fmt(j+1),o.emoji,'text',16)).join(''))}).join('');
+ const questions=GUIDED_QUESTIONS.map((_,i)=>{
+  const q=questionFor(c,i),key='q'+i;
+  const options=q.options.map((option,j)=>`<fieldset><legend>گزینهٔ ${fmt(j+1)} · ${esc(option.label)}</legend>
+   ${field(key+'Label'+j,'متن پاسخ',option.label)}
+   ${field(key+'Sub'+j,'توضیح پاسخ',option.sub)}
+   ${field(key+'Emoji'+j,'نماد پاسخ',option.emoji,'text',16)}
+  </fieldset>`).join('');
+  return group('سؤال '+fmt(i+1)+' · '+q.title,
+   field(key,'متن سؤال',q.title)+field(key+'Hint','راهنما',q.hint)+`<h4>گزینه‌های پاسخ</h4><div class="config-question-options">${options}</div>`);
+ }).join('');
  return {
   intro:group('عنوان، متن و شمارنده',intro+copies('intro'))+
    group('تصویر و رنگ رابط',photoField('cover','عکس صفحهٔ شروع',studentCover(c,'cover',studentCampaignArt(c)?'legacy':''))+themeFields('uiAccent','uiBackground','uiText')),
